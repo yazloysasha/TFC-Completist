@@ -17,10 +17,11 @@ public record InventoryCollectionSource(
   TagKey<Item> tag,
   boolean rejectBlockItems,
   Boolean gemOre,
-  boolean includeTfc
+  boolean includeTfc,
+  boolean tfcFarmlandSeeds
 ) {
   public InventoryCollectionSource(String namespace, String pathPrefix) {
-    this(namespace, pathPrefix, null, false, null, false, null, true);
+    this(namespace, pathPrefix, null, false, null, false, null, true, false);
   }
 
   public InventoryCollectionSource(
@@ -29,7 +30,17 @@ public record InventoryCollectionSource(
     String pathSuffix,
     boolean exactPath
   ) {
-    this(namespace, pathPrefix, pathSuffix, exactPath, null, false, null, true);
+    this(
+      namespace,
+      pathPrefix,
+      pathSuffix,
+      exactPath,
+      null,
+      false,
+      null,
+      true,
+      false
+    );
   }
 
   public static InventoryCollectionSource discovered(String pathPrefix) {
@@ -41,7 +52,8 @@ public record InventoryCollectionSource(
       null,
       false,
       null,
-      true
+      true,
+      false
     );
   }
 
@@ -54,7 +66,8 @@ public record InventoryCollectionSource(
       tag,
       false,
       null,
-      true
+      true,
+      false
     );
   }
 
@@ -67,6 +80,7 @@ public record InventoryCollectionSource(
       tag,
       false,
       null,
+      false,
       false
     );
   }
@@ -80,7 +94,8 @@ public record InventoryCollectionSource(
       null,
       true,
       null,
-      true
+      true,
+      false
     );
   }
 
@@ -93,6 +108,21 @@ public record InventoryCollectionSource(
       null,
       true,
       true,
+      true,
+      false
+    );
+  }
+
+  public static InventoryCollectionSource tfcFarmlandCrops() {
+    return new InventoryCollectionSource(
+      null,
+      null,
+      null,
+      false,
+      null,
+      false,
+      null,
+      true,
       true
     );
   }
@@ -100,6 +130,9 @@ public record InventoryCollectionSource(
   public String displayNamespace() {
     if (namespace != null) {
       return namespace;
+    }
+    if (tfcFarmlandSeeds) {
+      return "tfc farmland";
     }
     return includeTfc ? "discovered" : "addon";
   }
@@ -112,6 +145,9 @@ public record InventoryCollectionSource(
     var itemId = holder.getKey().location();
     if (!matchesNamespace(itemId.getNamespace())) {
       return false;
+    }
+    if (tfcFarmlandSeeds) {
+      return tagMembers.contains(itemId);
     }
     if (tag != null && !isInTag(itemId, holder, tagMembers)) {
       return false;

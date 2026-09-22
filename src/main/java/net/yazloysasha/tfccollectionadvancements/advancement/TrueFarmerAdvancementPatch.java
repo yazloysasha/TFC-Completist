@@ -12,10 +12,11 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 /**
  * Patches TFC True Farmer ({@code tfc:world/all_crops}).
  * <p>
- * Every {@code seeds/...} item from TFC and addons (for example Firmalife, Beneath),
- * including crops that never made it into the base JSON. Vanilla {@code minecraft}
- * seeds are ignored. Items only tagged in {@code c:seeds} without a {@code seeds/}
- * path (for example Farmer's Delight) are excluded.
+ * Every {@code seeds/...} item from TFC and addons, plus any seed of a TFC
+ * {@code CropBlock}. {@code seeds/} stays because Firmalife grape seeds are not
+ * crop blocks (they plant on grape strings). Beneath nether crops extend
+ * {@code CropBlock}, so they are covered either way. Farmer's Delight crops
+ * that only sit in {@code c:seeds} are excluded.
  */
 public final class TrueFarmerAdvancementPatch {
 
@@ -23,7 +24,8 @@ public final class TrueFarmerAdvancementPatch {
     ResourceLocation.fromNamespaceAndPath("tfc", "world/all_crops");
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.discovered("seeds/")
+    InventoryCollectionSource.discovered("seeds/"),
+    InventoryCollectionSource.tfcFarmlandCrops()
   );
 
   private TrueFarmerAdvancementPatch() {}

@@ -27,6 +27,20 @@ public final class ItemTagResolver {
     HolderLookup.Provider registries,
     TagKey<Item> tag
   ) {
+    Collection<ResourceLocation> members = loadAll(
+      resourceManager,
+      registries
+    ).get(tag.location());
+    if (members == null || members.isEmpty()) {
+      return Set.of();
+    }
+    return Set.copyOf(members);
+  }
+
+  public static Map<ResourceLocation, Collection<ResourceLocation>> loadAll(
+    ResourceManager resourceManager,
+    HolderLookup.Provider registries
+  ) {
     var itemRegistry = registries.lookupOrThrow(Registries.ITEM);
     TagLoader<ResourceLocation> loader = new TagLoader<>(
       id -> {
@@ -37,13 +51,6 @@ public final class ItemTagResolver {
       },
       Registries.tagsDirPath(Registries.ITEM)
     );
-
-    Map<ResourceLocation, Collection<ResourceLocation>> tags =
-      loader.loadAndBuild(resourceManager);
-    Collection<ResourceLocation> members = tags.get(tag.location());
-    if (members == null || members.isEmpty()) {
-      return Set.of();
-    }
-    return Set.copyOf(members);
+    return loader.loadAndBuild(resourceManager);
   }
 }
