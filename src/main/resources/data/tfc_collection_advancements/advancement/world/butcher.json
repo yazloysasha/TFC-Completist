@@ -14,7 +14,7 @@
   },
   "display": {
     "icon": {
-      "id": "tfc:food/venison",
+      "id": "tfc:food/wolf",
       "components": {
         "tfc:food": {
           "creation_date": -3

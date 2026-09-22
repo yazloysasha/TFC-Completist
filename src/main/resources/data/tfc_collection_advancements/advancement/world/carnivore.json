@@ -12,7 +12,7 @@
   },
   "display": {
     "icon": {
-      "id": "tfc:food/cooked_beef",
+      "id": "tfc:food/cooked_venison",
       "components": {
         "tfc:food": {
           "creation_date": -3

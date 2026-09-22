@@ -12,7 +12,7 @@
   },
   "display": {
     "icon": {
-      "id": "tfc:food/cooked_salmon",
+      "id": "tfc:food/cooked_calamari",
       "components": {
         "tfc:food": {
           "creation_date": -3
