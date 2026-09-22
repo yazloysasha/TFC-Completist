@@ -1,0 +1,32 @@
+{
+  "parent": "tfc:world/gemologist",
+  "criteria": {
+    "amethyst": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "tfc:gem/amethyst"
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "tfc:gem/ruby"
+    },
+    "title": {
+      "translate": "tfc_collection_advancements.advancements.world.jeweler.title"
+    },
+    "description": {
+      "translate": "tfc_collection_advancements.advancements.world.jeweler.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "tfc:textures/block/mud/fluvisol.png"
+  },
+  "requirements": [["amethyst"]]
+}

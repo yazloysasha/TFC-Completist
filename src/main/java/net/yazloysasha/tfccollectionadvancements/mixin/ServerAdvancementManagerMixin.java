@@ -15,6 +15,7 @@ import net.yazloysasha.tfccollectionadvancements.advancement.GemologistAdvanceme
 import net.yazloysasha.tfccollectionadvancements.advancement.GeologistAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.GoneFishingAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.HealthyDietAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.advancement.JewelerAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.MetallurgistAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.MinerologistAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.PedologistAdvancementPatch;
@@ -55,6 +56,11 @@ public abstract class ServerAdvancementManagerMixin {
       this.registries
     );
     GemologistAdvancementPatch.patch(
+      advancements,
+      resourceManager,
+      this.registries
+    );
+    JewelerAdvancementPatch.patch(
       advancements,
       resourceManager,
       this.registries
