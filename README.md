@@ -19,4 +19,5 @@ Tested with mods:
 
 - ArborFirmaCraft
 - Beneath
+- Farmer's Delight TFC
 - FirmaLife

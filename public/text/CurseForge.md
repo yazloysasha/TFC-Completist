@@ -20,3 +20,4 @@ Tested with mods:
 - ArborFirmaCraft
 - Beneath
 - FirmaLife
+- Farmer's Delight TFC

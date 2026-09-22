@@ -6,16 +6,16 @@ import java.util.Map;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.neoforged.neoforge.common.Tags;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
  * Patches TFC True Farmer ({@code tfc:world/all_crops}).
  * <p>
- * Every {@code seeds/...} item plus {@code c:seeds}, including TFC so a crop
- * that never made it into the JSON is still required. Minecraft seeds are
- * ignored.
+ * Every {@code seeds/...} item from TFC and addons (for example Firmalife, Beneath),
+ * including crops that never made it into the base JSON. Vanilla {@code minecraft}
+ * seeds are ignored. Items only tagged in {@code c:seeds} without a {@code seeds/}
+ * path (for example Farmer's Delight) are excluded.
  */
 public final class TrueFarmerAdvancementPatch {
 
@@ -23,8 +23,7 @@ public final class TrueFarmerAdvancementPatch {
     ResourceLocation.fromNamespaceAndPath("tfc", "world/all_crops");
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.discovered("seeds/"),
-    InventoryCollectionSource.discoveredTag(Tags.Items.SEEDS)
+    InventoryCollectionSource.discovered("seeds/")
   );
 
   private TrueFarmerAdvancementPatch() {}
