@@ -26,8 +26,9 @@ import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
 
 /**
  * Unique item drops from {@code tfc:prospectable} blocks that are not metal
- * ores or {@code #c:raw_materials}. Loot tables are read from datapack JSON
- * because they are not loaded yet when advancements are patched.
+ * ores, graded {@code tfc:ore_pieces}, {@code #c:raw_materials}, or small ore
+ * pieces. Loot tables are read from datapack JSON because they are not loaded
+ * yet when advancements are patched.
  */
 public final class MineralOreDropCollector {
 
@@ -57,6 +58,11 @@ public final class MineralOreDropCollector {
       registries,
       TFCTags.Items.SMALL_ORE_PIECES
     );
+    Set<ResourceLocation> orePieces = ItemTagResolver.resolve(
+      resourceManager,
+      registries,
+      TFCTags.Items.ORE_PIECES
+    );
     Set<ResourceLocation> rawMaterials = ItemTagResolver.resolve(
       resourceManager,
       registries,
@@ -80,7 +86,8 @@ public final class MineralOreDropCollector {
         if (
           metalOres.contains(itemId) ||
           smallOrePieces.contains(itemId) ||
-          rawMaterials.contains(itemId)
+          rawMaterials.contains(itemId) ||
+          isGradedOrePiece(itemId, orePieces)
         ) {
           continue;
         }
@@ -94,6 +101,31 @@ public final class MineralOreDropCollector {
       }
     }
     return drops;
+  }
+
+  /**
+   * Poor/normal/rich ore pieces (TFC metals and addon ores such as chromite).
+   * Addons may omit {@code tfc:metal_ores} but still tag graded pieces in
+   * {@code tfc:ore_pieces}.
+   */
+  private static boolean isGradedOrePiece(
+    ResourceLocation itemId,
+    Set<ResourceLocation> orePieces
+  ) {
+    if (!orePieces.contains(itemId)) {
+      return false;
+    }
+    String path = itemId.getPath();
+    int slash = path.indexOf('/');
+    if (slash < 0 || slash == path.length() - 1) {
+      return false;
+    }
+    String name = path.substring(slash + 1);
+    return (
+      name.startsWith("poor_") ||
+      name.startsWith("normal_") ||
+      name.startsWith("rich_")
+    );
   }
 
   private static ResourceLocation lootTableId(
