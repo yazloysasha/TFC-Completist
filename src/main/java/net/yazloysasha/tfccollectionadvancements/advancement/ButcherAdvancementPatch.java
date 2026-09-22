@@ -8,27 +8,29 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.neoforged.neoforge.common.Tags;
 import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
+import net.yazloysasha.tfccollectionadvancements.util.AdvancementCriterionBuilder;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Rebuilds Hunter ({@code tfc_collection_advancements:world/hunter}).
+ * Rebuilds Butcher ({@code tfc_collection_advancements:world/butcher}).
  * <p>
- * Every {@code tfc} and addon item in {@code c:foods/raw_meat}.
+ * Every {@code tfc} and addon item in {@code c:foods/raw_meat}. Parent is TFC
+ * Hunter ({@code tfc:world/hunter}, kill a TFC animal).
  */
-public final class HunterAdvancementPatch {
+public final class ButcherAdvancementPatch {
 
   public static final ResourceLocation ADVANCEMENT =
     ResourceLocation.fromNamespaceAndPath(
       TFCCollectionAdvancements.MOD_ID,
-      "world/hunter"
+      "world/butcher"
     );
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
     InventoryCollectionSource.discoveredTag(Tags.Items.FOODS_RAW_MEAT)
   );
 
-  private HunterAdvancementPatch() {}
+  private ButcherAdvancementPatch() {}
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,
@@ -42,5 +44,13 @@ public final class HunterAdvancementPatch {
       registries,
       SOURCES
     );
+
+    JsonElement advancement = advancements.get(ADVANCEMENT);
+    if (advancement != null && advancement.isJsonObject()) {
+      AdvancementCriterionBuilder.setFrame(
+        advancement.getAsJsonObject(),
+        "goal"
+      );
+    }
   }
 }

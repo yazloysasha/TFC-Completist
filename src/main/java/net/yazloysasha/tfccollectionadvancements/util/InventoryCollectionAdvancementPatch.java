@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.blocks.crop.CropBlock;
 import net.minecraft.core.BlockPos;
@@ -572,14 +573,54 @@ public final class InventoryCollectionAdvancementPatch {
     return switch (source.collectedItems()) {
       case TFC_FARMLAND_SEEDS -> tfcFarmlandSeeds;
       case MINERAL_ORE_DROPS -> mineralOreDrops;
-      case NONE -> source.tag() == null
-        ? Set.of()
-        : RegistryTagResolver.resolveSet(
-          resourceManager,
-          registries,
-          source.tag()
-        );
+      case NONE -> resolveTagMembers(source, resourceManager, registries);
     };
+  }
+
+  private static Set<ResourceLocation> resolveTagMembers(
+    InventoryCollectionSource source,
+    ResourceManager resourceManager,
+    HolderLookup.Provider registries
+  ) {
+    if (source.tag() == null) {
+      return Set.of();
+    }
+    Set<ResourceLocation> members = RegistryTagResolver.resolveSet(
+      resourceManager,
+      registries,
+      source.tag()
+    );
+    if (source.counterpartTag() == null) {
+      return members;
+    }
+    Set<ResourceLocation> rawMembers = RegistryTagResolver.resolveSet(
+      resourceManager,
+      registries,
+      source.counterpartTag()
+    );
+    return members
+      .stream()
+      .filter(id -> {
+        ResourceLocation raw = rawCounterpartFromCooked(id);
+        return raw != null && rawMembers.contains(raw);
+      })
+      .collect(Collectors.toCollection(LinkedHashSet::new));
+  }
+
+  static ResourceLocation rawCounterpartFromCooked(ResourceLocation cookedId) {
+    String path = cookedId.getPath();
+    String prefix = "food/cooked_";
+    if (!path.startsWith(prefix)) {
+      return null;
+    }
+    String rawSegment = path.substring(prefix.length());
+    if (rawSegment.isEmpty() || rawSegment.indexOf('/') >= 0) {
+      return null;
+    }
+    return ResourceLocation.fromNamespaceAndPath(
+      cookedId.getNamespace(),
+      "food/" + rawSegment
+    );
   }
 
   private static int patchSource(

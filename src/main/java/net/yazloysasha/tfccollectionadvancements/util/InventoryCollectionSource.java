@@ -19,7 +19,8 @@ public record InventoryCollectionSource(
   Boolean gemOre,
   boolean includeTfc,
   CollectedItems collectedItems,
-  boolean singleSegmentAfterPrefix
+  boolean singleSegmentAfterPrefix,
+  TagKey<Item> counterpartTag
 ) {
   public enum CollectedItems {
     NONE,
@@ -38,7 +39,8 @@ public record InventoryCollectionSource(
       null,
       true,
       CollectedItems.NONE,
-      false
+      false,
+      null
     );
   }
 
@@ -58,7 +60,8 @@ public record InventoryCollectionSource(
       null,
       true,
       CollectedItems.NONE,
-      false
+      false,
+      null
     );
   }
 
@@ -73,7 +76,8 @@ public record InventoryCollectionSource(
       null,
       true,
       CollectedItems.NONE,
-      false
+      false,
+      null
     );
   }
 
@@ -91,7 +95,8 @@ public record InventoryCollectionSource(
       null,
       true,
       CollectedItems.NONE,
-      true
+      true,
+      null
     );
   }
 
@@ -106,7 +111,31 @@ public record InventoryCollectionSource(
       null,
       true,
       CollectedItems.NONE,
-      false
+      false,
+      null
+    );
+  }
+
+  /**
+   * Items in {@code cookedTag} whose {@code food/cooked_*} path has a
+   * matching {@code food/*} entry in {@code rawTag} (excludes e.g. cooked turtle).
+   */
+  public static InventoryCollectionSource discoveredCookedWithRawCounterpart(
+    TagKey<Item> cookedTag,
+    TagKey<Item> rawTag
+  ) {
+    return new InventoryCollectionSource(
+      null,
+      null,
+      null,
+      false,
+      cookedTag,
+      false,
+      null,
+      true,
+      CollectedItems.NONE,
+      false,
+      rawTag
     );
   }
 
@@ -121,7 +150,8 @@ public record InventoryCollectionSource(
       null,
       false,
       CollectedItems.NONE,
-      false
+      false,
+      null
     );
   }
 
@@ -136,7 +166,8 @@ public record InventoryCollectionSource(
       true,
       true,
       CollectedItems.NONE,
-      false
+      false,
+      null
     );
   }
 
@@ -151,7 +182,8 @@ public record InventoryCollectionSource(
       null,
       true,
       CollectedItems.TFC_FARMLAND_SEEDS,
-      false
+      false,
+      null
     );
   }
 
@@ -166,7 +198,8 @@ public record InventoryCollectionSource(
       null,
       true,
       CollectedItems.MINERAL_ORE_DROPS,
-      false
+      false,
+      null
     );
   }
 

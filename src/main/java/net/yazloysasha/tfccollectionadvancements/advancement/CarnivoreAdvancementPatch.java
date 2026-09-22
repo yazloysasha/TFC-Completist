@@ -15,7 +15,7 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
  * Rebuilds Carnivore ({@code tfc_collection_advancements:world/carnivore}).
  * <p>
  * Every {@code tfc} and addon item in {@code c:foods/cooked_meat}. Parent is
- * {@link HunterAdvancementPatch}, like {@link VegetarianAdvancementPatch} follows
+ * {@link ButcherAdvancementPatch}, like {@link VegetarianAdvancementPatch} follows
  * Healthy Diet.
  */
 public final class CarnivoreAdvancementPatch {

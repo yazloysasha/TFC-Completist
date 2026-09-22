@@ -1,5 +1,5 @@
 {
-  "parent": "tfc_collection_advancements:world/hunter",
+  "parent": "tfc_collection_advancements:world/butcher",
   "criteria": {
     "cooked_beef": {
       "trigger": "minecraft:consume_item",

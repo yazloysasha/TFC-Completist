@@ -1,5 +1,5 @@
 {
-  "parent": "tfc:world/root",
+  "parent": "tfc:world/hunter",
   "criteria": {
     "beef": {
       "trigger": "minecraft:inventory_changed",
@@ -22,10 +22,10 @@
       }
     },
     "title": {
-      "translate": "tfc_collection_advancements.advancements.world.hunter.title"
+      "translate": "tfc_collection_advancements.advancements.world.butcher.title"
     },
     "description": {
-      "translate": "tfc_collection_advancements.advancements.world.hunter.description"
+      "translate": "tfc_collection_advancements.advancements.world.butcher.description"
     },
     "frame": "goal",
     "show_toast": true,

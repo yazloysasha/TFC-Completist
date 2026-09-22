@@ -9,12 +9,12 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.yazloysasha.tfccollectionadvancements.advancement.AdventuringTimeAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.ArboristAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.advancement.ButcherAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.CarnivoreAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.GemologistAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.GeologistAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.GoneFishingAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.HealthyDietAdvancementPatch;
-import net.yazloysasha.tfccollectionadvancements.advancement.HunterAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.MetallurgistAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.MinerologistAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.PedologistAdvancementPatch;
@@ -79,7 +79,7 @@ public abstract class ServerAdvancementManagerMixin {
       resourceManager,
       this.registries
     );
-    HunterAdvancementPatch.patch(
+    ButcherAdvancementPatch.patch(
       advancements,
       resourceManager,
       this.registries
