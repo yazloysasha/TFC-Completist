@@ -18,10 +18,26 @@ public record InventoryCollectionSource(
   boolean rejectBlockItems,
   Boolean gemOre,
   boolean includeTfc,
-  boolean tfcFarmlandSeeds
+  CollectedItems collectedItems
 ) {
+  public enum CollectedItems {
+    NONE,
+    TFC_FARMLAND_SEEDS,
+    MINERAL_ORE_DROPS,
+  }
+
   public InventoryCollectionSource(String namespace, String pathPrefix) {
-    this(namespace, pathPrefix, null, false, null, false, null, true, false);
+    this(
+      namespace,
+      pathPrefix,
+      null,
+      false,
+      null,
+      false,
+      null,
+      true,
+      CollectedItems.NONE
+    );
   }
 
   public InventoryCollectionSource(
@@ -39,7 +55,7 @@ public record InventoryCollectionSource(
       false,
       null,
       true,
-      false
+      CollectedItems.NONE
     );
   }
 
@@ -53,7 +69,7 @@ public record InventoryCollectionSource(
       false,
       null,
       true,
-      false
+      CollectedItems.NONE
     );
   }
 
@@ -67,7 +83,7 @@ public record InventoryCollectionSource(
       false,
       null,
       true,
-      false
+      CollectedItems.NONE
     );
   }
 
@@ -81,21 +97,7 @@ public record InventoryCollectionSource(
       false,
       null,
       false,
-      false
-    );
-  }
-
-  public static InventoryCollectionSource mineralPieces() {
-    return new InventoryCollectionSource(
-      null,
-      "ore/",
-      null,
-      false,
-      null,
-      true,
-      null,
-      true,
-      false
+      CollectedItems.NONE
     );
   }
 
@@ -109,7 +111,7 @@ public record InventoryCollectionSource(
       true,
       true,
       true,
-      false
+      CollectedItems.NONE
     );
   }
 
@@ -123,7 +125,21 @@ public record InventoryCollectionSource(
       false,
       null,
       true,
-      true
+      CollectedItems.TFC_FARMLAND_SEEDS
+    );
+  }
+
+  public static InventoryCollectionSource mineralOreDrops() {
+    return new InventoryCollectionSource(
+      null,
+      null,
+      null,
+      false,
+      null,
+      false,
+      null,
+      true,
+      CollectedItems.MINERAL_ORE_DROPS
     );
   }
 
@@ -131,10 +147,11 @@ public record InventoryCollectionSource(
     if (namespace != null) {
       return namespace;
     }
-    if (tfcFarmlandSeeds) {
-      return "tfc farmland";
-    }
-    return includeTfc ? "discovered" : "addon";
+    return switch (collectedItems) {
+      case TFC_FARMLAND_SEEDS -> "tfc farmland";
+      case MINERAL_ORE_DROPS -> "mineral ore drops";
+      case NONE -> includeTfc ? "discovered" : "addon";
+    };
   }
 
   public boolean matches(
@@ -146,7 +163,7 @@ public record InventoryCollectionSource(
     if (!matchesNamespace(itemId.getNamespace())) {
       return false;
     }
-    if (tfcFarmlandSeeds) {
+    if (collectedItems != CollectedItems.NONE) {
       return tagMembers.contains(itemId);
     }
     if (tag != null && !isInTag(itemId, holder, tagMembers)) {

@@ -8,7 +8,17 @@ public record BiomeCollectionSource(
   String biomeNamespace,
   TagKey<Biome> tag
 ) {
-  public String criterionPrefix() {
-    return biomeNamespace + "_";
+  public static BiomeCollectionSource discovered() {
+    return new BiomeCollectionSource(null, null, null);
+  }
+
+  public String displayNamespace() {
+    if (namespace != null) {
+      return namespace;
+    }
+    if (biomeNamespace != null) {
+      return biomeNamespace;
+    }
+    return "discovered";
   }
 }

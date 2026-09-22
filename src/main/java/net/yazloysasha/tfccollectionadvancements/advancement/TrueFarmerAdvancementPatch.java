@@ -10,7 +10,7 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvance
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Patches TFC True Farmer ({@code tfc:world/all_crops}).
+ * Rebuilds TFC True Farmer ({@code tfc:world/all_crops}).
  * <p>
  * Every {@code seeds/...} item from TFC and addons, plus any seed of a TFC
  * {@code CropBlock}. {@code seeds/} stays because Firmalife grape seeds are not

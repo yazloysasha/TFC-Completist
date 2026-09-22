@@ -61,6 +61,11 @@ public final class AdvancementCriterionBuilder {
     return criterion;
   }
 
+  public static void resetCollection(JsonObject root) {
+    root.add("criteria", new JsonObject());
+    root.add("requirements", new JsonArray());
+  }
+
   public static void addAndRequire(
     JsonObject criteria,
     JsonArray requirements,

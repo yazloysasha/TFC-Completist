@@ -67,7 +67,8 @@ public final class InventoryCollectionAdvancementPatch {
   }
 
   /**
-   * Discovers metals from molten metal fluids, then adds the matching ingot.
+   * Discovers metals from molten metal fluids, then rebuilds the matching
+   * ingot criteria.
    */
   public static void patchIngotsFromMoltenMetals(
     ResourceLocation advancementId,
@@ -87,7 +88,9 @@ public final class InventoryCollectionAdvancementPatch {
       return;
     }
 
-    CollectionAdvancementDeduplicator.deduplicate(root);
+    AdvancementCriterionBuilder.resetCollection(root);
+    criteria = root.getAsJsonObject("criteria");
+    requirements = root.getAsJsonArray("requirements");
 
     var items = registries
       .lookupOrThrow(Registries.ITEM)
@@ -151,14 +154,12 @@ public final class InventoryCollectionAdvancementPatch {
       added++;
     }
 
-    if (added > 0) {
-      CollectionAdvancementDeduplicator.deduplicate(root);
-      TFCCollectionAdvancements.LOGGER.info(
-        "Extended {} with {} molten-metal ingot criteria",
-        advancementId,
-        added
-      );
-    }
+    CollectionAdvancementDeduplicator.deduplicate(root);
+    TFCCollectionAdvancements.LOGGER.info(
+      "Rebuilt {} with {} molten-metal ingot criteria",
+      advancementId,
+      added
+    );
   }
 
   private static void putMetalItem(
@@ -248,6 +249,10 @@ public final class InventoryCollectionAdvancementPatch {
 
     var itemRegistry = registries.lookupOrThrow(Registries.ITEM);
     var items = itemRegistry.listElements().toList();
+    AdvancementCriterionBuilder.resetCollection(root);
+    criteria = root.getAsJsonObject("criteria");
+    requirements = root.getAsJsonArray("requirements");
+
     boolean needsMetalOres = sources
       .stream()
       .anyMatch(source -> source.rejectBlockItems() || source.gemOre() != null);
@@ -259,28 +264,40 @@ public final class InventoryCollectionAdvancementPatch {
       )
       : Set.of();
 
-    CollectionAdvancementDeduplicator.deduplicate(root);
-
     boolean needsFarmlandSeeds = sources
       .stream()
-      .anyMatch(InventoryCollectionSource::tfcFarmlandSeeds);
+      .anyMatch(
+        source ->
+          source.collectedItems() ==
+          InventoryCollectionSource.CollectedItems.TFC_FARMLAND_SEEDS
+      );
     Set<ResourceLocation> tfcFarmlandSeeds = needsFarmlandSeeds
       ? collectTfcCropSeeds()
       : Set.of();
+    boolean needsMineralOreDrops = sources
+      .stream()
+      .anyMatch(
+        source ->
+          source.collectedItems() ==
+          InventoryCollectionSource.CollectedItems.MINERAL_ORE_DROPS
+      );
+    Set<ResourceLocation> mineralOreDrops = needsMineralOreDrops
+      ? MineralOreDropCollector.collect(resourceManager, registries)
+      : Set.of();
 
     for (InventoryCollectionSource source : sources) {
-      Set<ResourceLocation> tagMembers;
-      if (source.tfcFarmlandSeeds()) {
-        tagMembers = tfcFarmlandSeeds;
-      } else if (source.tag() == null) {
-        tagMembers = Set.of();
-      } else {
-        tagMembers = ItemTagResolver.resolve(
-          resourceManager,
-          registries,
-          source.tag()
-        );
-      }
+      Set<ResourceLocation> tagMembers =
+        switch (source.collectedItems()) {
+          case TFC_FARMLAND_SEEDS -> tfcFarmlandSeeds;
+          case MINERAL_ORE_DROPS -> mineralOreDrops;
+          case NONE -> source.tag() == null
+            ? Set.of()
+            : ItemTagResolver.resolve(
+              resourceManager,
+              registries,
+              source.tag()
+            );
+        };
       int added = patchSource(
         criteria,
         requirements,
@@ -292,7 +309,7 @@ public final class InventoryCollectionAdvancementPatch {
       );
       if (added > 0) {
         TFCCollectionAdvancements.LOGGER.info(
-          "Extended {} with {} {} item criteria",
+          "Rebuilt {} with {} {} item criteria",
           advancementId,
           added,
           source.displayNamespace()

@@ -10,14 +10,14 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvance
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Patches TFC Minerologist ({@code tfc:world/minerologist}).
+ * Rebuilds TFC Minerologist ({@code tfc:world/minerologist}).
  * <p>
- * TFC description is every non-metal mineral. That includes gems; the JSON list
- * {@code ALL_MINERALS} omits pyrite, ruby, sapphire, and topaz and duplicates
- * {@code sulfur} in {@code requirements}. Missing TFC pieces are filled from
- * held {@code ore/{name}} items that are not metal ores, not from a hardcoded
- * gem list; duplicates are removed when the advancement is patched. Addon
- * minerals and items such as Beneath cursecoal are included the same way.
+ * Criteria are unique item drops from {@code tfc:prospectable} blocks that are
+ * not metal ores. That covers TFC mineral and gem pieces, Beneath cursecoal,
+ * and any addon mineral whose ore block is prospectable — without hardcoding
+ * item ids. TFC halite contributes salt, which is what the block actually
+ * drops. Gems still belong here: TFC describes Minerologist as every
+ * non-metal mineral.
  */
 public final class MinerologistAdvancementPatch {
 
@@ -25,8 +25,7 @@ public final class MinerologistAdvancementPatch {
     ResourceLocation.fromNamespaceAndPath("tfc", "world/minerologist");
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.mineralPieces(),
-    new InventoryCollectionSource("beneath", "cursecoal")
+    InventoryCollectionSource.mineralOreDrops()
   );
 
   private MinerologistAdvancementPatch() {}

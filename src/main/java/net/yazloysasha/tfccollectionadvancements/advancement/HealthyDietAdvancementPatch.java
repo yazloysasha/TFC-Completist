@@ -11,13 +11,11 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvance
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Patches TFC Healthy Diet ({@code tfc:world/fruit}).
+ * Rebuilds TFC Healthy Diet ({@code tfc:world/fruit}).
  * <p>
- * Base TFC uses {@code minecraft:consume_item}. Its JSON list is hand-maintained
- * and misses entries (for example {@code melon_slice} is fruit in {@code
- * c:foods/fruit} but not in the advancement). We add every {@code tfc} and addon
- * item in {@code c:foods/fruit} that is not already a criterion. Item tags are
- * read from datapacks at advancement reload (holders are not tagged yet).
+ * Every {@code tfc} and addon item in {@code c:foods/fruit}. Base TFC uses
+ * {@code minecraft:consume_item}. Item tags are read from datapacks at
+ * advancement reload (holders are not tagged yet).
  */
 public final class HealthyDietAdvancementPatch {
 

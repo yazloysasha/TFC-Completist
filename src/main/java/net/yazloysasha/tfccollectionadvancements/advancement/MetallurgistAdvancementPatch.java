@@ -8,7 +8,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancementPatch;
 
 /**
- * Patches TFC Metallurgist ({@code tfc:world/metallurgist}).
+ * Rebuilds TFC Metallurgist ({@code tfc:world/metallurgist}).
  * <p>
  * A TFC metal is anything in {@code tfc:molten_metals}. The criterion is the
  * matching ingot from

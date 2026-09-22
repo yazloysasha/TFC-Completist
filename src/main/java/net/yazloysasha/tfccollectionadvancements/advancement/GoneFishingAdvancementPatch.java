@@ -11,7 +11,7 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvance
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Patches TFC Gone Fishing ({@code tfc:world/all_fish}).
+ * Rebuilds TFC Gone Fishing ({@code tfc:world/all_fish}).
  * <p>
  * Raw fish tagged {@code c:foods/raw_fish}, including TFC.
  */

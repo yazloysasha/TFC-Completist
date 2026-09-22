@@ -10,10 +10,9 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvance
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Patches TFC Gemologist ({@code tfc:world/gemologist}).
+ * Rebuilds TFC Gemologist ({@code tfc:world/gemologist}).
  * <p>
  * Held gem ore pieces ({@code ore/{name}} with a matching {@code gem/{name}}).
- * Includes TFC so a gem missing from the JSON is still required.
  */
 public final class GemologistAdvancementPatch {
 

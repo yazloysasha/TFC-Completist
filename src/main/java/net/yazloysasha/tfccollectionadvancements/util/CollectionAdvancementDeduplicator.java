@@ -12,8 +12,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Removes redundant criteria and requirement groups from patched collection advancements
- * (e.g. duplicate {@code sulfur} entries in TFC Minerologist).
+ * Removes redundant criteria and requirement groups from rebuilt collection
+ * advancements (for example two sources that resolve to the same item).
  */
 public final class CollectionAdvancementDeduplicator {
 

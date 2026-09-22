@@ -10,7 +10,7 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvance
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Patches TFC Arborist ({@code tfc:world/saplings}).
+ * Rebuilds TFC Arborist ({@code tfc:world/saplings}).
  * <p>
  * Timber saplings under {@code wood/sapling/...}, including TFC. Fruit-tree
  * saplings use other paths and belong with {@link HealthyDietAdvancementPatch}.
