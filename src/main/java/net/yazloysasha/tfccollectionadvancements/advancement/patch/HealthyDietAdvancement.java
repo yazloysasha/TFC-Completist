@@ -1,4 +1,4 @@
-package net.yazloysasha.tfccollectionadvancements.advancement;
+package net.yazloysasha.tfccollectionadvancements.advancement.patch;
 
 import com.google.gson.JsonElement;
 import java.util.List;
@@ -8,31 +8,33 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.neoforged.neoforge.common.Tags;
 import net.yazloysasha.tfccollectionadvancements.util.AdvancementCriterionBuilder;
-import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancement;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Rebuilds TFC Gone Fishing ({@code tfc:world/all_fish}).
+ * Rebuilds TFC Healthy Diet ({@code tfc:world/fruit}).
  * <p>
- * Raw fish tagged {@code c:foods/raw_fish}, including TFC.
+ * Every {@code tfc} and addon item in {@code c:foods/fruit}. Base TFC uses
+ * {@code minecraft:consume_item}. Item tags are read from datapacks at
+ * advancement reload (holders are not tagged yet).
  */
-public final class GoneFishingAdvancementPatch {
+public final class HealthyDietAdvancement {
 
   public static final ResourceLocation ADVANCEMENT =
-    ResourceLocation.fromNamespaceAndPath("tfc", "world/all_fish");
+    ResourceLocation.fromNamespaceAndPath("tfc", "world/fruit");
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.discoveredTag(Tags.Items.FOODS_RAW_FISH)
+    InventoryCollectionSource.discoveredTag(Tags.Items.FOODS_FRUIT)
   );
 
-  private GoneFishingAdvancementPatch() {}
+  private HealthyDietAdvancement() {}
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,
     ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
-    InventoryCollectionAdvancementPatch.patch(
+    InventoryCollectionAdvancement.patchConsume(
       ADVANCEMENT,
       advancements,
       resourceManager,

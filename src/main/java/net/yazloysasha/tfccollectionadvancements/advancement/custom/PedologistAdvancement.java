@@ -1,4 +1,4 @@
-package net.yazloysasha.tfccollectionadvancements.advancement;
+package net.yazloysasha.tfccollectionadvancements.advancement.custom;
 
 import com.google.gson.JsonElement;
 import java.util.List;
@@ -7,7 +7,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
-import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancement;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
@@ -16,7 +16,7 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
  * One AND-group per soil order (entisol, aridisol, …). Dirt, grass, duff, clay,
  * clay duff, mud, and coarse dirt of the same order are OR'd.
  */
-public final class PedologistAdvancementPatch {
+public final class PedologistAdvancement {
 
   public static final ResourceLocation ADVANCEMENT =
     ResourceLocation.fromNamespaceAndPath(
@@ -34,14 +34,14 @@ public final class PedologistAdvancementPatch {
     InventoryCollectionSource.discovered("coarse_dirt/")
   );
 
-  private PedologistAdvancementPatch() {}
+  private PedologistAdvancement() {}
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,
     ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
-    InventoryCollectionAdvancementPatch.patchAnyOfByLastPathSegment(
+    InventoryCollectionAdvancement.patchAnyOfByLastPathSegment(
       ADVANCEMENT,
       advancements,
       resourceManager,

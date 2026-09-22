@@ -1,4 +1,4 @@
-package net.yazloysasha.tfccollectionadvancements.advancement;
+package net.yazloysasha.tfccollectionadvancements.advancement.custom;
 
 import com.google.gson.JsonElement;
 import java.util.List;
@@ -6,31 +6,36 @@ import java.util.Map;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
+import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancement;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Rebuilds TFC Gemologist ({@code tfc:world/gemologist}).
+ * Rebuilds Jeweler ({@code tfc_collection_advancements:world/jeweler}).
  * <p>
- * Held gem ore pieces ({@code ore/{name}} with a matching {@code gem/{name}}).
+ * Cut gems ({@code gem/{name}}), not ore pieces or powders. Parent is TFC
+ * Gemologist ({@code tfc:world/gemologist}).
  */
-public final class GemologistAdvancementPatch {
+public final class JewelerAdvancement {
 
   public static final ResourceLocation ADVANCEMENT =
-    ResourceLocation.fromNamespaceAndPath("tfc", "world/gemologist");
+    ResourceLocation.fromNamespaceAndPath(
+      TFCCollectionAdvancements.MOD_ID,
+      "world/jeweler"
+    );
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.gemPieces()
+    InventoryCollectionSource.discovered("gem/")
   );
 
-  private GemologistAdvancementPatch() {}
+  private JewelerAdvancement() {}
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,
     ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
-    InventoryCollectionAdvancementPatch.patch(
+    InventoryCollectionAdvancement.patch(
       ADVANCEMENT,
       advancements,
       resourceManager,

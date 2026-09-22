@@ -7,24 +7,24 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.ServerAdvancementManager;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
-import net.yazloysasha.tfccollectionadvancements.advancement.AdventuringTimeAdvancementPatch;
-import net.yazloysasha.tfccollectionadvancements.advancement.ArboristAdvancementPatch;
-import net.yazloysasha.tfccollectionadvancements.advancement.ButcherAdvancementPatch;
-import net.yazloysasha.tfccollectionadvancements.advancement.CarnivoreAdvancementPatch;
-import net.yazloysasha.tfccollectionadvancements.advancement.GemologistAdvancementPatch;
-import net.yazloysasha.tfccollectionadvancements.advancement.GeologistAdvancementPatch;
-import net.yazloysasha.tfccollectionadvancements.advancement.GoneFishingAdvancementPatch;
-import net.yazloysasha.tfccollectionadvancements.advancement.HealthyDietAdvancementPatch;
-import net.yazloysasha.tfccollectionadvancements.advancement.JewelerAdvancementPatch;
-import net.yazloysasha.tfccollectionadvancements.advancement.MetallurgistAdvancementPatch;
-import net.yazloysasha.tfccollectionadvancements.advancement.MinerologistAdvancementPatch;
-import net.yazloysasha.tfccollectionadvancements.advancement.PedologistAdvancementPatch;
-import net.yazloysasha.tfccollectionadvancements.advancement.SandsOfTheWorldAdvancementPatch;
-import net.yazloysasha.tfccollectionadvancements.advancement.SeaCookAdvancementPatch;
-import net.yazloysasha.tfccollectionadvancements.advancement.SommelierAdvancementPatch;
-import net.yazloysasha.tfccollectionadvancements.advancement.StonemasonAdvancementPatch;
-import net.yazloysasha.tfccollectionadvancements.advancement.TrueFarmerAdvancementPatch;
-import net.yazloysasha.tfccollectionadvancements.advancement.VegetarianAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.advancement.custom.ButcherAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.custom.CarnivoreAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.custom.GeologistAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.custom.JewelerAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.custom.PedologistAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.custom.SandsOfTheWorldAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.custom.SeaCookAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.custom.SommelierAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.custom.StonemasonAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.custom.VegetarianAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.patch.AdventuringTimeAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.patch.ArboristAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.patch.GemologistAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.patch.GoneFishingAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.patch.HealthyDietAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.patch.MetallurgistAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.patch.MinerologistAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.patch.TrueFarmerAdvancement;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -46,95 +46,47 @@ public abstract class ServerAdvancementManagerMixin {
     ProfilerFiller profiler,
     CallbackInfo ci
   ) {
-    AdventuringTimeAdvancementPatch.patch(
+    AdventuringTimeAdvancement.patch(
       advancements,
       resourceManager,
       this.registries
     );
-    ArboristAdvancementPatch.patch(
+    ArboristAdvancement.patch(advancements, resourceManager, this.registries);
+    GemologistAdvancement.patch(advancements, resourceManager, this.registries);
+    JewelerAdvancement.patch(advancements, resourceManager, this.registries);
+    CarnivoreAdvancement.patch(advancements, resourceManager, this.registries);
+    GeologistAdvancement.patch(advancements, resourceManager, this.registries);
+    GoneFishingAdvancement.patch(
       advancements,
       resourceManager,
       this.registries
     );
-    GemologistAdvancementPatch.patch(
+    HealthyDietAdvancement.patch(
       advancements,
       resourceManager,
       this.registries
     );
-    JewelerAdvancementPatch.patch(
+    ButcherAdvancement.patch(advancements, resourceManager, this.registries);
+    MetallurgistAdvancement.patch(
       advancements,
       resourceManager,
       this.registries
     );
-    CarnivoreAdvancementPatch.patch(
+    MinerologistAdvancement.patch(
       advancements,
       resourceManager,
       this.registries
     );
-    GeologistAdvancementPatch.patch(
+    PedologistAdvancement.patch(advancements, resourceManager, this.registries);
+    SandsOfTheWorldAdvancement.patch(
       advancements,
       resourceManager,
       this.registries
     );
-    GoneFishingAdvancementPatch.patch(
-      advancements,
-      resourceManager,
-      this.registries
-    );
-    HealthyDietAdvancementPatch.patch(
-      advancements,
-      resourceManager,
-      this.registries
-    );
-    ButcherAdvancementPatch.patch(
-      advancements,
-      resourceManager,
-      this.registries
-    );
-    MetallurgistAdvancementPatch.patch(
-      advancements,
-      resourceManager,
-      this.registries
-    );
-    MinerologistAdvancementPatch.patch(
-      advancements,
-      resourceManager,
-      this.registries
-    );
-    PedologistAdvancementPatch.patch(
-      advancements,
-      resourceManager,
-      this.registries
-    );
-    SandsOfTheWorldAdvancementPatch.patch(
-      advancements,
-      resourceManager,
-      this.registries
-    );
-    SommelierAdvancementPatch.patch(
-      advancements,
-      resourceManager,
-      this.registries
-    );
-    SeaCookAdvancementPatch.patch(
-      advancements,
-      resourceManager,
-      this.registries
-    );
-    StonemasonAdvancementPatch.patch(
-      advancements,
-      resourceManager,
-      this.registries
-    );
-    TrueFarmerAdvancementPatch.patch(
-      advancements,
-      resourceManager,
-      this.registries
-    );
-    VegetarianAdvancementPatch.patch(
-      advancements,
-      resourceManager,
-      this.registries
-    );
+    SommelierAdvancement.patch(advancements, resourceManager, this.registries);
+    SeaCookAdvancement.patch(advancements, resourceManager, this.registries);
+    StonemasonAdvancement.patch(advancements, resourceManager, this.registries);
+    TrueFarmerAdvancement.patch(advancements, resourceManager, this.registries);
+    VegetarianAdvancement.patch(advancements, resourceManager, this.registries);
   }
 }

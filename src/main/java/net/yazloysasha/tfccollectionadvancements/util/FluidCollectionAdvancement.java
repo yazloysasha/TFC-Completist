@@ -14,9 +14,9 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
 import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
 
-public final class FluidCollectionAdvancementPatch {
+public final class FluidCollectionAdvancement {
 
-  private FluidCollectionAdvancementPatch() {}
+  private FluidCollectionAdvancement() {}
 
   /**
    * Rebuilds drink-fluid criteria for every fluid in {@code tag}, including addon

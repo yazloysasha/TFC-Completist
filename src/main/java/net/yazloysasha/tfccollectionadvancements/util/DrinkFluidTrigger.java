@@ -1,4 +1,4 @@
-package net.yazloysasha.tfccollectionadvancements.advancement;
+package net.yazloysasha.tfccollectionadvancements.util;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

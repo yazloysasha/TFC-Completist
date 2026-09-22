@@ -1,4 +1,4 @@
-package net.yazloysasha.tfccollectionadvancements.advancement;
+package net.yazloysasha.tfccollectionadvancements.advancement.custom;
 
 import com.google.gson.JsonElement;
 import java.util.List;
@@ -6,39 +6,36 @@ import java.util.Map;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.neoforged.neoforge.common.Tags;
 import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
-import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancement;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Rebuilds Vegetarian ({@code tfc_collection_advancements:world/vegetarian}).
+ * Rebuilds Stonemason ({@code tfc_collection_advancements:world/stonemason}).
  * <p>
- * Every {@code tfc} and addon item in {@code c:foods/fruit} and
- * {@code c:foods/vegetable}. Parent is TFC Healthy Diet ({@code tfc:world/fruit}),
- * like Minerologist follows Gemologist.
+ * One criterion per rock type: place {@code rock/bricks/{rock}}. Slabs, stairs,
+ * and walls are excluded.
  */
-public final class VegetarianAdvancementPatch {
+public final class StonemasonAdvancement {
 
   public static final ResourceLocation ADVANCEMENT =
     ResourceLocation.fromNamespaceAndPath(
       TFCCollectionAdvancements.MOD_ID,
-      "world/vegetarian"
+      "world/stonemason"
     );
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.discoveredTag(Tags.Items.FOODS_FRUIT),
-    InventoryCollectionSource.discoveredTag(Tags.Items.FOODS_VEGETABLE)
+    InventoryCollectionSource.discoveredPrimaryBlock("rock/bricks/")
   );
 
-  private VegetarianAdvancementPatch() {}
+  private StonemasonAdvancement() {}
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,
     ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
-    InventoryCollectionAdvancementPatch.patchConsume(
+    InventoryCollectionAdvancement.patchPlacedBlock(
       ADVANCEMENT,
       advancements,
       resourceManager,

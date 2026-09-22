@@ -250,7 +250,7 @@ public record InventoryCollectionSource(
       }
     } else if (
       pathPrefix != null &&
-      !InventoryCollectionAdvancementPatch.matchesPathPrefix(path, pathPrefix)
+      !InventoryCollectionAdvancement.matchesPathPrefix(path, pathPrefix)
     ) {
       return false;
     }
@@ -258,9 +258,7 @@ public record InventoryCollectionSource(
       return false;
     }
     if (singleSegmentAfterPrefix && pathPrefix != null) {
-      if (
-        !InventoryCollectionAdvancementPatch.matchesPathPrefix(path, pathPrefix)
-      ) {
+      if (!InventoryCollectionAdvancement.matchesPathPrefix(path, pathPrefix)) {
         return false;
       }
       String remainder = path.substring(pathPrefix.length());

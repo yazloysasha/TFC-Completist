@@ -26,13 +26,13 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
 
-public final class InventoryCollectionAdvancementPatch {
+public final class InventoryCollectionAdvancement {
 
   private static final String METAL_INGOT_PREFIX = "metal/ingot/";
   private static final String MOLTEN_METAL_PREFIX = "metal/";
   private static final String COMMON_INGOTS_PATH = "ingots/";
 
-  private InventoryCollectionAdvancementPatch() {}
+  private InventoryCollectionAdvancement() {}
 
   public static void patch(
     ResourceLocation advancementId,
@@ -81,7 +81,7 @@ public final class InventoryCollectionAdvancementPatch {
       resourceManager,
       registries,
       sources,
-      InventoryCollectionAdvancementPatch::placedBlockCriterion
+      InventoryCollectionAdvancement::placedBlockCriterion
     );
   }
 

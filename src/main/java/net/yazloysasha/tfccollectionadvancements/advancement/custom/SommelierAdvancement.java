@@ -1,4 +1,4 @@
-package net.yazloysasha.tfccollectionadvancements.advancement;
+package net.yazloysasha.tfccollectionadvancements.advancement.custom;
 
 import com.google.gson.JsonElement;
 import java.util.List;
@@ -8,7 +8,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
-import net.yazloysasha.tfccollectionadvancements.util.FluidCollectionAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.util.FluidCollectionAdvancement;
 
 /**
  * Rebuilds Sommelier ({@code tfc_collection_advancements:world/sommelier}).
@@ -20,7 +20,7 @@ import net.yazloysasha.tfccollectionadvancements.util.FluidCollectionAdvancement
  * {@code Drinkable.onDrink}). Farmer's Delight drinks stay out unless they
  * are registered as alcohol fluids. Parent is {@code tfc:world/root}.
  */
-public final class SommelierAdvancementPatch {
+public final class SommelierAdvancement {
 
   public static final ResourceLocation ADVANCEMENT =
     ResourceLocation.fromNamespaceAndPath(
@@ -28,14 +28,14 @@ public final class SommelierAdvancementPatch {
       "world/sommelier"
     );
 
-  private SommelierAdvancementPatch() {}
+  private SommelierAdvancement() {}
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,
     ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
-    FluidCollectionAdvancementPatch.patchDrinkFromTags(
+    FluidCollectionAdvancement.patchDrinkFromTags(
       ADVANCEMENT,
       advancements,
       resourceManager,

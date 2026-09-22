@@ -1,4 +1,4 @@
-package net.yazloysasha.tfccollectionadvancements.advancement;
+package net.yazloysasha.tfccollectionadvancements.advancement.patch;
 
 import com.google.gson.JsonElement;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.Map;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancement;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
@@ -18,7 +18,7 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
  * {@code CropBlock}, so they are covered either way. Farmer's Delight crops
  * that only sit in {@code c:seeds} are excluded.
  */
-public final class TrueFarmerAdvancementPatch {
+public final class TrueFarmerAdvancement {
 
   public static final ResourceLocation ADVANCEMENT =
     ResourceLocation.fromNamespaceAndPath("tfc", "world/all_crops");
@@ -28,14 +28,14 @@ public final class TrueFarmerAdvancementPatch {
     InventoryCollectionSource.tfcFarmlandCrops()
   );
 
-  private TrueFarmerAdvancementPatch() {}
+  private TrueFarmerAdvancement() {}
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,
     ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
-    InventoryCollectionAdvancementPatch.patch(
+    InventoryCollectionAdvancement.patch(
       ADVANCEMENT,
       advancements,
       resourceManager,

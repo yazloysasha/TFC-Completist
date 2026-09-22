@@ -1,4 +1,4 @@
-package net.yazloysasha.tfccollectionadvancements.advancement;
+package net.yazloysasha.tfccollectionadvancements.advancement.patch;
 
 import com.google.gson.JsonElement;
 import java.util.List;
@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
-import net.yazloysasha.tfccollectionadvancements.util.BiomeCollectionAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.util.BiomeCollectionAdvancement;
 import net.yazloysasha.tfccollectionadvancements.util.BiomeCollectionSource;
 
 /**
@@ -19,7 +19,7 @@ import net.yazloysasha.tfccollectionadvancements.util.BiomeCollectionSource;
  * loaded (Beneath reuses vanilla nether biome ids). Vanilla rows use
  * {@code minecraft:location} with a biome id in the predicate.
  */
-public final class AdventuringTimeAdvancementPatch {
+public final class AdventuringTimeAdvancement {
 
   public static final ResourceLocation ADVANCEMENT =
     ResourceLocation.fromNamespaceAndPath("tfc", "world/adventuring_time");
@@ -34,14 +34,14 @@ public final class AdventuringTimeAdvancementPatch {
     new BiomeCollectionSource("beneath", "minecraft", IS_NETHER)
   );
 
-  private AdventuringTimeAdvancementPatch() {}
+  private AdventuringTimeAdvancement() {}
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,
     ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
-    BiomeCollectionAdvancementPatch.patch(
+    BiomeCollectionAdvancement.patch(
       ADVANCEMENT,
       advancements,
       resourceManager,

@@ -14,9 +14,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
 
-public final class BiomeCollectionAdvancementPatch {
+public final class BiomeCollectionAdvancement {
 
-  private BiomeCollectionAdvancementPatch() {}
+  private BiomeCollectionAdvancement() {}
 
   public static void patch(
     ResourceLocation advancementId,

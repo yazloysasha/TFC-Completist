@@ -1,4 +1,4 @@
-package net.yazloysasha.tfccollectionadvancements.advancement;
+package net.yazloysasha.tfccollectionadvancements.advancement.custom;
 
 import com.google.gson.JsonElement;
 import java.util.List;
@@ -6,36 +6,37 @@ import java.util.Map;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.neoforged.neoforge.common.Tags;
 import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
-import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancement;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Rebuilds Stonemason ({@code tfc_collection_advancements:world/stonemason}).
+ * Rebuilds Butcher ({@code tfc_collection_advancements:world/butcher}).
  * <p>
- * One criterion per rock type: place {@code rock/bricks/{rock}}. Slabs, stairs,
- * and walls are excluded.
+ * Every {@code tfc} and addon item in {@code c:foods/raw_meat}. Parent is TFC
+ * Hunter ({@code tfc:world/hunter}, kill a TFC animal).
  */
-public final class StonemasonAdvancementPatch {
+public final class ButcherAdvancement {
 
   public static final ResourceLocation ADVANCEMENT =
     ResourceLocation.fromNamespaceAndPath(
       TFCCollectionAdvancements.MOD_ID,
-      "world/stonemason"
+      "world/butcher"
     );
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.discoveredPrimaryBlock("rock/bricks/")
+    InventoryCollectionSource.discoveredTag(Tags.Items.FOODS_RAW_MEAT)
   );
 
-  private StonemasonAdvancementPatch() {}
+  private ButcherAdvancement() {}
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,
     ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
-    InventoryCollectionAdvancementPatch.patchPlacedBlock(
+    InventoryCollectionAdvancement.patch(
       ADVANCEMENT,
       advancements,
       resourceManager,

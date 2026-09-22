@@ -1,4 +1,4 @@
-package net.yazloysasha.tfccollectionadvancements.advancement;
+package net.yazloysasha.tfccollectionadvancements.advancement.patch;
 
 import com.google.gson.JsonElement;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.Map;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancement;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
@@ -19,7 +19,7 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
  * drops. Gems still belong here: TFC describes Minerologist as every
  * non-metal mineral.
  */
-public final class MinerologistAdvancementPatch {
+public final class MinerologistAdvancement {
 
   public static final ResourceLocation ADVANCEMENT =
     ResourceLocation.fromNamespaceAndPath("tfc", "world/minerologist");
@@ -28,14 +28,14 @@ public final class MinerologistAdvancementPatch {
     InventoryCollectionSource.mineralOreDrops()
   );
 
-  private MinerologistAdvancementPatch() {}
+  private MinerologistAdvancement() {}
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,
     ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
-    InventoryCollectionAdvancementPatch.patch(
+    InventoryCollectionAdvancement.patch(
       ADVANCEMENT,
       advancements,
       resourceManager,

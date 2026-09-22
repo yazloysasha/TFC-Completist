@@ -10,6 +10,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
+import net.yazloysasha.tfccollectionadvancements.util.DrinkFluidTracker;
+import net.yazloysasha.tfccollectionadvancements.util.DrinkFluidTrigger;
 
 public final class TFCCollectionAdvancementTriggers {
 
