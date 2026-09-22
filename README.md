@@ -23,3 +23,4 @@ Tested with mods:
 - FirmaLife
 - TFC + IE Crossover
 - TFC Ore Washing
+- TFC Volcanoes

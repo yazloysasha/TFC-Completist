@@ -23,3 +23,4 @@ Tested with mods:
 - Farmer's Delight TFC
 - TFC + IE Crossover
 - TFC Ore Washing
+- TFC Volcanoes
