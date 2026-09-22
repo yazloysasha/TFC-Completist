@@ -6,11 +6,11 @@ A simple mod that adds items from addons to TerraFirmaCraft collection advanceme
 
 Collection advancements and compatibility:
 
-- True Farmer (none)
+- True Farmer (Beneath, FirmaLife)
 - Arborist (ArborFirmaCraft, Beneath)
-- Healthy Diet (none)
+- Healthy Diet (FirmaLife)
 - Gone Fishing (none)
 - Gemologist (none)
 - Minerologist (Beneath)
-- Metallurgist (none)
+- Metallurgist (FirmaLife)
 - Adventuring Time (Beneath)

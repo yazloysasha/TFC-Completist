@@ -8,25 +8,26 @@ import net.minecraft.resources.ResourceLocation;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
-public final class OreCollectionAdvancementPatch {
+public final class MinerologistAdvancementPatch {
 
-  public static final ResourceLocation TFC_MINERALOGIST_ADVANCEMENT =
+  public static final ResourceLocation ADVANCEMENT =
     ResourceLocation.fromNamespaceAndPath("tfc", "world/minerologist");
 
-  private static final List<InventoryCollectionSource> MINERALOGIST_SOURCES =
-    List.of(new InventoryCollectionSource("beneath", "cursecoal"));
+  private static final List<InventoryCollectionSource> SOURCES = List.of(
+    new InventoryCollectionSource("beneath", "cursecoal")
+  );
 
-  private OreCollectionAdvancementPatch() {}
+  private MinerologistAdvancementPatch() {}
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,
     HolderLookup.Provider registries
   ) {
     InventoryCollectionAdvancementPatch.patch(
-      TFC_MINERALOGIST_ADVANCEMENT,
+      ADVANCEMENT,
       advancements,
       registries,
-      MINERALOGIST_SOURCES
+      SOURCES
     );
   }
 }

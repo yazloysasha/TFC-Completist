@@ -8,8 +8,11 @@ import net.minecraft.server.ServerAdvancementManager;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.yazloysasha.tfccollectionadvancements.advancement.AdventuringTimeAdvancementPatch;
-import net.yazloysasha.tfccollectionadvancements.advancement.OreCollectionAdvancementPatch;
-import net.yazloysasha.tfccollectionadvancements.advancement.SaplingsAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.advancement.ArboristAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.advancement.HealthyDietAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.advancement.MetallurgistAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.advancement.MinerologistAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.advancement.TrueFarmerAdvancementPatch;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,8 +34,11 @@ public abstract class ServerAdvancementManagerMixin {
     ProfilerFiller profiler,
     CallbackInfo ci
   ) {
-    SaplingsAdvancementPatch.patch(advancements, this.registries);
-    OreCollectionAdvancementPatch.patch(advancements, this.registries);
+    ArboristAdvancementPatch.patch(advancements, this.registries);
+    TrueFarmerAdvancementPatch.patch(advancements, this.registries);
+    HealthyDietAdvancementPatch.patch(advancements, this.registries);
+    MinerologistAdvancementPatch.patch(advancements, this.registries);
+    MetallurgistAdvancementPatch.patch(advancements, this.registries);
     AdventuringTimeAdvancementPatch.patch(
       advancements,
       resourceManager,

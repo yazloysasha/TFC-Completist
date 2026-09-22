@@ -8,6 +8,19 @@ public final class AdvancementCriterionBuilder {
 
   private AdvancementCriterionBuilder() {}
 
+  public static JsonObject consumeItem(ResourceLocation itemId) {
+    JsonObject itemPredicate = new JsonObject();
+    itemPredicate.addProperty("items", itemId.toString());
+
+    JsonObject conditions = new JsonObject();
+    conditions.add("item", itemPredicate);
+
+    JsonObject criterion = new JsonObject();
+    criterion.addProperty("trigger", "minecraft:consume_item");
+    criterion.add("conditions", conditions);
+    return criterion;
+  }
+
   public static JsonObject inventoryChanged(ResourceLocation itemId) {
     JsonObject itemPredicate = new JsonObject();
     itemPredicate.addProperty("items", itemId.toString());

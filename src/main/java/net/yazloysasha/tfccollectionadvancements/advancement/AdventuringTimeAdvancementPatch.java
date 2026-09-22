@@ -14,7 +14,7 @@ import net.yazloysasha.tfccollectionadvancements.util.BiomeCollectionSource;
 
 public final class AdventuringTimeAdvancementPatch {
 
-  public static final ResourceLocation TFC_ADVENTURING_TIME_ADVANCEMENT =
+  public static final ResourceLocation ADVANCEMENT =
     ResourceLocation.fromNamespaceAndPath("tfc", "world/adventuring_time");
 
   private static final TagKey<Biome> IS_NETHER = TagKey.create(
@@ -22,7 +22,7 @@ public final class AdventuringTimeAdvancementPatch {
     ResourceLocation.withDefaultNamespace("is_nether")
   );
 
-  private static final List<BiomeCollectionSource> BIOME_SOURCES = List.of(
+  private static final List<BiomeCollectionSource> SOURCES = List.of(
     new BiomeCollectionSource("beneath", "minecraft", IS_NETHER)
   );
 
@@ -34,11 +34,11 @@ public final class AdventuringTimeAdvancementPatch {
     HolderLookup.Provider registries
   ) {
     BiomeCollectionAdvancementPatch.patch(
-      TFC_ADVENTURING_TIME_ADVANCEMENT,
+      ADVANCEMENT,
       advancements,
       resourceManager,
       registries,
-      BIOME_SOURCES
+      SOURCES
     );
   }
 }

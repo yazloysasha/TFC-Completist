@@ -8,30 +8,28 @@ import net.minecraft.resources.ResourceLocation;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
-public final class SaplingsAdvancementPatch {
+public final class MetallurgistAdvancementPatch {
 
-  public static final ResourceLocation TFC_SAPLINGS_ADVANCEMENT =
-    ResourceLocation.fromNamespaceAndPath("tfc", "world/saplings");
+  public static final ResourceLocation ADVANCEMENT =
+    ResourceLocation.fromNamespaceAndPath("tfc", "world/metallurgist");
 
-  private static final String SAPLING_PATH_PREFIX = "wood/sapling/";
+  private static final String INGOT_PATH_PREFIX = "metal/ingot/";
 
-  private static final List<InventoryCollectionSource> SAPLING_SOURCES =
-    List.of(
-      new InventoryCollectionSource("afc", SAPLING_PATH_PREFIX),
-      new InventoryCollectionSource("beneath", SAPLING_PATH_PREFIX)
-    );
+  private static final List<InventoryCollectionSource> SOURCES = List.of(
+    new InventoryCollectionSource("firmalife", INGOT_PATH_PREFIX)
+  );
 
-  private SaplingsAdvancementPatch() {}
+  private MetallurgistAdvancementPatch() {}
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,
     HolderLookup.Provider registries
   ) {
     InventoryCollectionAdvancementPatch.patch(
-      TFC_SAPLINGS_ADVANCEMENT,
+      ADVANCEMENT,
       advancements,
       registries,
-      SAPLING_SOURCES
+      SOURCES
     );
   }
 }
