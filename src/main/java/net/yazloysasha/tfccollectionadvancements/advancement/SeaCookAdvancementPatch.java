@@ -14,9 +14,8 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 /**
  * Rebuilds Sea Cook ({@code tfc_collection_advancements:world/sea_cook}).
  * <p>
- * Cooked fish that pair with {@code c:foods/raw_fish} (same count as Gone
- * Fishing; excludes e.g. {@code cooked_turtle}). Parent is
- * {@code tfc:world/all_fish}.
+ * Every {@code tfc} and addon item in {@code c:foods/cooked_fish}. Parent is
+ * TFC Gone Fishing ({@code tfc:world/all_fish}).
  */
 public final class SeaCookAdvancementPatch {
 
@@ -27,10 +26,7 @@ public final class SeaCookAdvancementPatch {
     );
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.discoveredCookedWithRawCounterpart(
-      Tags.Items.FOODS_COOKED_FISH,
-      Tags.Items.FOODS_RAW_FISH
-    )
+    InventoryCollectionSource.discoveredTag(Tags.Items.FOODS_COOKED_FISH)
   );
 
   private SeaCookAdvancementPatch() {}
