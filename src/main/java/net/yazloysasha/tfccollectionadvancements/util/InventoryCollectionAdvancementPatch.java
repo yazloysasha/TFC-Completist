@@ -118,48 +118,6 @@ public final class InventoryCollectionAdvancementPatch {
     return added;
   }
 
-  public static void addItems(
-    ResourceLocation advancementId,
-    Map<ResourceLocation, JsonElement> advancements,
-    Iterable<ResourceLocation> itemIds,
-    Function<ResourceLocation, JsonObject> criterionFactory
-  ) {
-    JsonElement advancementElement = advancements.get(advancementId);
-    if (advancementElement == null || !advancementElement.isJsonObject()) {
-      return;
-    }
-
-    JsonObject root = advancementElement.getAsJsonObject();
-    JsonObject criteria = root.getAsJsonObject("criteria");
-    JsonArray requirements = root.getAsJsonArray("requirements");
-    if (criteria == null || requirements == null) {
-      return;
-    }
-
-    int added = 0;
-    for (ResourceLocation itemId : itemIds) {
-      String criterionName = criterionName(itemId, null);
-      if (criteria.has(criterionName)) {
-        continue;
-      }
-
-      AdvancementCriterionBuilder.addAndRequire(
-        criteria,
-        requirements,
-        criterionName,
-        criterionFactory.apply(itemId)
-      );
-      added++;
-    }
-    if (added > 0) {
-      TFCCollectionAdvancements.LOGGER.info(
-        "Extended {} with {} plant fruit criteria",
-        advancementId,
-        added
-      );
-    }
-  }
-
   static String criterionName(ResourceLocation itemId, String pathPrefix) {
     String suffix = criterionSuffix(itemId.getPath(), pathPrefix);
     return AddonNamespaces.isTfc(itemId.getNamespace())
