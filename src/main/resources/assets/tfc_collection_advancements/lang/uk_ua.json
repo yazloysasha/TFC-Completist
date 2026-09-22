@@ -1,4 +1,8 @@
 {
   "tfc_collection_advancements.advancements.world.geologist.title": "Петролог",
-  "tfc_collection_advancements.advancements.world.geologist.description": "Дістаньте кожен вид гірської породи в моді"
+  "tfc_collection_advancements.advancements.world.geologist.description": "Дістаньте кожен вид гірської породи в моді",
+  "tfc_collection_advancements.advancements.world.pedologist.title": "Педолог",
+  "tfc_collection_advancements.advancements.world.pedologist.description": "Дістаньте кожен тип ґрунту в моді",
+  "tfc_collection_advancements.advancements.world.sands_of_the_world.title": "Піски з усього світу",
+  "tfc_collection_advancements.advancements.world.sands_of_the_world.description": "Дістаньте кожен колір піску в моді"
 }

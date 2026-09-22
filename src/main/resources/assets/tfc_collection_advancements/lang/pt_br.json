@@ -1,4 +1,8 @@
 {
   "tfc_collection_advancements.advancements.world.geologist.title": "Geologist",
-  "tfc_collection_advancements.advancements.world.geologist.description": "Find every rock type in TFC."
+  "tfc_collection_advancements.advancements.world.geologist.description": "Find every rock type in TFC.",
+  "tfc_collection_advancements.advancements.world.pedologist.title": "Pedologist",
+  "tfc_collection_advancements.advancements.world.pedologist.description": "Find every soil type in TFC.",
+  "tfc_collection_advancements.advancements.world.sands_of_the_world.title": "Areias do mundo",
+  "tfc_collection_advancements.advancements.world.sands_of_the_world.description": "Find every sand color in TFC."
 }

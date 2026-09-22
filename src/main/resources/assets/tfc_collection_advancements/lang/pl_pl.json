@@ -1,4 +1,8 @@
 {
   "tfc_collection_advancements.advancements.world.geologist.title": "Geolog",
-  "tfc_collection_advancements.advancements.world.geologist.description": "Zdobądź każdy rodzaj skały w tfc."
+  "tfc_collection_advancements.advancements.world.geologist.description": "Zdobądź każdy rodzaj skały w tfc.",
+  "tfc_collection_advancements.advancements.world.pedologist.title": "Pedolog",
+  "tfc_collection_advancements.advancements.world.pedologist.description": "Zdobądź każdy typ gleby w tfc.",
+  "tfc_collection_advancements.advancements.world.sands_of_the_world.title": "Piaski świata",
+  "tfc_collection_advancements.advancements.world.sands_of_the_world.description": "Zdobądź każdy kolor piasku w tfc."
 }

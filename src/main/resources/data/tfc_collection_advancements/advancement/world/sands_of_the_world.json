@@ -1,0 +1,32 @@
+{
+  "parent": "tfc:world/root",
+  "criteria": {
+    "brown": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "tfc:sand/brown"
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "tfc:sand/yellow"
+    },
+    "title": {
+      "translate": "tfc_collection_advancements.advancements.world.sands_of_the_world.title"
+    },
+    "description": {
+      "translate": "tfc_collection_advancements.advancements.world.sands_of_the_world.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "tfc:textures/block/mud/fluvisol.png"
+  },
+  "requirements": [["brown"]]
+}
