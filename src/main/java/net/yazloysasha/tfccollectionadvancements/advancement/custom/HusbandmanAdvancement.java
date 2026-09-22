@@ -13,7 +13,8 @@ import net.yazloysasha.tfccollectionadvancements.util.EntityCollectionAdvancemen
 /**
  * Rebuilds Husbandman ({@code tfc_collection_advancements:world/husbandman}).
  * <p>
- * Same tag sources as {@link DomesticationAdvancement}, minus mule (sterile).
+ * Same tag sources as {@link DomesticationAdvancement}, minus mule (sterile)
+ * and frog.
  * Criterion is {@code bred_animal} from {@code onFertilized}.
  */
 public final class HusbandmanAdvancement {

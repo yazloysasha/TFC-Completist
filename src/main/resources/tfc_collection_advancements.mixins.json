@@ -5,7 +5,9 @@
   "compatibilityLevel": "JAVA_21",
   "refmap": "tfc_collection_advancements.refmap.json",
   "mixins": [
+    "CommonAnimalBehaviorMixin",
     "DrinkableMixin",
+    "PlayerInteractMixin",
     "ServerAdvancementManagerMixin",
     "TFCAnimalPropertiesMixin"
   ],

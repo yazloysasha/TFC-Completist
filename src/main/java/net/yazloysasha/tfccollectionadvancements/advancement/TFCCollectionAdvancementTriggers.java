@@ -18,6 +18,8 @@ import net.yazloysasha.tfccollectionadvancements.util.AddonNamespaces;
 import net.yazloysasha.tfccollectionadvancements.util.BredAnimalTrigger;
 import net.yazloysasha.tfccollectionadvancements.util.DrinkFluidTracker;
 import net.yazloysasha.tfccollectionadvancements.util.DrinkFluidTrigger;
+import net.yazloysasha.tfccollectionadvancements.util.EntityCollectionAdvancement;
+import net.yazloysasha.tfccollectionadvancements.util.FamiliarizedAnimalTrigger;
 import net.yazloysasha.tfccollectionadvancements.util.LastFedAnimalTracker;
 
 public final class TFCCollectionAdvancementTriggers {
@@ -38,6 +40,14 @@ public final class TFCCollectionAdvancementTriggers {
     BredAnimalTrigger
   > BRED_ANIMAL = TRIGGERS.register("bred_animal", BredAnimalTrigger::new);
 
+  public static final DeferredHolder<
+    CriterionTrigger<?>,
+    FamiliarizedAnimalTrigger
+  > FAMILIARIZED_ANIMAL = TRIGGERS.register(
+    "familiarized_animal",
+    FamiliarizedAnimalTrigger::new
+  );
+
   private TFCCollectionAdvancementTriggers() {}
 
   public static void register(IEventBus modEventBus) {
@@ -54,13 +64,28 @@ public final class TFCCollectionAdvancementTriggers {
     }
   }
 
+  public static void onFamiliarized(ServerPlayer player, LivingEntity animal) {
+    ResourceLocation entityId = BuiltInRegistries.ENTITY_TYPE.getKey(
+      animal.getType()
+    );
+    if (
+      entityId == null ||
+      !AddonNamespaces.isDiscoverable(entityId.getNamespace()) ||
+      EntityCollectionAdvancement.isExcludedFromFamiliarization(entityId)
+    ) {
+      return;
+    }
+    FAMILIARIZED_ANIMAL.get().trigger(player, entityId);
+  }
+
   public static void onBredAnimal(LivingEntity female, LivingEntity male) {
     ResourceLocation entityId = BuiltInRegistries.ENTITY_TYPE.getKey(
       female.getType()
     );
     if (
       entityId == null ||
-      !AddonNamespaces.isDiscoverable(entityId.getNamespace())
+      !AddonNamespaces.isDiscoverable(entityId.getNamespace()) ||
+      EntityCollectionAdvancement.isExcludedFromBreeding(entityId)
     ) {
       return;
     }

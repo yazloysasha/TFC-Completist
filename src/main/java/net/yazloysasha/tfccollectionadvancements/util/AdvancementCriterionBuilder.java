@@ -18,15 +18,15 @@ public final class AdvancementCriterionBuilder {
     return criterion;
   }
 
-  public static JsonObject fedAnimal(ResourceLocation entityId) {
-    JsonObject entity = new JsonObject();
-    entity.addProperty("type", entityId.toString());
-
+  public static JsonObject familiarizedAnimal(ResourceLocation entityId) {
     JsonObject conditions = new JsonObject();
-    conditions.add("entity", entity);
+    conditions.addProperty("entity", entityId.toString());
 
     JsonObject criterion = new JsonObject();
-    criterion.addProperty("trigger", "tfc:fed_animal");
+    criterion.addProperty(
+      "trigger",
+      "tfc_collection_advancements:familiarized_animal"
+    );
     criterion.add("conditions", conditions);
     return criterion;
   }

@@ -17,27 +17,44 @@ import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
 
 public final class EntityCollectionAdvancement {
 
+  private static final ResourceLocation TFC_FROG =
+    ResourceLocation.fromNamespaceAndPath("tfc", "frog");
+
+  private static final ResourceLocation TFC_MULE =
+    ResourceLocation.fromNamespaceAndPath("tfc", "mule");
+
   /**
-   * No {@code tfc:fed_animal} from normal livestock feeding.
+   * No familiarity cap in TFC; omitted from collection advancements.
    */
-  private static final Set<ResourceLocation> FED_ANIMAL_EXCLUDED = Set.of(
-    ResourceLocation.fromNamespaceAndPath("tfc", "frog")
+  private static final Set<ResourceLocation> FAMILIARIZED_EXCLUDED = Set.of(
+    TFC_FROG
   );
 
   /**
-   * Sterile; still feedable for Domestication.
+   * Sterile or non-standard breeding.
    */
   private static final Set<ResourceLocation> BRED_ANIMAL_EXCLUDED = Set.of(
-    ResourceLocation.fromNamespaceAndPath("tfc", "mule")
+    TFC_MULE,
+    TFC_FROG
   );
+
+  public static boolean isExcludedFromFamiliarization(
+    ResourceLocation entityId
+  ) {
+    return FAMILIARIZED_EXCLUDED.contains(entityId);
+  }
+
+  public static boolean isExcludedFromBreeding(ResourceLocation entityId) {
+    return BRED_ANIMAL_EXCLUDED.contains(entityId);
+  }
 
   private EntityCollectionAdvancement() {}
 
   /**
-   * Rebuilds {@code tfc:fed_animal} criteria for every discoverable entity in
-   * {@code tags}. Same trigger TFC uses for {@code world/familiarity}.
+   * Rebuilds {@code familiarized_animal} criteria for tag members that reach
+   * adult familiarity cap (or 100% as a child).
    */
-  public static void patchFedAnimalFromTags(
+  public static void patchFamiliarizedAnimalFromTags(
     ResourceLocation advancementId,
     Map<ResourceLocation, JsonElement> advancements,
     ResourceManager resourceManager,
@@ -50,9 +67,9 @@ public final class EntityCollectionAdvancement {
       resourceManager,
       registries,
       tags,
-      FED_ANIMAL_EXCLUDED,
-      AdvancementCriterionBuilder::fedAnimal,
-      "fed-animal"
+      FAMILIARIZED_EXCLUDED,
+      AdvancementCriterionBuilder::familiarizedAnimal,
+      "familiarized-animal"
     );
   }
 

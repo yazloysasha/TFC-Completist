@@ -2,11 +2,9 @@
   "parent": "tfc:world/familiarity",
   "criteria": {
     "cow": {
-      "trigger": "tfc:fed_animal",
+      "trigger": "tfc_collection_advancements:familiarized_animal",
       "conditions": {
-        "entity": {
-          "type": "tfc:cow"
-        }
+        "entity": "tfc:cow"
       }
     }
   },
