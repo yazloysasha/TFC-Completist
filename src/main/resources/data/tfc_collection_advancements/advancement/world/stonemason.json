@@ -1,0 +1,32 @@
+{
+  "parent": "tfc_collection_advancements:world/geologist",
+  "criteria": {
+    "limestone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "tfc:rock/bricks/limestone"
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "tfc:rock/bricks/limestone"
+    },
+    "title": {
+      "translate": "tfc_collection_advancements.advancements.world.stonemason.title"
+    },
+    "description": {
+      "translate": "tfc_collection_advancements.advancements.world.stonemason.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "tfc:textures/block/mud/fluvisol.png"
+  },
+  "requirements": [["limestone"]]
+}

@@ -17,6 +17,7 @@ import net.yazloysasha.tfccollectionadvancements.advancement.MetallurgistAdvance
 import net.yazloysasha.tfccollectionadvancements.advancement.MinerologistAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.PedologistAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.SandsOfTheWorldAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.advancement.StonemasonAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.TrueFarmerAdvancementPatch;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -85,6 +86,11 @@ public abstract class ServerAdvancementManagerMixin {
       this.registries
     );
     SandsOfTheWorldAdvancementPatch.patch(
+      advancements,
+      resourceManager,
+      this.registries
+    );
+    StonemasonAdvancementPatch.patch(
       advancements,
       resourceManager,
       this.registries

@@ -18,7 +18,8 @@ public record InventoryCollectionSource(
   boolean rejectBlockItems,
   Boolean gemOre,
   boolean includeTfc,
-  CollectedItems collectedItems
+  CollectedItems collectedItems,
+  boolean singleSegmentAfterPrefix
 ) {
   public enum CollectedItems {
     NONE,
@@ -36,7 +37,8 @@ public record InventoryCollectionSource(
       false,
       null,
       true,
-      CollectedItems.NONE
+      CollectedItems.NONE,
+      false
     );
   }
 
@@ -55,7 +57,8 @@ public record InventoryCollectionSource(
       false,
       null,
       true,
-      CollectedItems.NONE
+      CollectedItems.NONE,
+      false
     );
   }
 
@@ -69,7 +72,26 @@ public record InventoryCollectionSource(
       false,
       null,
       true,
-      CollectedItems.NONE
+      CollectedItems.NONE,
+      false
+    );
+  }
+
+  /** Base block only ({@code rock/smooth/granite}), not slabs, stairs, or walls. */
+  public static InventoryCollectionSource discoveredPrimaryBlock(
+    String pathPrefix
+  ) {
+    return new InventoryCollectionSource(
+      null,
+      pathPrefix,
+      null,
+      false,
+      null,
+      false,
+      null,
+      true,
+      CollectedItems.NONE,
+      true
     );
   }
 
@@ -83,7 +105,8 @@ public record InventoryCollectionSource(
       false,
       null,
       true,
-      CollectedItems.NONE
+      CollectedItems.NONE,
+      false
     );
   }
 
@@ -97,7 +120,8 @@ public record InventoryCollectionSource(
       false,
       null,
       false,
-      CollectedItems.NONE
+      CollectedItems.NONE,
+      false
     );
   }
 
@@ -111,7 +135,8 @@ public record InventoryCollectionSource(
       true,
       true,
       true,
-      CollectedItems.NONE
+      CollectedItems.NONE,
+      false
     );
   }
 
@@ -125,7 +150,8 @@ public record InventoryCollectionSource(
       false,
       null,
       true,
-      CollectedItems.TFC_FARMLAND_SEEDS
+      CollectedItems.TFC_FARMLAND_SEEDS,
+      false
     );
   }
 
@@ -139,7 +165,8 @@ public record InventoryCollectionSource(
       false,
       null,
       true,
-      CollectedItems.MINERAL_ORE_DROPS
+      CollectedItems.MINERAL_ORE_DROPS,
+      false
     );
   }
 
@@ -229,6 +256,21 @@ public record InventoryCollectionSource(
     }
     if (pathSuffix != null && !path.endsWith(pathSuffix)) {
       return false;
+    }
+    if (singleSegmentAfterPrefix && pathPrefix != null) {
+      if (
+        !InventoryCollectionAdvancementPatch.matchesPathPrefix(path, pathPrefix)
+      ) {
+        return false;
+      }
+      String remainder = path.substring(pathPrefix.length());
+      if (
+        remainder.isEmpty() ||
+        remainder.indexOf('/') >= 0 ||
+        remainder.indexOf('_') >= 0
+      ) {
+        return false;
+      }
     }
     return !rejectBlockItems || isHeldOrePiecePath(path);
   }
