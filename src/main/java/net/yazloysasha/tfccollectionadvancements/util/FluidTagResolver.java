@@ -4,13 +4,13 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.TagKey;
-import net.minecraft.tags.TagLoader;
 import net.minecraft.world.level.material.Fluid;
 
 /**
@@ -41,15 +41,17 @@ public final class FluidTagResolver {
     HolderLookup.Provider registries
   ) {
     var fluidRegistry = registries.lookupOrThrow(Registries.FLUID);
-    TagLoader<ResourceLocation> loader = new TagLoader<>(
+    Function<ResourceLocation, Optional<? extends ResourceLocation>> idToValue =
       id -> {
         ResourceKey<Fluid> key = ResourceKey.create(Registries.FLUID, id);
         return fluidRegistry.get(key).isPresent()
           ? Optional.of(id)
           : Optional.empty();
-      },
+      };
+    return ResilientTagLoader.loadAndBuild(
+      resourceManager,
+      idToValue,
       Registries.tagsDirPath(Registries.FLUID)
     );
-    return loader.loadAndBuild(resourceManager);
   }
 }

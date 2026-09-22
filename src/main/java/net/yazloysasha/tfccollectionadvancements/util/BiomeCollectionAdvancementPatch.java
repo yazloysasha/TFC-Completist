@@ -3,8 +3,10 @@ package net.yazloysasha.tfccollectionadvancements.util;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -32,6 +34,21 @@ public final class BiomeCollectionAdvancementPatch {
     JsonObject criteria = root.getAsJsonObject("criteria");
     JsonArray requirements = root.getAsJsonArray("requirements");
     if (criteria == null || requirements == null) {
+      return;
+    }
+
+    int resolvedCriteria = countResolvedBiomeCriteria(
+      resourceManager,
+      registries,
+      sources
+    );
+    if (
+      CollectionAdvancementRebuildGuard.shouldSkipRebuild(
+        advancementId,
+        resolvedCriteria,
+        "biome"
+      )
+    ) {
       return;
     }
 
@@ -86,6 +103,38 @@ public final class BiomeCollectionAdvancementPatch {
     }
 
     CollectionAdvancementDeduplicator.deduplicate(root);
+  }
+
+  private static int countResolvedBiomeCriteria(
+    ResourceManager resourceManager,
+    HolderLookup.Provider registries,
+    List<BiomeCollectionSource> sources
+  ) {
+    Set<String> criterionNames = new HashSet<>();
+    for (BiomeCollectionSource source : sources) {
+      if (
+        source.namespace() != null &&
+        !AddonNamespaces.isPresent(registries, source.namespace())
+      ) {
+        continue;
+      }
+
+      List<ResourceLocation> biomeIds = source.tag() == null
+        ? registries
+          .lookupOrThrow(Registries.BIOME)
+          .listElementIds()
+          .map(ResourceKey::location)
+          .toList()
+        : BiomeTagResolver.resolve(resourceManager, registries, source.tag());
+
+      for (ResourceLocation biomeId : biomeIds) {
+        if (!matchesBiome(source, biomeId)) {
+          continue;
+        }
+        criterionNames.add(criterionName(biomeId));
+      }
+    }
+    return criterionNames.size();
   }
 
   private static boolean matchesBiome(

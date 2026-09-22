@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -88,10 +89,6 @@ public final class InventoryCollectionAdvancementPatch {
       return;
     }
 
-    AdvancementCriterionBuilder.resetCollection(root);
-    criteria = root.getAsJsonObject("criteria");
-    requirements = root.getAsJsonArray("requirements");
-
     var items = registries
       .lookupOrThrow(Registries.ITEM)
       .listElements()
@@ -130,6 +127,26 @@ public final class InventoryCollectionAdvancementPatch {
       }
     }
 
+    int resolved = 0;
+    for (String metal : metals) {
+      if (resolveIngotForMetal(metal, tfcStyleIngots, itemTags) != null) {
+        resolved++;
+      }
+    }
+    if (
+      CollectionAdvancementRebuildGuard.shouldSkipRebuild(
+        advancementId,
+        resolved,
+        "ingot"
+      )
+    ) {
+      return;
+    }
+
+    AdvancementCriterionBuilder.resetCollection(root);
+    criteria = root.getAsJsonObject("criteria");
+    requirements = root.getAsJsonArray("requirements");
+
     int added = 0;
     for (String metal : metals) {
       ResourceLocation ingotId = resolveIngotForMetal(
@@ -155,11 +172,13 @@ public final class InventoryCollectionAdvancementPatch {
     }
 
     CollectionAdvancementDeduplicator.deduplicate(root);
-    TFCCollectionAdvancements.LOGGER.info(
-      "Rebuilt {} with {} molten-metal ingot criteria",
-      advancementId,
-      added
-    );
+    if (added > 0) {
+      TFCCollectionAdvancements.LOGGER.info(
+        "Rebuilt {} with {} molten-metal ingot criteria",
+        advancementId,
+        added
+      );
+    }
   }
 
   private static void putMetalItem(
@@ -249,9 +268,17 @@ public final class InventoryCollectionAdvancementPatch {
 
     var itemRegistry = registries.lookupOrThrow(Registries.ITEM);
     var items = itemRegistry.listElements().toList();
-    AdvancementCriterionBuilder.resetCollection(root);
-    criteria = root.getAsJsonObject("criteria");
-    requirements = root.getAsJsonArray("requirements");
+
+    boolean needsMineralOreDrops = sources
+      .stream()
+      .anyMatch(
+        source ->
+          source.collectedItems() ==
+          InventoryCollectionSource.CollectedItems.MINERAL_ORE_DROPS
+      );
+    Set<ResourceLocation> mineralOreDrops = needsMineralOreDrops
+      ? MineralOreDropCollector.collect(resourceManager, registries)
+      : Set.of();
 
     boolean needsMetalOres = sources
       .stream()
@@ -274,16 +301,29 @@ public final class InventoryCollectionAdvancementPatch {
     Set<ResourceLocation> tfcFarmlandSeeds = needsFarmlandSeeds
       ? collectTfcCropSeeds()
       : Set.of();
-    boolean needsMineralOreDrops = sources
-      .stream()
-      .anyMatch(
-        source ->
-          source.collectedItems() ==
-          InventoryCollectionSource.CollectedItems.MINERAL_ORE_DROPS
-      );
-    Set<ResourceLocation> mineralOreDrops = needsMineralOreDrops
-      ? MineralOreDropCollector.collect(resourceManager, registries)
-      : Set.of();
+
+    int resolvedCriteria = countResolvedItemCriteria(
+      items,
+      sources,
+      resourceManager,
+      registries,
+      mineralOreDrops,
+      tfcFarmlandSeeds,
+      metalOres
+    );
+    if (
+      CollectionAdvancementRebuildGuard.shouldSkipRebuild(
+        advancementId,
+        resolvedCriteria,
+        "item"
+      )
+    ) {
+      return;
+    }
+
+    AdvancementCriterionBuilder.resetCollection(root);
+    criteria = root.getAsJsonObject("criteria");
+    requirements = root.getAsJsonArray("requirements");
 
     for (InventoryCollectionSource source : sources) {
       Set<ResourceLocation> tagMembers =
@@ -318,6 +358,40 @@ public final class InventoryCollectionAdvancementPatch {
     }
 
     CollectionAdvancementDeduplicator.deduplicate(root);
+  }
+
+  private static int countResolvedItemCriteria(
+    List<Holder.Reference<Item>> items,
+    List<InventoryCollectionSource> sources,
+    ResourceManager resourceManager,
+    HolderLookup.Provider registries,
+    Set<ResourceLocation> mineralOreDrops,
+    Set<ResourceLocation> tfcFarmlandSeeds,
+    Set<ResourceLocation> metalOres
+  ) {
+    Set<String> criterionNames = new HashSet<>();
+    for (InventoryCollectionSource source : sources) {
+      Set<ResourceLocation> tagMembers =
+        switch (source.collectedItems()) {
+          case TFC_FARMLAND_SEEDS -> tfcFarmlandSeeds;
+          case MINERAL_ORE_DROPS -> mineralOreDrops;
+          case NONE -> source.tag() == null
+            ? Set.of()
+            : ItemTagResolver.resolve(
+              resourceManager,
+              registries,
+              source.tag()
+            );
+        };
+      for (var holder : items) {
+        if (!source.matches(holder, tagMembers, metalOres)) {
+          continue;
+        }
+        ResourceLocation itemId = holder.getKey().location();
+        criterionNames.add(criterionName(itemId, source.pathPrefix()));
+      }
+    }
+    return criterionNames.size();
   }
 
   private static int patchSource(

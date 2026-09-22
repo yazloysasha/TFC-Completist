@@ -4,13 +4,13 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.TagKey;
-import net.minecraft.tags.TagLoader;
 import net.minecraft.world.item.Item;
 
 /**
@@ -42,15 +42,17 @@ public final class ItemTagResolver {
     HolderLookup.Provider registries
   ) {
     var itemRegistry = registries.lookupOrThrow(Registries.ITEM);
-    TagLoader<ResourceLocation> loader = new TagLoader<>(
+    Function<ResourceLocation, Optional<? extends ResourceLocation>> idToValue =
       id -> {
         ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, id);
         return itemRegistry.get(key).isPresent()
           ? Optional.of(id)
           : Optional.empty();
-      },
+      };
+    return ResilientTagLoader.loadAndBuild(
+      resourceManager,
+      idToValue,
       Registries.tagsDirPath(Registries.ITEM)
     );
-    return loader.loadAndBuild(resourceManager);
   }
 }
