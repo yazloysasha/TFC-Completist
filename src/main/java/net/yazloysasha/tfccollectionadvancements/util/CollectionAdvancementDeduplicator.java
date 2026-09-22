@@ -144,6 +144,10 @@ public final class CollectionAdvancementDeduplicator {
       return "biome:" + biomeId;
     }
 
+    if (conditions.has("fluid") && conditions.get("fluid").isJsonPrimitive()) {
+      return "fluid:" + conditions.get("fluid").getAsString();
+    }
+
     return null;
   }
 

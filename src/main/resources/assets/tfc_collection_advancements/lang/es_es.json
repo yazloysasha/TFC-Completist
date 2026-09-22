@@ -16,5 +16,7 @@
   "tfc_collection_advancements.advancements.world.carnivore.title": "Carnívoro",
   "tfc_collection_advancements.advancements.world.carnivore.description": "Prepara y prueba toda la carne de TFC.",
   "tfc_collection_advancements.advancements.world.sea_cook.title": "Cocinero de mar",
-  "tfc_collection_advancements.advancements.world.sea_cook.description": "Prepara y prueba todos los mariscos de TFC, incluida la tortuga."
+  "tfc_collection_advancements.advancements.world.sea_cook.description": "Prepara y prueba todos los mariscos de TFC, incluida la tortuga.",
+  "tfc_collection_advancements.advancements.world.sommelier.title": "Sommelier",
+  "tfc_collection_advancements.advancements.world.sommelier.description": "Bebe cada bebida alcohólica de TFC."
 }

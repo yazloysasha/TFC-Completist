@@ -8,6 +8,16 @@ public final class AdvancementCriterionBuilder {
 
   private AdvancementCriterionBuilder() {}
 
+  public static JsonObject drinkFluid(ResourceLocation fluidId) {
+    JsonObject conditions = new JsonObject();
+    conditions.addProperty("fluid", fluidId.toString());
+
+    JsonObject criterion = new JsonObject();
+    criterion.addProperty("trigger", "tfc_collection_advancements:drink_fluid");
+    criterion.add("conditions", conditions);
+    return criterion;
+  }
+
   public static JsonObject consumeItem(ResourceLocation itemId) {
     JsonObject itemPredicate = new JsonObject();
     itemPredicate.addProperty("items", itemId.toString());

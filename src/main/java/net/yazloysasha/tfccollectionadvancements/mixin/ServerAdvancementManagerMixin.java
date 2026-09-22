@@ -21,6 +21,7 @@ import net.yazloysasha.tfccollectionadvancements.advancement.MinerologistAdvance
 import net.yazloysasha.tfccollectionadvancements.advancement.PedologistAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.SandsOfTheWorldAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.SeaCookAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.advancement.SommelierAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.StonemasonAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.TrueFarmerAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.VegetarianAdvancementPatch;
@@ -106,6 +107,11 @@ public abstract class ServerAdvancementManagerMixin {
       this.registries
     );
     SandsOfTheWorldAdvancementPatch.patch(
+      advancements,
+      resourceManager,
+      this.registries
+    );
+    SommelierAdvancementPatch.patch(
       advancements,
       resourceManager,
       this.registries
