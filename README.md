@@ -21,3 +21,4 @@ Tested with mods:
 - Beneath
 - Farmer's Delight TFC
 - FirmaLife
+- TFC Ore Washing
