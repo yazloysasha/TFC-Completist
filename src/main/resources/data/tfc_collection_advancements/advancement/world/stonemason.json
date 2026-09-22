@@ -1,20 +1,16 @@
 {
   "parent": "tfc_collection_advancements:world/geologist",
   "criteria": {
-    "limestone": {
-      "trigger": "minecraft:inventory_changed",
+    "dacite": {
+      "trigger": "minecraft:placed_block",
       "conditions": {
-        "items": [
-          {
-            "items": "tfc:rock/bricks/limestone"
-          }
-        ]
+        "block": "tfc:rock/bricks/dacite"
       }
     }
   },
   "display": {
     "icon": {
-      "id": "tfc:rock/bricks/limestone"
+      "id": "tfc:rock/bricks/dacite"
     },
     "title": {
       "translate": "tfc_collection_advancements.advancements.world.stonemason.title"
@@ -28,5 +24,5 @@
     "hidden": false,
     "background": "tfc:textures/block/mud/fluvisol.png"
   },
-  "requirements": [["limestone"]]
+  "requirements": [["dacite"]]
 }

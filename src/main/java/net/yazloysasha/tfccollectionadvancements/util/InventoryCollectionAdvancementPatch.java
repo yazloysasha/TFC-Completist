@@ -67,6 +67,23 @@ public final class InventoryCollectionAdvancementPatch {
     );
   }
 
+  public static void patchPlacedBlock(
+    ResourceLocation advancementId,
+    Map<ResourceLocation, JsonElement> advancements,
+    ResourceManager resourceManager,
+    HolderLookup.Provider registries,
+    List<InventoryCollectionSource> sources
+  ) {
+    patch(
+      advancementId,
+      advancements,
+      resourceManager,
+      registries,
+      sources,
+      AdvancementCriterionBuilder::placedBlock
+    );
+  }
+
   /**
    * Items from every source that share the same last path segment are OR'd in
    * one requirement group. Groups are AND'd. Used when several item forms

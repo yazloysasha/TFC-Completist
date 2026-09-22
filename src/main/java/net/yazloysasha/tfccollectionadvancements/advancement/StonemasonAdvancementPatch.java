@@ -13,8 +13,8 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 /**
  * Rebuilds Stonemason ({@code tfc_collection_advancements:world/stonemason}).
  * <p>
- * One criterion per rock type: {@code rock/bricks/{rock}}. Slabs, stairs, and
- * walls are excluded.
+ * One criterion per rock type: place {@code rock/bricks/{rock}}. Slabs, stairs,
+ * and walls are excluded.
  */
 public final class StonemasonAdvancementPatch {
 
@@ -35,7 +35,7 @@ public final class StonemasonAdvancementPatch {
     ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
-    InventoryCollectionAdvancementPatch.patch(
+    InventoryCollectionAdvancementPatch.patchPlacedBlock(
       ADVANCEMENT,
       advancements,
       resourceManager,
