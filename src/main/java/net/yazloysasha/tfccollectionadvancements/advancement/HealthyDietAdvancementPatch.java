@@ -7,6 +7,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.neoforged.neoforge.common.Tags;
+import net.yazloysasha.tfccollectionadvancements.util.AdvancementCriterionBuilder;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
@@ -40,5 +41,13 @@ public final class HealthyDietAdvancementPatch {
       registries,
       SOURCES
     );
+
+    JsonElement advancement = advancements.get(ADVANCEMENT);
+    if (advancement != null && advancement.isJsonObject()) {
+      AdvancementCriterionBuilder.setFrame(
+        advancement.getAsJsonObject(),
+        "goal"
+      );
+    }
   }
 }

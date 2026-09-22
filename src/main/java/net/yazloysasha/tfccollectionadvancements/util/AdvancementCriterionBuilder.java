@@ -91,6 +91,13 @@ public final class AdvancementCriterionBuilder {
     root.add("requirements", new JsonArray());
   }
 
+  public static void setFrame(JsonObject root, String frame) {
+    JsonObject display = root.getAsJsonObject("display");
+    if (display != null) {
+      display.addProperty("frame", frame);
+    }
+  }
+
   public static void addAndRequire(
     JsonObject criteria,
     JsonArray requirements,
