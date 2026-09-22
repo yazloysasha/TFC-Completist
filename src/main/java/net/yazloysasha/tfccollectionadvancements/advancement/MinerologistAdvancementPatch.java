@@ -11,10 +11,11 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 /**
  * Patches TFC Minerologist ({@code tfc:world/minerologist}).
  * <p>
- * Collects addon-held mineral pieces ({@code ore/{name}} items, not rock-ore
- * block items or graded metal ores). Unique items such as Beneath cursecoal
- * that do not use the {@code ore/} prefix are still matched by id. Gems go to
- * {@link GemologistAdvancementPatch}.
+ * TFC description is every non-metal mineral. That includes gems; the JSON list
+ * {@code ALL_MINERALS} omits pyrite, ruby, sapphire, and topaz. Missing TFC
+ * pieces are filled from held {@code ore/{name}} items that are not metal ores,
+ * not from a hardcoded gem list. Addon minerals and items such as Beneath
+ * cursecoal are included the same way.
  */
 public final class MinerologistAdvancementPatch {
 
@@ -22,7 +23,7 @@ public final class MinerologistAdvancementPatch {
     ResourceLocation.fromNamespaceAndPath("tfc", "world/minerologist");
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.addonOrePieces(false),
+    InventoryCollectionSource.mineralPieces(),
     new InventoryCollectionSource("beneath", "cursecoal")
   );
 

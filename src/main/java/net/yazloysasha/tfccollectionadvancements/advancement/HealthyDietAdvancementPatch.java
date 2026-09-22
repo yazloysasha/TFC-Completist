@@ -14,12 +14,15 @@ import net.yazloysasha.tfccollectionadvancements.util.SeasonalFruitItems;
 /**
  * Patches TFC Healthy Diet ({@code tfc:world/fruit}).
  * <p>
- * Base TFC uses {@code minecraft:consume_item}. Addon rows stay on that trigger
- * via {@link InventoryCollectionAdvancementPatch#patchConsume}.
+ * TFC text is “eat every berry and tree fruit”. The JSON is generated from
+ * {@code BERRIES + FRUITS} — bush and fruit-tree products — with {@code
+ * minecraft:consume_item}. {@code c:foods/fruit} is wider (TFC puts {@code
+ * melon_slice} there) and is not the advancement’s source of truth.
  * <p>
- * New fruits are discovered from {@code c:foods/fruit} plus TFC-style berry
- * bush / fruit tree products (so untagged berries such as nightshade still
- * count). TFC’s own items are left to the original advancement.
+ * Rows are filled from {@link SeasonalFruitItems} (including TFC, so a new bush
+ * that never made it into the JSON still counts). Addon items tagged {@code
+ * c:foods/fruit} cover fruits that are not {@code SeasonalPlantBlock} products,
+ * such as FirmaLife grapes.
  */
 public final class HealthyDietAdvancementPatch {
 
@@ -36,17 +39,17 @@ public final class HealthyDietAdvancementPatch {
     Map<ResourceLocation, JsonElement> advancements,
     HolderLookup.Provider registries
   ) {
+    InventoryCollectionAdvancementPatch.addItems(
+      ADVANCEMENT,
+      advancements,
+      SeasonalFruitItems.collect(registries),
+      AdvancementCriterionBuilder::consumeItem
+    );
     InventoryCollectionAdvancementPatch.patchConsume(
       ADVANCEMENT,
       advancements,
       registries,
       SOURCES
-    );
-    InventoryCollectionAdvancementPatch.addItems(
-      ADVANCEMENT,
-      advancements,
-      SeasonalFruitItems.collectAddonProducts(registries),
-      AdvancementCriterionBuilder::consumeItem
     );
   }
 }

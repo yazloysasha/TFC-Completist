@@ -12,7 +12,7 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 /**
  * Patches TFC Gone Fishing ({@code tfc:world/all_fish}).
  * <p>
- * Addon raw fish tagged {@code c:foods/raw_fish} are added automatically.
+ * Raw fish tagged {@code c:foods/raw_fish}, including TFC.
  */
 public final class GoneFishingAdvancementPatch {
 
@@ -20,7 +20,7 @@ public final class GoneFishingAdvancementPatch {
     ResourceLocation.fromNamespaceAndPath("tfc", "world/all_fish");
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.addonTag(Tags.Items.FOODS_RAW_FISH)
+    InventoryCollectionSource.discoveredTag(Tags.Items.FOODS_RAW_FISH)
   );
 
   private GoneFishingAdvancementPatch() {}

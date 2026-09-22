@@ -15,15 +15,18 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.Tags;
 
 /**
- * Addon berry-bush and fruit-tree products that TFC-style plants expose at
- * runtime. Complements {@code c:foods/fruit}: bushes such as nightshade are
- * berries but are not always tagged as fruit.
+ * Products of TFC berry bushes and fruit trees ({@link SeasonalPlantBlock}).
+ * <p>
+ * TFC Healthy Diet is generated from {@code BERRIES + FRUITS}, which is exactly
+ * these plants — not {@code c:foods/fruit} (that tag also contains crop foods
+ * such as {@code melon_slice}). Cocoa beans are a fruit-tree product but not a
+ * diet fruit, so they stay out unless tagged as fruit.
  */
 public final class SeasonalFruitItems {
 
   private SeasonalFruitItems() {}
 
-  public static List<ResourceLocation> collectAddonProducts(
+  public static List<ResourceLocation> collect(
     HolderLookup.Provider registries
   ) {
     var itemRegistry = registries.lookupOrThrow(Registries.ITEM);
@@ -42,18 +45,22 @@ public final class SeasonalFruitItems {
           return;
         }
         ResourceLocation id = BuiltInRegistries.ITEM.getKey(product.getItem());
-        if (id == null || !AddonNamespaces.isAddon(id.getNamespace())) {
+        if (id == null || !AddonNamespaces.isDiscoverable(id.getNamespace())) {
           return;
         }
         boolean fruit = itemRegistry
           .get(ResourceKey.create(Registries.ITEM, id))
           .map(found -> found.is(Tags.Items.FOODS_FRUIT))
           .orElse(false);
-        if (fruit || id.getPath().contains("berry")) {
+        if (fruit || isBerryProduct(id.getPath())) {
           itemIds.add(id);
         }
       });
 
     return new ArrayList<>(itemIds);
+  }
+
+  static boolean isBerryProduct(String path) {
+    return path.contains("berry");
   }
 }

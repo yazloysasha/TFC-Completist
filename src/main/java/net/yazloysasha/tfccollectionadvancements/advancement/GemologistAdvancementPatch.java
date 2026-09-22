@@ -11,10 +11,8 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 /**
  * Patches TFC Gemologist ({@code tfc:world/gemologist}).
  * <p>
- * Collects addon-held gem ore pieces ({@code ore/{name}}) when a matching
- * {@code gem/{name}} item exists in that addon or in TFC. World ore blocks
- * that drop an existing TFC gem are skipped — the TFC criterion already
- * covers the drop.
+ * Held gem ore pieces ({@code ore/{name}} with a matching {@code gem/{name}}).
+ * Includes TFC so a gem missing from the JSON is still required.
  */
 public final class GemologistAdvancementPatch {
 
@@ -22,7 +20,7 @@ public final class GemologistAdvancementPatch {
     ResourceLocation.fromNamespaceAndPath("tfc", "world/gemologist");
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.addonOrePieces(true)
+    InventoryCollectionSource.gemPieces()
   );
 
   private GemologistAdvancementPatch() {}

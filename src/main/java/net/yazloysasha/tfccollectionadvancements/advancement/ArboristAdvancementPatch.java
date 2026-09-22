@@ -11,9 +11,8 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 /**
  * Patches TFC Arborist ({@code tfc:world/saplings}).
  * <p>
- * Any addon timber sapling under {@code wood/sapling/...} is added. Fruit-tree
- * saplings live under other paths and belong with {@link
- * HealthyDietAdvancementPatch}.
+ * Timber saplings under {@code wood/sapling/...}, including TFC. Fruit-tree
+ * saplings use other paths and belong with {@link HealthyDietAdvancementPatch}.
  */
 public final class ArboristAdvancementPatch {
 
@@ -21,7 +20,7 @@ public final class ArboristAdvancementPatch {
     ResourceLocation.fromNamespaceAndPath("tfc", "world/saplings");
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.anyAddon("wood/sapling/")
+    InventoryCollectionSource.discovered("wood/sapling/")
   );
 
   private ArboristAdvancementPatch() {}

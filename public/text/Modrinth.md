@@ -4,13 +4,19 @@ A simple mod that adds items from addons to TerraFirmaCraft collection advanceme
 | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | ![Before](https://raw.githubusercontent.com/yazloysasha/TFC-Collection-Advancements/refs/heads/1.21.x/public/img/before.png) | ![After](https://raw.githubusercontent.com/yazloysasha/TFC-Collection-Advancements/refs/heads/1.21.x/public/img/after.png) |
 
-Collection advancements and compatibility:
+Improved collection advancements:
 
-- Adventuring Time (Beneath)
-- Arborist (ArborFirmaCraft, Beneath)
-- Gemologist (none)
-- Gone Fishing (none)
-- Healthy Diet (FirmaLife)
-- Metallurgist (FirmaLife)
-- Minerologist (Beneath)
-- True Farmer (Beneath, FirmaLife)
+- Adventuring Time
+- Arborist
+- Gemologist
+- Gone Fishing
+- Healthy Diet
+- Metallurgist
+- Minerologist
+- True Farmer
+
+Tested with mods:
+
+- ArborFirmaCraft
+- Beneath
+- FirmaLife

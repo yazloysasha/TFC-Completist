@@ -15,10 +15,11 @@ public record InventoryCollectionSource(
   boolean exactPath,
   TagKey<Item> tag,
   boolean rejectBlockItems,
-  Boolean gemOre
+  Boolean gemOre,
+  boolean includeTfc
 ) {
   public InventoryCollectionSource(String namespace, String pathPrefix) {
-    this(namespace, pathPrefix, null, false, null, false, null);
+    this(namespace, pathPrefix, null, false, null, false, null, true);
   }
 
   public InventoryCollectionSource(
@@ -27,10 +28,10 @@ public record InventoryCollectionSource(
     String pathSuffix,
     boolean exactPath
   ) {
-    this(namespace, pathPrefix, pathSuffix, exactPath, null, false, null);
+    this(namespace, pathPrefix, pathSuffix, exactPath, null, false, null, true);
   }
 
-  public static InventoryCollectionSource anyAddon(String pathPrefix) {
+  public static InventoryCollectionSource discovered(String pathPrefix) {
     return new InventoryCollectionSource(
       null,
       pathPrefix,
@@ -38,7 +39,21 @@ public record InventoryCollectionSource(
       false,
       null,
       false,
-      null
+      null,
+      true
+    );
+  }
+
+  public static InventoryCollectionSource discoveredTag(TagKey<Item> tag) {
+    return new InventoryCollectionSource(
+      null,
+      null,
+      null,
+      false,
+      tag,
+      false,
+      null,
+      true
     );
   }
 
@@ -50,11 +65,12 @@ public record InventoryCollectionSource(
       false,
       tag,
       false,
-      null
+      null,
+      false
     );
   }
 
-  public static InventoryCollectionSource addonOrePieces(boolean gemOre) {
+  public static InventoryCollectionSource mineralPieces() {
     return new InventoryCollectionSource(
       null,
       "ore/",
@@ -62,17 +78,29 @@ public record InventoryCollectionSource(
       false,
       null,
       true,
-      gemOre
+      null,
+      true
+    );
+  }
+
+  public static InventoryCollectionSource gemPieces() {
+    return new InventoryCollectionSource(
+      null,
+      "ore/",
+      null,
+      false,
+      null,
+      true,
+      true,
+      true
     );
   }
 
   public String displayNamespace() {
-    return namespace != null ? namespace : "addon";
-  }
-
-  public String criterionPrefix(String itemNamespace) {
-    String resolved = namespace != null ? namespace : itemNamespace;
-    return "tfc".equals(resolved) ? "" : resolved + "_";
+    if (namespace != null) {
+      return namespace;
+    }
+    return includeTfc ? "discovered" : "addon";
   }
 
   public boolean matches(Holder<Item> holder) {
@@ -89,10 +117,7 @@ public record InventoryCollectionSource(
     if (rejectBlockItems && holder.value() instanceof BlockItem) {
       return false;
     }
-    if (
-      (rejectBlockItems || gemOre != null) &&
-      holder.is(TFCTags.Items.METAL_ORES)
-    ) {
+    if (isOrePieceSource() && holder.is(TFCTags.Items.METAL_ORES)) {
       return false;
     }
     if (gemOre != null && hasGemCounterpart(itemId) != gemOre) {
@@ -104,6 +129,9 @@ public record InventoryCollectionSource(
   public boolean matchesNamespace(String itemNamespace) {
     if (namespace != null) {
       return namespace.equals(itemNamespace);
+    }
+    if (includeTfc) {
+      return AddonNamespaces.isDiscoverable(itemNamespace);
     }
     return AddonNamespaces.isAddon(itemNamespace);
   }
@@ -123,6 +151,10 @@ public record InventoryCollectionSource(
       return false;
     }
     return !rejectBlockItems || isHeldOrePiecePath(path);
+  }
+
+  private boolean isOrePieceSource() {
+    return rejectBlockItems || gemOre != null;
   }
 
   static boolean hasGemCounterpart(ResourceLocation oreId) {

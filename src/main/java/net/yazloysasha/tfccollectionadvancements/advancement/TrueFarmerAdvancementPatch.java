@@ -12,9 +12,9 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 /**
  * Patches TFC True Farmer ({@code tfc:world/all_crops}).
  * <p>
- * Pulls every addon seed that follows TFC’s {@code seeds/...} id layout or is
- * tagged {@code c:seeds}. A newly added crop from any loaded addon is picked up
- * on advancement reload without a hardcoded item list.
+ * Every {@code seeds/...} item plus {@code c:seeds}, including TFC so a crop
+ * that never made it into the JSON is still required. Minecraft seeds are
+ * ignored.
  */
 public final class TrueFarmerAdvancementPatch {
 
@@ -22,8 +22,8 @@ public final class TrueFarmerAdvancementPatch {
     ResourceLocation.fromNamespaceAndPath("tfc", "world/all_crops");
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.anyAddon("seeds/"),
-    InventoryCollectionSource.addonTag(Tags.Items.SEEDS)
+    InventoryCollectionSource.discovered("seeds/"),
+    InventoryCollectionSource.discoveredTag(Tags.Items.SEEDS)
   );
 
   private TrueFarmerAdvancementPatch() {}

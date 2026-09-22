@@ -11,7 +11,7 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 /**
  * Patches TFC Metallurgist ({@code tfc:world/metallurgist}).
  * <p>
- * Any addon ingot under {@code metal/ingot/...} is added as a new metal row.
+ * Ingot items under {@code metal/ingot/...}, including TFC.
  */
 public final class MetallurgistAdvancementPatch {
 
@@ -19,7 +19,7 @@ public final class MetallurgistAdvancementPatch {
     ResourceLocation.fromNamespaceAndPath("tfc", "world/metallurgist");
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.anyAddon("metal/ingot/")
+    InventoryCollectionSource.discovered("metal/ingot/")
   );
 
   private MetallurgistAdvancementPatch() {}

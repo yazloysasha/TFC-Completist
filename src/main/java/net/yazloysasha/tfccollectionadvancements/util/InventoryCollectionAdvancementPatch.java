@@ -102,12 +102,7 @@ public final class InventoryCollectionAdvancementPatch {
       }
 
       ResourceLocation itemId = holder.getKey().location();
-      String criterionSuffix = criterionSuffix(
-        itemId.getPath(),
-        source.pathPrefix()
-      );
-      String criterionName =
-        source.criterionPrefix(itemId.getNamespace()) + criterionSuffix;
+      String criterionName = criterionName(itemId, source.pathPrefix());
       if (criteria.has(criterionName)) {
         continue;
       }
@@ -143,10 +138,7 @@ public final class InventoryCollectionAdvancementPatch {
 
     int added = 0;
     for (ResourceLocation itemId : itemIds) {
-      String criterionName =
-        itemId.getNamespace() +
-        "_" +
-        itemId.getPath().substring(itemId.getPath().lastIndexOf('/') + 1);
+      String criterionName = criterionName(itemId, null);
       if (criteria.has(criterionName)) {
         continue;
       }
@@ -161,11 +153,18 @@ public final class InventoryCollectionAdvancementPatch {
     }
     if (added > 0) {
       TFCCollectionAdvancements.LOGGER.info(
-        "Extended {} with {} addon plant fruit criteria",
+        "Extended {} with {} plant fruit criteria",
         advancementId,
         added
       );
     }
+  }
+
+  static String criterionName(ResourceLocation itemId, String pathPrefix) {
+    String suffix = criterionSuffix(itemId.getPath(), pathPrefix);
+    return AddonNamespaces.isTfc(itemId.getNamespace())
+      ? suffix
+      : itemId.getNamespace() + "_" + suffix;
   }
 
   private static String criterionSuffix(String path, String pathPrefix) {
