@@ -13,11 +13,8 @@ import net.yazloysasha.tfccollectionadvancements.util.EntityCollectionAdvancemen
 /**
  * Rebuilds Husbandman ({@code tfc_collection_advancements:world/husbandman}).
  * <p>
- * Same tag sources as {@link DomesticationAdvancement}, but only entity types
- * where a scratch pair can mate in TFC ({@code canMate} /
- * {@code checkExtraBreedConditions}), like True Farmer discovers seeds from
- * {@code CropBlock}. Criterion is {@code bred_animal} from
- * {@code TFCAnimalProperties#onFertilized}.
+ * Same tag sources as {@link DomesticationAdvancement}, minus mule (sterile).
+ * Criterion is {@code bred_animal} from {@code onFertilized}.
  */
 public final class HusbandmanAdvancement {
 

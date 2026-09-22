@@ -1,15 +1,15 @@
 package net.yazloysasha.tfccollectionadvancements.advancement;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.phys.AABB;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -18,6 +18,7 @@ import net.yazloysasha.tfccollectionadvancements.util.AddonNamespaces;
 import net.yazloysasha.tfccollectionadvancements.util.BredAnimalTrigger;
 import net.yazloysasha.tfccollectionadvancements.util.DrinkFluidTracker;
 import net.yazloysasha.tfccollectionadvancements.util.DrinkFluidTrigger;
+import net.yazloysasha.tfccollectionadvancements.util.LastFedAnimalTracker;
 
 public final class TFCCollectionAdvancementTriggers {
 
@@ -37,8 +38,6 @@ public final class TFCCollectionAdvancementTriggers {
     BredAnimalTrigger
   > BRED_ANIMAL = TRIGGERS.register("bred_animal", BredAnimalTrigger::new);
 
-  private static final double BRED_ANIMAL_RANGE = 16.0;
-
   private TFCCollectionAdvancementTriggers() {}
 
   public static void register(IEventBus modEventBus) {
@@ -55,12 +54,9 @@ public final class TFCCollectionAdvancementTriggers {
     }
   }
 
-  public static void onBredAnimal(LivingEntity animal) {
-    if (!(animal.level() instanceof ServerLevel level)) {
-      return;
-    }
+  public static void onBredAnimal(LivingEntity female, LivingEntity male) {
     ResourceLocation entityId = BuiltInRegistries.ENTITY_TYPE.getKey(
-      animal.getType()
+      female.getType()
     );
     if (
       entityId == null ||
@@ -68,11 +64,16 @@ public final class TFCCollectionAdvancementTriggers {
     ) {
       return;
     }
-    AABB box = animal.getBoundingBox().inflate(BRED_ANIMAL_RANGE);
-    for (ServerPlayer player : level.getEntitiesOfClass(
-      ServerPlayer.class,
-      box
-    )) {
+    Set<ServerPlayer> breeders = new LinkedHashSet<>();
+    ServerPlayer femaleFeeder = LastFedAnimalTracker.feeder(female);
+    if (femaleFeeder != null) {
+      breeders.add(femaleFeeder);
+    }
+    ServerPlayer maleFeeder = LastFedAnimalTracker.feeder(male);
+    if (maleFeeder != null) {
+      breeders.add(maleFeeder);
+    }
+    for (ServerPlayer player : breeders) {
       BRED_ANIMAL.get().trigger(player, entityId);
     }
   }

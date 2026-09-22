@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
-import java.util.function.Predicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -18,13 +17,25 @@ import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
 
 public final class EntityCollectionAdvancement {
 
+  /**
+   * No {@code tfc:fed_animal} from normal livestock feeding.
+   */
+  private static final Set<ResourceLocation> FED_ANIMAL_EXCLUDED = Set.of(
+    ResourceLocation.fromNamespaceAndPath("tfc", "frog")
+  );
+
+  /**
+   * Sterile; still feedable for Domestication.
+   */
+  private static final Set<ResourceLocation> BRED_ANIMAL_EXCLUDED = Set.of(
+    ResourceLocation.fromNamespaceAndPath("tfc", "mule")
+  );
+
   private EntityCollectionAdvancement() {}
 
   /**
    * Rebuilds {@code tfc:fed_animal} criteria for every discoverable entity in
-   * {@code tags}. TFC fires that trigger only when feeding actually raises
-   * familiarity ({@code TFCAnimalProperties#eatFood}), including pets that
-   * extend {@code TamableMammal}.
+   * {@code tags}. Same trigger TFC uses for {@code world/familiarity}.
    */
   public static void patchFedAnimalFromTags(
     ResourceLocation advancementId,
@@ -39,16 +50,15 @@ public final class EntityCollectionAdvancement {
       resourceManager,
       registries,
       tags,
-      entityId -> true,
+      FED_ANIMAL_EXCLUDED,
       AdvancementCriterionBuilder::fedAnimal,
       "fed-animal"
     );
   }
 
   /**
-   * Rebuilds {@code bred_animal} criteria for tag members that pass TFC breed
-   * simulation ({@link TfcBreedableLivestockCollector}), same idea as True
-   * Farmer scanning {@code CropBlock} for seeds.
+   * Rebuilds {@code bred_animal} criteria for every discoverable entity in
+   * {@code tags}. Progress is this mod's trigger from {@code onFertilized}.
    */
   public static void patchBredAnimalFromTags(
     ResourceLocation advancementId,
@@ -57,19 +67,13 @@ public final class EntityCollectionAdvancement {
     HolderLookup.Provider registries,
     List<TagKey<EntityType<?>>> tags
   ) {
-    Set<ResourceLocation> breedable =
-      TfcBreedableLivestockCollector.collectFromTags(
-        resourceManager,
-        registries,
-        tags
-      );
     patchFromTags(
       advancementId,
       advancements,
       resourceManager,
       registries,
       tags,
-      breedable::contains,
+      BRED_ANIMAL_EXCLUDED,
       AdvancementCriterionBuilder::bredAnimal,
       "bred-animal"
     );
@@ -81,7 +85,7 @@ public final class EntityCollectionAdvancement {
     ResourceManager resourceManager,
     HolderLookup.Provider registries,
     List<TagKey<EntityType<?>>> tags,
-    Predicate<ResourceLocation> include,
+    Set<ResourceLocation> excluded,
     Function<ResourceLocation, JsonObject> criterionFactory,
     String kind
   ) {
@@ -106,7 +110,7 @@ public final class EntityCollectionAdvancement {
       )) {
         if (
           AddonNamespaces.isDiscoverable(entityId.getNamespace()) &&
-          include.test(entityId)
+          !excluded.contains(entityId)
         ) {
           entities.add(entityId);
         }
