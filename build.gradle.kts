@@ -4,7 +4,7 @@ plugins {
 
 val minecraftVersion: String = "1.21.1"
 val neoForgeVersion: String = "21.1.234"
-val minTfcVersion: String = "4.2.0"
+val minTfcVersion: String = "4.1.0"
 val maxTfcVersion: String = "4.2.10"
 
 val modId: String = "tfc_collection_advancements"
