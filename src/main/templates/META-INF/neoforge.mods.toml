@@ -24,7 +24,6 @@ license = "MIT"
 [[dependencies.${modId}]]
     modId = "afc"
     type = "optional"
-    versionRange = "[0,)"
     ordering = "AFTER"
     side = "BOTH"
 
