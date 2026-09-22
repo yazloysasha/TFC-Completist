@@ -9,6 +9,8 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.yazloysasha.tfccollectionadvancements.advancement.AdventuringTimeAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.ArboristAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.advancement.GemologistAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.advancement.GoneFishingAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.HealthyDietAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.MetallurgistAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.MinerologistAdvancementPatch;
@@ -34,15 +36,17 @@ public abstract class ServerAdvancementManagerMixin {
     ProfilerFiller profiler,
     CallbackInfo ci
   ) {
-    ArboristAdvancementPatch.patch(advancements, this.registries);
-    TrueFarmerAdvancementPatch.patch(advancements, this.registries);
-    HealthyDietAdvancementPatch.patch(advancements, this.registries);
-    MinerologistAdvancementPatch.patch(advancements, this.registries);
-    MetallurgistAdvancementPatch.patch(advancements, this.registries);
     AdventuringTimeAdvancementPatch.patch(
       advancements,
       resourceManager,
       this.registries
     );
+    ArboristAdvancementPatch.patch(advancements, this.registries);
+    GemologistAdvancementPatch.patch(advancements, this.registries);
+    GoneFishingAdvancementPatch.patch(advancements, this.registries);
+    HealthyDietAdvancementPatch.patch(advancements, this.registries);
+    MetallurgistAdvancementPatch.patch(advancements, this.registries);
+    MinerologistAdvancementPatch.patch(advancements, this.registries);
+    TrueFarmerAdvancementPatch.patch(advancements, this.registries);
   }
 }

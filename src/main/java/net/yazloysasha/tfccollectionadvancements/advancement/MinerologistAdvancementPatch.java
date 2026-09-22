@@ -9,20 +9,11 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvance
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Patches TFC Minerologist ({@code tfc:world/minerologist}), chained after {@code
- * tfc:world/gemologist} in the world tab.
- * <p>
- * Each vanilla criterion is {@code minecraft:inventory_changed} for one <em>logical mineral
- * type</em>: a single item id such as {@code .../ore/{name}} with no rock suffix and no poor/normal/rich
- * grade split. That checklist covers non-smelted geological loot (salts, coals, sulfur, gems also
- * listed here, etc.), not metals you track as ingots — those belong under {@link
- * MetallurgistAdvancementPatch}.
- * <p>
- * Addon minerals fit when the player collects one representative item per type, using the same
- * id shape as TFC ({@code ore/...} or a lone item id if the mod does not use {@code ore/}). Do not
- * add graded ore drops ({@code ore/{grade}_{ore}/{rock}} block items), every rock variant, or
- * smelting products. Use {@code exactPath} when a path prefix would also match block-item
- * variants; see {@link InventoryCollectionSource#exactPath()}.
+ * Patches TFC Minerologist ({@code tfc:world/minerologist}), child of {@link
+ * GemologistAdvancementPatch} in the world tab. Base criteria are {@code
+ * minecraft:inventory_changed} on non-metal mineral ores ({@code tfc:ore/...}). Smelted metals belong
+ * under {@link MetallurgistAdvancementPatch}. Use {@code exactPath} when a prefix would also match
+ * graded or block-item variants; see {@link InventoryCollectionSource#exactPath()}.
  */
 public final class MinerologistAdvancementPatch {
 
@@ -30,7 +21,11 @@ public final class MinerologistAdvancementPatch {
     ResourceLocation.fromNamespaceAndPath("tfc", "world/minerologist");
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    new InventoryCollectionSource("beneath", "cursecoal")
+    new InventoryCollectionSource("beneath", "cursecoal"),
+    new InventoryCollectionSource("tfc", "ore/pyrite", null, true),
+    new InventoryCollectionSource("tfc", "ore/ruby", null, true),
+    new InventoryCollectionSource("tfc", "ore/sapphire", null, true),
+    new InventoryCollectionSource("tfc", "ore/topaz", null, true)
   );
 
   private MinerologistAdvancementPatch() {}

@@ -11,7 +11,7 @@ public record InventoryCollectionSource(
   }
 
   public String criterionPrefix() {
-    return namespace + "_";
+    return "tfc".equals(namespace) ? "" : namespace + "_";
   }
 
   public boolean matchesItemPath(String path) {

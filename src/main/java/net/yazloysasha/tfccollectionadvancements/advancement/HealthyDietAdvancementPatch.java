@@ -30,15 +30,15 @@ public final class HealthyDietAdvancementPatch {
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
     new InventoryCollectionSource("firmalife", "food/fig", null, true),
-    new InventoryCollectionSource("firmalife", "food/pineapple", null, true),
-    new InventoryCollectionSource("firmalife", "food/red_grapes", null, true),
-    new InventoryCollectionSource("firmalife", "food/white_grapes", null, true),
     new InventoryCollectionSource(
       "firmalife",
       "food/nightshade_berry",
       null,
       true
-    )
+    ),
+    new InventoryCollectionSource("firmalife", "food/pineapple", null, true),
+    new InventoryCollectionSource("firmalife", "food/red_grapes", null, true),
+    new InventoryCollectionSource("firmalife", "food/white_grapes", null, true)
   );
 
   private HealthyDietAdvancementPatch() {}
