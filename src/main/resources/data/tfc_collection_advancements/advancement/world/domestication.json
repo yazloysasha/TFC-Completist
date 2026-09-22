@@ -10,7 +10,7 @@
   },
   "display": {
     "icon": {
-      "id": "tfc:spawn_egg/cow"
+      "id": "minecraft:leather_horse_armor"
     },
     "title": {
       "translate": "tfc_collection_advancements.advancements.world.domestication.title"

@@ -10,7 +10,7 @@
   },
   "display": {
     "icon": {
-      "id": "tfc:spawn_egg/pig"
+      "id": "minecraft:egg"
     },
     "title": {
       "translate": "tfc_collection_advancements.advancements.world.husbandman.title"
