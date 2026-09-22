@@ -1,4 +1,4 @@
-package net.yazloysasha.afcadvancement.advancement;
+package net.yazloysasha.tfccollectionadvancements.advancement;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -8,7 +8,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.yazloysasha.afcadvancement.AFCAdvancement;
+import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
 
 public final class SaplingsAdvancementPatch {
 
@@ -63,7 +63,7 @@ public final class SaplingsAdvancementPatch {
     }
 
     if (added > 0) {
-      AFCAdvancement.LOGGER.info(
+      TFCCollectionAdvancements.LOGGER.info(
         "Extended {} with {} ArborFirmaCraft sapling criteria",
         TFC_SAPLINGS_ADVANCEMENT,
         added

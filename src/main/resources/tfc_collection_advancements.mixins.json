@@ -1,9 +1,9 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.yazloysasha.afcadvancement.mixin",
+  "package": "net.yazloysasha.tfccollectionadvancements.mixin",
   "compatibilityLevel": "JAVA_21",
-  "refmap": "afc_advancement.refmap.json",
+  "refmap": "tfc_collection_advancements.refmap.json",
   "mixins": ["ServerAdvancementManagerMixin"],
   "injectors": {
     "defaultRequire": 1

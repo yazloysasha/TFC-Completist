@@ -3,14 +3,14 @@ modLoader = "javafml"
 loaderVersion = "[4,)"
 license = "MIT"
 
-# ArborFirmaCraft Advancement
+# TFC Collection Advancements
 [[mods]]
     modId = "${modId}"
     version = "${modVersion}"
-    displayName = "ArborFirmaCraft Advancement"
-    credits = "Extends the sapling-finding advancement with every ArborFirmaCraft tree"
+    displayName = "TFC Collection Advancements"
+    credits = "Adds addon items to collection advancements"
     authors = "yazloysasha"
-    description = '''Adds all trees from ArborFirmaCraft to the sapling-finding advancement.'''
+    description = '''A simple mod that adds items from addons to TerraFirmaCraft collection advancements.'''
     displayTest = "MATCH_VERSION"
 
 # Dependencies
@@ -23,7 +23,7 @@ license = "MIT"
 
 [[dependencies.${modId}]]
     modId = "afc"
-    type = "required"
+    type = "optional"
     versionRange = "[0,)"
     ordering = "AFTER"
     side = "BOTH"

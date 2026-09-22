@@ -13,4 +13,4 @@ plugins {
   id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
 }
 
-rootProject.name = "afc_advancement"
+rootProject.name = "tfc_collection_advancements"
