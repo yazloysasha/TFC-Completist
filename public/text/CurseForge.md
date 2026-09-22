@@ -11,6 +11,6 @@ Collection advancements and compatibility:
 - Healthy Diet (none)
 - Gone Fishing (none)
 - Gemologist (none)
-- Minerologist (none)
+- Minerologist (Beneath)
 - Metallurgist (none)
 - Adventuring Time (Beneath)

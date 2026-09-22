@@ -1,14 +1,14 @@
-package net.yazloysasha.tfccollectionadvancements.advancement;
+package net.yazloysasha.tfccollectionadvancements.util;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.resources.ResourceLocation;
 
-final class AdvancementPatchUtil {
+public final class AdvancementCriterionBuilder {
 
-  private AdvancementPatchUtil() {}
+  private AdvancementCriterionBuilder() {}
 
-  static JsonObject createInventoryCriterion(ResourceLocation itemId) {
+  public static JsonObject inventoryChanged(ResourceLocation itemId) {
     JsonObject itemPredicate = new JsonObject();
     itemPredicate.addProperty("items", itemId.toString());
 
@@ -24,7 +24,7 @@ final class AdvancementPatchUtil {
     return criterion;
   }
 
-  static JsonObject createBiomeLocationCriterion(ResourceLocation biomeId) {
+  public static JsonObject biomeLocation(ResourceLocation biomeId) {
     JsonObject location = new JsonObject();
     location.addProperty("biomes", biomeId.toString());
 
@@ -48,7 +48,7 @@ final class AdvancementPatchUtil {
     return criterion;
   }
 
-  static void addCriterion(
+  public static void addAndRequire(
     JsonObject criteria,
     JsonArray requirements,
     String criterionName,

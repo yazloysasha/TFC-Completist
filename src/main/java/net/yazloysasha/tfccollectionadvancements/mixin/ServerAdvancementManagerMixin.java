@@ -8,6 +8,7 @@ import net.minecraft.server.ServerAdvancementManager;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.yazloysasha.tfccollectionadvancements.advancement.AdventuringTimeAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.advancement.OreCollectionAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.SaplingsAdvancementPatch;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,6 +32,7 @@ public abstract class ServerAdvancementManagerMixin {
     CallbackInfo ci
   ) {
     SaplingsAdvancementPatch.patch(advancements, this.registries);
+    OreCollectionAdvancementPatch.patch(advancements, this.registries);
     AdventuringTimeAdvancementPatch.patch(advancements, this.registries);
   }
 }
