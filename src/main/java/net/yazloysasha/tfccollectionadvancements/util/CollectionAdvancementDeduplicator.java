@@ -134,6 +134,11 @@ public final class CollectionAdvancementDeduplicator {
       return "item:" + itemId;
     }
 
+    String blockId = blockIdFromConditions(conditions);
+    if (blockId != null) {
+      return "block:" + blockId;
+    }
+
     String biomeId = biomeIdFromConditions(conditions);
     if (biomeId != null) {
       return "biome:" + biomeId;
@@ -156,6 +161,41 @@ public final class CollectionAdvancementDeduplicator {
       JsonElement id = conditions.getAsJsonObject("item").get("items");
       if (id != null && id.isJsonPrimitive()) {
         return id.getAsString();
+      }
+    }
+    return null;
+  }
+
+  private static String blockIdFromConditions(JsonObject conditions) {
+    if (!conditions.has("location")) {
+      return null;
+    }
+    JsonArray location = conditions.getAsJsonArray("location");
+    for (JsonElement element : location) {
+      if (!element.isJsonObject()) {
+        continue;
+      }
+      JsonObject condition = element.getAsJsonObject();
+      if (
+        !"minecraft:location_check".equals(
+            condition.get("condition").getAsString()
+          )
+      ) {
+        continue;
+      }
+      JsonObject predicate = condition.getAsJsonObject("predicate");
+      if (predicate == null || !predicate.has("block")) {
+        continue;
+      }
+      JsonObject block = predicate.getAsJsonObject("block");
+      if (block.has("blocks")) {
+        JsonElement blocks = block.get("blocks");
+        if (blocks.isJsonPrimitive()) {
+          return blocks.getAsString();
+        }
+        if (blocks.isJsonArray() && !blocks.getAsJsonArray().isEmpty()) {
+          return blocks.getAsJsonArray().get(0).getAsString();
+        }
       }
     }
     return null;

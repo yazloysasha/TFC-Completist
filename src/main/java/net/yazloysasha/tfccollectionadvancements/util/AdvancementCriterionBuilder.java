@@ -22,8 +22,23 @@ public final class AdvancementCriterionBuilder {
   }
 
   public static JsonObject placedBlock(ResourceLocation blockId) {
+    JsonObject blocks = new JsonObject();
+    JsonArray blockIds = new JsonArray();
+    blockIds.add(blockId.toString());
+    blocks.add("blocks", blockIds);
+
+    JsonObject predicate = new JsonObject();
+    predicate.add("block", blocks);
+
+    JsonObject locationCheck = new JsonObject();
+    locationCheck.addProperty("condition", "minecraft:location_check");
+    locationCheck.add("predicate", predicate);
+
+    JsonArray location = new JsonArray();
+    location.add(locationCheck);
+
     JsonObject conditions = new JsonObject();
-    conditions.addProperty("block", blockId.toString());
+    conditions.add("location", location);
 
     JsonObject criterion = new JsonObject();
     criterion.addProperty("trigger", "minecraft:placed_block");

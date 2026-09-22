@@ -20,6 +20,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -80,8 +81,19 @@ public final class InventoryCollectionAdvancementPatch {
       resourceManager,
       registries,
       sources,
-      AdvancementCriterionBuilder::placedBlock
+      InventoryCollectionAdvancementPatch::placedBlockCriterion
     );
+  }
+
+  private static JsonObject placedBlockCriterion(ResourceLocation itemId) {
+    Item item = BuiltInRegistries.ITEM.get(itemId);
+    if (!(item instanceof BlockItem blockItem)) {
+      return null;
+    }
+    ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(
+      blockItem.getBlock()
+    );
+    return AdvancementCriterionBuilder.placedBlock(blockId);
   }
 
   /**
@@ -591,11 +603,15 @@ public final class InventoryCollectionAdvancementPatch {
         continue;
       }
 
+      JsonObject criterion = criterionFactory.apply(itemId);
+      if (criterion == null) {
+        continue;
+      }
       AdvancementCriterionBuilder.addAndRequire(
         criteria,
         requirements,
         criterionName,
-        criterionFactory.apply(itemId)
+        criterion
       );
       added++;
     }

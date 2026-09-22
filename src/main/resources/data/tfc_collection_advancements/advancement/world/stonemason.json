@@ -4,7 +4,16 @@
     "dacite": {
       "trigger": "minecraft:placed_block",
       "conditions": {
-        "block": "tfc:rock/bricks/dacite"
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": ["tfc:rock/bricks/dacite"]
+              }
+            }
+          }
+        ]
       }
     }
   },
