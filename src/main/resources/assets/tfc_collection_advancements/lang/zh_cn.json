@@ -8,5 +8,11 @@
   "tfc_collection_advancements.advancements.world.stonemason.title": "石匠",
   "tfc_collection_advancements.advancements.world.stonemason.description": "放置TFC中每种岩石的砖块",
   "tfc_collection_advancements.advancements.world.vegetarian.title": "素食者",
-  "tfc_collection_advancements.advancements.world.vegetarian.description": "尝遍TFC中的所有植物性食物"
+  "tfc_collection_advancements.advancements.world.vegetarian.description": "尝遍TFC中的所有植物性食物",
+  "tfc_collection_advancements.advancements.world.hunter.title": "猎人",
+  "tfc_collection_advancements.advancements.world.hunter.description": "获得TFC中的每一种生肉",
+  "tfc_collection_advancements.advancements.world.carnivore.title": "肉食者",
+  "tfc_collection_advancements.advancements.world.carnivore.description": "制作并品尝TFC中的所有肉类",
+  "tfc_collection_advancements.advancements.world.sea_cook.title": "海上厨师",
+  "tfc_collection_advancements.advancements.world.sea_cook.description": "制作并品尝TFC中的所有海鲜"
 }

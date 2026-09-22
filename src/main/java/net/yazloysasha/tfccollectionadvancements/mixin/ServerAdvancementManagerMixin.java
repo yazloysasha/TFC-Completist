@@ -9,14 +9,17 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.yazloysasha.tfccollectionadvancements.advancement.AdventuringTimeAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.ArboristAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.advancement.CarnivoreAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.GemologistAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.GeologistAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.GoneFishingAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.HealthyDietAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.advancement.HunterAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.MetallurgistAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.MinerologistAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.PedologistAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.SandsOfTheWorldAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.advancement.SeaCookAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.StonemasonAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.TrueFarmerAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.VegetarianAdvancementPatch;
@@ -56,6 +59,11 @@ public abstract class ServerAdvancementManagerMixin {
       resourceManager,
       this.registries
     );
+    CarnivoreAdvancementPatch.patch(
+      advancements,
+      resourceManager,
+      this.registries
+    );
     GeologistAdvancementPatch.patch(
       advancements,
       resourceManager,
@@ -67,6 +75,11 @@ public abstract class ServerAdvancementManagerMixin {
       this.registries
     );
     HealthyDietAdvancementPatch.patch(
+      advancements,
+      resourceManager,
+      this.registries
+    );
+    HunterAdvancementPatch.patch(
       advancements,
       resourceManager,
       this.registries
@@ -87,6 +100,11 @@ public abstract class ServerAdvancementManagerMixin {
       this.registries
     );
     SandsOfTheWorldAdvancementPatch.patch(
+      advancements,
+      resourceManager,
+      this.registries
+    );
+    SeaCookAdvancementPatch.patch(
       advancements,
       resourceManager,
       this.registries

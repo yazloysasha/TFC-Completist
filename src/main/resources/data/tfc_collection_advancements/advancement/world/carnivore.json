@@ -1,0 +1,35 @@
+{
+  "parent": "tfc_collection_advancements:world/hunter",
+  "criteria": {
+    "cooked_beef": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": "tfc:food/cooked_beef"
+        }
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "tfc:food/cooked_beef",
+      "components": {
+        "tfc:food": {
+          "creation_date": -3
+        }
+      }
+    },
+    "title": {
+      "translate": "tfc_collection_advancements.advancements.world.carnivore.title"
+    },
+    "description": {
+      "translate": "tfc_collection_advancements.advancements.world.carnivore.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "tfc:textures/block/mud/fluvisol.png"
+  },
+  "requirements": [["cooked_beef"]]
+}

@@ -7,45 +7,41 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.neoforged.neoforge.common.Tags;
-import net.yazloysasha.tfccollectionadvancements.util.AdvancementCriterionBuilder;
+import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Rebuilds TFC Gone Fishing ({@code tfc:world/all_fish}).
+ * Rebuilds Sea Cook ({@code tfc_collection_advancements:world/sea_cook}).
  * <p>
- * Raw fish tagged {@code c:foods/raw_fish}, including TFC.
+ * Every {@code tfc} and addon item in {@code c:foods/cooked_fish}. Parent is
+ * TFC Gone Fishing ({@code tfc:world/all_fish}).
  */
-public final class GoneFishingAdvancementPatch {
+public final class SeaCookAdvancementPatch {
 
   public static final ResourceLocation ADVANCEMENT =
-    ResourceLocation.fromNamespaceAndPath("tfc", "world/all_fish");
+    ResourceLocation.fromNamespaceAndPath(
+      TFCCollectionAdvancements.MOD_ID,
+      "world/sea_cook"
+    );
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.discoveredTag(Tags.Items.FOODS_RAW_FISH)
+    InventoryCollectionSource.discoveredTag(Tags.Items.FOODS_COOKED_FISH)
   );
 
-  private GoneFishingAdvancementPatch() {}
+  private SeaCookAdvancementPatch() {}
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,
     ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
-    InventoryCollectionAdvancementPatch.patch(
+    InventoryCollectionAdvancementPatch.patchConsume(
       ADVANCEMENT,
       advancements,
       resourceManager,
       registries,
       SOURCES
     );
-
-    JsonElement advancement = advancements.get(ADVANCEMENT);
-    if (advancement != null && advancement.isJsonObject()) {
-      AdvancementCriterionBuilder.setFrame(
-        advancement.getAsJsonObject(),
-        "goal"
-      );
-    }
   }
 }

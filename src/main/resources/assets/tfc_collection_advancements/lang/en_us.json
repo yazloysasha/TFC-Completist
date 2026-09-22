@@ -8,5 +8,11 @@
   "tfc_collection_advancements.advancements.world.stonemason.title": "Stonemason",
   "tfc_collection_advancements.advancements.world.stonemason.description": "Place bricks of every rock type in TFC",
   "tfc_collection_advancements.advancements.world.vegetarian.title": "Vegetarian",
-  "tfc_collection_advancements.advancements.world.vegetarian.description": "Try every plant-based food in TFC"
+  "tfc_collection_advancements.advancements.world.vegetarian.description": "Try every plant-based food in TFC",
+  "tfc_collection_advancements.advancements.world.hunter.title": "Hunter",
+  "tfc_collection_advancements.advancements.world.hunter.description": "Obtain every raw meat in TFC",
+  "tfc_collection_advancements.advancements.world.carnivore.title": "Carnivore",
+  "tfc_collection_advancements.advancements.world.carnivore.description": "Prepare and try every meat in TFC",
+  "tfc_collection_advancements.advancements.world.sea_cook.title": "Sea Cook",
+  "tfc_collection_advancements.advancements.world.sea_cook.description": "Prepare and try every seafood in TFC"
 }

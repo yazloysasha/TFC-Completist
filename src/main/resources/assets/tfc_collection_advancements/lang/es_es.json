@@ -8,5 +8,11 @@
   "tfc_collection_advancements.advancements.world.stonemason.title": "Cantero",
   "tfc_collection_advancements.advancements.world.stonemason.description": "Coloca ladrillos de cada tipo de roca en TFC.",
   "tfc_collection_advancements.advancements.world.vegetarian.title": "Vegetariano",
-  "tfc_collection_advancements.advancements.world.vegetarian.description": "Prueba toda la comida vegetal de TFC."
+  "tfc_collection_advancements.advancements.world.vegetarian.description": "Prueba toda la comida vegetal de TFC.",
+  "tfc_collection_advancements.advancements.world.hunter.title": "Cazador",
+  "tfc_collection_advancements.advancements.world.hunter.description": "Obtén toda la carne cruda de TFC.",
+  "tfc_collection_advancements.advancements.world.carnivore.title": "Carnívoro",
+  "tfc_collection_advancements.advancements.world.carnivore.description": "Prepara y prueba toda la carne de TFC.",
+  "tfc_collection_advancements.advancements.world.sea_cook.title": "Cocinero de mar",
+  "tfc_collection_advancements.advancements.world.sea_cook.description": "Prepara y prueba todos los mariscos de TFC."
 }

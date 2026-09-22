@@ -8,5 +8,11 @@
   "tfc_collection_advancements.advancements.world.stonemason.title": "Steinmetz",
   "tfc_collection_advancements.advancements.world.stonemason.description": "Platziere Ziegel jeder Gesteinsart in TFC.",
   "tfc_collection_advancements.advancements.world.vegetarian.title": "Vegetarier",
-  "tfc_collection_advancements.advancements.world.vegetarian.description": "Probiere alle pflanzlichen Lebensmittel in TFC."
+  "tfc_collection_advancements.advancements.world.vegetarian.description": "Probiere alle pflanzlichen Lebensmittel in TFC.",
+  "tfc_collection_advancements.advancements.world.hunter.title": "Jäger",
+  "tfc_collection_advancements.advancements.world.hunter.description": "Erhalte jedes rohe Fleisch in TFC.",
+  "tfc_collection_advancements.advancements.world.carnivore.title": "Fleischfresser",
+  "tfc_collection_advancements.advancements.world.carnivore.description": "Bereite jedes Fleisch in TFC zu und probiere es.",
+  "tfc_collection_advancements.advancements.world.sea_cook.title": "Schiffskoch",
+  "tfc_collection_advancements.advancements.world.sea_cook.description": "Bereite alle Meeresfrüchte in TFC zu und probiere sie."
 }
