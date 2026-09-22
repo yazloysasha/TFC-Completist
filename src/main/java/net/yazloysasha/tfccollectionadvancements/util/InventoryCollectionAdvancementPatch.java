@@ -68,6 +68,156 @@ public final class InventoryCollectionAdvancementPatch {
   }
 
   /**
+   * Items from every source that share the same last path segment are OR'd in
+   * one requirement group. Groups are AND'd. Used when several item forms
+   * count as the same collectible (loose rock vs mossy loose rock).
+   */
+  public static void patchAnyOfByLastPathSegment(
+    ResourceLocation advancementId,
+    Map<ResourceLocation, JsonElement> advancements,
+    ResourceManager resourceManager,
+    HolderLookup.Provider registries,
+    List<InventoryCollectionSource> sources
+  ) {
+    JsonElement advancementElement = advancements.get(advancementId);
+    if (advancementElement == null || !advancementElement.isJsonObject()) {
+      return;
+    }
+
+    JsonObject root = advancementElement.getAsJsonObject();
+    if (
+      root.getAsJsonObject("criteria") == null ||
+      root.getAsJsonArray("requirements") == null
+    ) {
+      return;
+    }
+
+    var items = registries
+      .lookupOrThrow(Registries.ITEM)
+      .listElements()
+      .toList();
+    Map<String, Map<String, ResourceLocation>> groups = groupByLastPathSegment(
+      items,
+      sources
+    );
+    if (
+      CollectionAdvancementRebuildGuard.shouldSkipRebuild(
+        advancementId,
+        groups.size(),
+        "item"
+      )
+    ) {
+      return;
+    }
+
+    AdvancementCriterionBuilder.resetCollection(root);
+    JsonObject criteria = root.getAsJsonObject("criteria");
+    JsonArray requirements = root.getAsJsonArray("requirements");
+
+    int alternatives = 0;
+    for (Map<String, ResourceLocation> group : groups.values()) {
+      for (var entry : group.entrySet()) {
+        if (criteria.has(entry.getKey())) {
+          continue;
+        }
+        criteria.add(
+          entry.getKey(),
+          AdvancementCriterionBuilder.inventoryChanged(entry.getValue())
+        );
+        alternatives++;
+      }
+      AdvancementCriterionBuilder.addRequirementAny(
+        requirements,
+        group.keySet()
+      );
+    }
+
+    CollectionAdvancementDeduplicator.deduplicate(root);
+    if (alternatives > 0) {
+      TFCCollectionAdvancements.LOGGER.info(
+        "Rebuilt {} with {} item groups ({} alternatives)",
+        advancementId,
+        groups.size(),
+        alternatives
+      );
+    }
+  }
+
+  private static Map<
+    String,
+    Map<String, ResourceLocation>
+  > groupByLastPathSegment(
+    List<Holder.Reference<Item>> items,
+    List<InventoryCollectionSource> sources
+  ) {
+    Map<String, Map<String, ResourceLocation>> groups = new LinkedHashMap<>();
+    Set<String> usedNames = new HashSet<>();
+    Set<ResourceLocation> emptyTags = Set.of();
+    Set<ResourceLocation> emptyOres = Set.of();
+
+    for (InventoryCollectionSource source : sources) {
+      for (var holder : items) {
+        if (!source.matches(holder, emptyTags, emptyOres)) {
+          continue;
+        }
+        ResourceLocation itemId = holder.getKey().location();
+        String groupKey = groupKey(itemId);
+        Map<String, ResourceLocation> group = groups.computeIfAbsent(
+          groupKey,
+          key -> new LinkedHashMap<>()
+        );
+        String criterionName = uniqueCriterionName(
+          itemId,
+          source.pathPrefix(),
+          usedNames
+        );
+        group.putIfAbsent(criterionName, itemId);
+      }
+    }
+    return groups;
+  }
+
+  private static String groupKey(ResourceLocation itemId) {
+    String rock = lastPathSegment(itemId.getPath());
+    return AddonNamespaces.isTfc(itemId.getNamespace())
+      ? rock
+      : itemId.getNamespace() + "_" + rock;
+  }
+
+  private static String uniqueCriterionName(
+    ResourceLocation itemId,
+    String pathPrefix,
+    Set<String> usedNames
+  ) {
+    String name = criterionName(itemId, pathPrefix);
+    if (usedNames.add(name)) {
+      return name;
+    }
+    String folder = lastPathSegment(
+      pathPrefix != null && pathPrefix.endsWith("/")
+        ? pathPrefix.substring(0, pathPrefix.length() - 1)
+        : pathPrefix
+    );
+    String fallback = AddonNamespaces.isTfc(itemId.getNamespace())
+      ? folder + "_" + lastPathSegment(itemId.getPath())
+      : itemId.getNamespace() +
+      "_" +
+      folder +
+      "_" +
+      lastPathSegment(itemId.getPath());
+    usedNames.add(fallback);
+    return fallback;
+  }
+
+  private static String lastPathSegment(String path) {
+    if (path == null || path.isEmpty()) {
+      return "";
+    }
+    int slash = path.lastIndexOf('/');
+    return slash >= 0 ? path.substring(slash + 1) : path;
+  }
+
+  /**
    * Discovers metals from molten metal fluids, then rebuilds the matching
    * ingot criteria.
    */

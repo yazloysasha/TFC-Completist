@@ -10,6 +10,7 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import net.yazloysasha.tfccollectionadvancements.advancement.AdventuringTimeAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.ArboristAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.GemologistAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.advancement.GeologistAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.GoneFishingAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.HealthyDietAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.MetallurgistAdvancementPatch;
@@ -42,6 +43,11 @@ public abstract class ServerAdvancementManagerMixin {
       this.registries
     );
     ArboristAdvancementPatch.patch(
+      advancements,
+      resourceManager,
+      this.registries
+    );
+    GeologistAdvancementPatch.patch(
       advancements,
       resourceManager,
       this.registries

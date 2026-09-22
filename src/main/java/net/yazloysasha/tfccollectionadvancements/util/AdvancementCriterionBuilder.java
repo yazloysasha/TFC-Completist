@@ -85,4 +85,21 @@ public final class AdvancementCriterionBuilder {
     requirement.add(criterionName);
     requirements.add(requirement);
   }
+
+  /**
+   * One AND-group whose members are OR'd. Criteria must already exist.
+   */
+  public static void addRequirementAny(
+    JsonArray requirements,
+    Iterable<String> criterionNames
+  ) {
+    JsonArray requirement = new JsonArray();
+    for (String criterionName : criterionNames) {
+      requirement.add(criterionName);
+    }
+    if (requirement.isEmpty()) {
+      return;
+    }
+    requirements.add(requirement);
+  }
 }
