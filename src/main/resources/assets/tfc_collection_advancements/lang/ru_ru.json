@@ -18,5 +18,9 @@
   "tfc_collection_advancements.advancements.world.sea_cook.title": "Кок",
   "tfc_collection_advancements.advancements.world.sea_cook.description": "Приготовьте и попробуйте все морепродукты, включая черепаху, из мода TFC",
   "tfc_collection_advancements.advancements.world.sommelier.title": "Сомелье",
-  "tfc_collection_advancements.advancements.world.sommelier.description": "Выпейте каждый алкогольный напиток из мода TFC"
+  "tfc_collection_advancements.advancements.world.sommelier.description": "Выпейте каждый алкогольный напиток из мода TFC",
+  "tfc_collection_advancements.advancements.world.orchardist.title": "Садовод",
+  "tfc_collection_advancements.advancements.world.orchardist.description": "Посадите каждый саженец фруктового дерева из мода TFC",
+  "tfc_collection_advancements.advancements.world.berry_gardener.title": "Ягодник",
+  "tfc_collection_advancements.advancements.world.berry_gardener.description": "Посадите каждый ягодный куст из мода TFC"
 }

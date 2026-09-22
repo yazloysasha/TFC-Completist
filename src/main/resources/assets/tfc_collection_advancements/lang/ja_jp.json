@@ -18,5 +18,9 @@
   "tfc_collection_advancements.advancements.world.sea_cook.title": "船料理人",
   "tfc_collection_advancements.advancements.world.sea_cook.description": "TFCの海の幸をすべて調理して味わう。カメも含む。",
   "tfc_collection_advancements.advancements.world.sommelier.title": "ソムリエ",
-  "tfc_collection_advancements.advancements.world.sommelier.description": "TFCのアルコール飲料をすべて飲む。"
+  "tfc_collection_advancements.advancements.world.sommelier.description": "TFCのアルコール飲料をすべて飲む。",
+  "tfc_collection_advancements.advancements.world.orchardist.title": "果樹園主",
+  "tfc_collection_advancements.advancements.world.orchardist.description": "TFCの果樹の苗木をすべて植える。",
+  "tfc_collection_advancements.advancements.world.berry_gardener.title": "ベリー栽培家",
+  "tfc_collection_advancements.advancements.world.berry_gardener.description": "TFCのベリーの低木をすべて植える。"
 }

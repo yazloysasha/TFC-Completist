@@ -18,5 +18,9 @@
   "tfc_collection_advancements.advancements.world.sea_cook.title": "Cozinheiro do mar",
   "tfc_collection_advancements.advancements.world.sea_cook.description": "Prepare e experimente todos os frutos do mar do TFC, incluindo tartaruga.",
   "tfc_collection_advancements.advancements.world.sommelier.title": "Sommelier",
-  "tfc_collection_advancements.advancements.world.sommelier.description": "Beba cada bebida alcoólica do TFC."
+  "tfc_collection_advancements.advancements.world.sommelier.description": "Beba cada bebida alcoólica do TFC.",
+  "tfc_collection_advancements.advancements.world.orchardist.title": "Pomarista",
+  "tfc_collection_advancements.advancements.world.orchardist.description": "Plante cada muda de árvore frutífera do TFC.",
+  "tfc_collection_advancements.advancements.world.berry_gardener.title": "Cultivador de bagas",
+  "tfc_collection_advancements.advancements.world.berry_gardener.description": "Plante cada arbusto de bagas do TFC."
 }

@@ -11,37 +11,33 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvance
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Rebuilds Pedologist ({@code tfc_collection_advancements:world/pedologist}).
+ * Rebuilds Orchardist ({@code tfc_collection_advancements:world/orchardist}).
  * <p>
- * One AND-group per soil order (entisol, aridisol, ...). Dirt, grass, duff, clay,
- * clay duff, mud, and coarse dirt of the same order are OR'd.
+ * Fruit-tree saplings under {@code plant/..._sapling}, including TFC (banana,
+ * cherry, apples, ...) and addons that follow the same path (Firmalife cocoa and
+ * fig). Timber saplings stay on Arborist ({@code wood/sapling/...}). Potted
+ * variants have no item.
  */
-public final class PedologistAdvancement {
+public final class OrchardistAdvancement {
 
   public static final ResourceLocation ADVANCEMENT =
     ResourceLocation.fromNamespaceAndPath(
       TFCCollectionAdvancements.MOD_ID,
-      "world/pedologist"
+      "world/orchardist"
     );
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.discovered("dirt/"),
-    InventoryCollectionSource.discovered("grass/"),
-    InventoryCollectionSource.discovered("duff/"),
-    InventoryCollectionSource.discovered("clay/"),
-    InventoryCollectionSource.discovered("clay_duff/"),
-    InventoryCollectionSource.discovered("mud/"),
-    InventoryCollectionSource.discovered("coarse_dirt/")
+    InventoryCollectionSource.discovered("plant/", "_sapling")
   );
 
-  private PedologistAdvancement() {}
+  private OrchardistAdvancement() {}
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,
     ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
-    InventoryCollectionAdvancement.patchAnyOfByLastPathSegment(
+    InventoryCollectionAdvancement.patchPlacedBlock(
       ADVANCEMENT,
       advancements,
       resourceManager,

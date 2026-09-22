@@ -18,5 +18,9 @@
   "tfc_collection_advancements.advancements.world.sea_cook.title": "Deniz aşçısı",
   "tfc_collection_advancements.advancements.world.sea_cook.description": "TFC'deki tüm deniz ürünlerini, kaplumbağa dahil, pişir ve dene.",
   "tfc_collection_advancements.advancements.world.sommelier.title": "Sommelier",
-  "tfc_collection_advancements.advancements.world.sommelier.description": "TFC'deki her alkollü içeceği iç."
+  "tfc_collection_advancements.advancements.world.sommelier.description": "TFC'deki her alkollü içeceği iç.",
+  "tfc_collection_advancements.advancements.world.orchardist.title": "Bahçıvan",
+  "tfc_collection_advancements.advancements.world.orchardist.description": "TFC'deki her meyve ağacı fidanını dik.",
+  "tfc_collection_advancements.advancements.world.berry_gardener.title": "Böğürtlen Bahçıvanı",
+  "tfc_collection_advancements.advancements.world.berry_gardener.description": "TFC'deki her meyve çalısını dik."
 }

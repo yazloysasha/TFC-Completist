@@ -11,37 +11,33 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvance
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Rebuilds Pedologist ({@code tfc_collection_advancements:world/pedologist}).
+ * Rebuilds Forager ({@code tfc_collection_advancements:world/forager}).
  * <p>
- * One AND-group per soil order (entisol, aridisol, ...). Dirt, grass, duff, clay,
- * clay duff, mud, and coarse dirt of the same order are OR'd.
+ * Berry bushes under {@code plant/..._bush}, including TFC (stationary,
+ * spreading, and cranberry) and addons that follow the same path (Firmalife
+ * nightshade and pineapple). Spreading canes and dead bushes have no item.
+ * Firmalife grapes are seeds on trellises, already covered by True Farmer.
  */
-public final class PedologistAdvancement {
+public final class ForagerAdvancement {
 
   public static final ResourceLocation ADVANCEMENT =
     ResourceLocation.fromNamespaceAndPath(
       TFCCollectionAdvancements.MOD_ID,
-      "world/pedologist"
+      "world/forager"
     );
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.discovered("dirt/"),
-    InventoryCollectionSource.discovered("grass/"),
-    InventoryCollectionSource.discovered("duff/"),
-    InventoryCollectionSource.discovered("clay/"),
-    InventoryCollectionSource.discovered("clay_duff/"),
-    InventoryCollectionSource.discovered("mud/"),
-    InventoryCollectionSource.discovered("coarse_dirt/")
+    InventoryCollectionSource.discovered("plant/", "_bush")
   );
 
-  private PedologistAdvancement() {}
+  private ForagerAdvancement() {}
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,
     ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
-    InventoryCollectionAdvancement.patchAnyOfByLastPathSegment(
+    InventoryCollectionAdvancement.patchPlacedBlock(
       ADVANCEMENT,
       advancements,
       resourceManager,

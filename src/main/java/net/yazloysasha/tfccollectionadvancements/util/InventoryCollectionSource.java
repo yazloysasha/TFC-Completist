@@ -63,10 +63,17 @@ public record InventoryCollectionSource(
   }
 
   public static InventoryCollectionSource discovered(String pathPrefix) {
+    return discovered(pathPrefix, null);
+  }
+
+  public static InventoryCollectionSource discovered(
+    String pathPrefix,
+    String pathSuffix
+  ) {
     return new InventoryCollectionSource(
       null,
       pathPrefix,
-      null,
+      pathSuffix,
       false,
       null,
       false,
@@ -255,6 +262,14 @@ public record InventoryCollectionSource(
       return false;
     }
     if (pathSuffix != null && !path.endsWith(pathSuffix)) {
+      return false;
+    }
+    if (
+      pathSuffix != null &&
+      pathPrefix != null &&
+      pathPrefix.endsWith("/") &&
+      path.substring(pathPrefix.length()).indexOf('/') >= 0
+    ) {
       return false;
     }
     if (singleSegmentAfterPrefix && pathPrefix != null) {

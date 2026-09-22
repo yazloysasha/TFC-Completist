@@ -18,5 +18,9 @@
   "tfc_collection_advancements.advancements.world.sea_cook.title": "Kucharz morski",
   "tfc_collection_advancements.advancements.world.sea_cook.description": "Przygotuj i spróbuj wszystkich owoców morza w tfc, w tym żółwia.",
   "tfc_collection_advancements.advancements.world.sommelier.title": "Sommelier",
-  "tfc_collection_advancements.advancements.world.sommelier.description": "Wypij każdy napój alkoholowy w tfc."
+  "tfc_collection_advancements.advancements.world.sommelier.description": "Wypij każdy napój alkoholowy w tfc.",
+  "tfc_collection_advancements.advancements.world.orchardist.title": "Sadownik",
+  "tfc_collection_advancements.advancements.world.orchardist.description": "Posadź każdą sadzonkę drzewa owocowego w tfc.",
+  "tfc_collection_advancements.advancements.world.berry_gardener.title": "Jagodnik",
+  "tfc_collection_advancements.advancements.world.berry_gardener.description": "Posadź każdy krzew jagodowy w tfc."
 }

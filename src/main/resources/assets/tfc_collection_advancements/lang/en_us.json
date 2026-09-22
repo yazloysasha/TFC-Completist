@@ -18,5 +18,9 @@
   "tfc_collection_advancements.advancements.world.sea_cook.title": "Sea Cook",
   "tfc_collection_advancements.advancements.world.sea_cook.description": "Prepare and try every seafood in TFC, including turtle",
   "tfc_collection_advancements.advancements.world.sommelier.title": "Sommelier",
-  "tfc_collection_advancements.advancements.world.sommelier.description": "Drink every alcoholic beverage in TFC"
+  "tfc_collection_advancements.advancements.world.sommelier.description": "Drink every alcoholic beverage in TFC",
+  "tfc_collection_advancements.advancements.world.orchardist.title": "Orchardist",
+  "tfc_collection_advancements.advancements.world.orchardist.description": "Plant every fruit tree sapling in TFC",
+  "tfc_collection_advancements.advancements.world.berry_gardener.title": "Berry Gardener",
+  "tfc_collection_advancements.advancements.world.berry_gardener.description": "Plant every berry bush in TFC"
 }

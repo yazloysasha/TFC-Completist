@@ -18,5 +18,9 @@
   "tfc_collection_advancements.advancements.world.sea_cook.title": "海上廚師",
   "tfc_collection_advancements.advancements.world.sea_cook.description": "製作並品嚐TFC中的所有海鮮，包括海龜",
   "tfc_collection_advancements.advancements.world.sommelier.title": "侍酒師",
-  "tfc_collection_advancements.advancements.world.sommelier.description": "喝遍TFC中的每一種酒精飲料"
+  "tfc_collection_advancements.advancements.world.sommelier.description": "喝遍TFC中的每一種酒精飲料",
+  "tfc_collection_advancements.advancements.world.orchardist.title": "果農",
+  "tfc_collection_advancements.advancements.world.orchardist.description": "種植TFC中的每一種果樹樹苗",
+  "tfc_collection_advancements.advancements.world.berry_gardener.title": "漿果农",
+  "tfc_collection_advancements.advancements.world.berry_gardener.description": "種植TFC中的每一種漿果灌木"
 }

@@ -1,0 +1,37 @@
+{
+  "parent": "tfc:world/root",
+  "criteria": {
+    "orange_sapling": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": ["tfc:plant/orange_sapling"]
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "tfc:plant/orange_sapling"
+    },
+    "title": {
+      "translate": "tfc_collection_advancements.advancements.world.orchardist.title"
+    },
+    "description": {
+      "translate": "tfc_collection_advancements.advancements.world.orchardist.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "tfc:textures/block/mud/fluvisol.png"
+  },
+  "requirements": [["orange_sapling"]]
+}
