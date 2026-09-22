@@ -14,7 +14,7 @@
   },
   "display": {
     "icon": {
-      "id": "tfc:sand/yellow"
+      "id": "tfc:sand/white"
     },
     "title": {
       "translate": "tfc_collection_advancements.advancements.world.sands_of_the_world.title"
@@ -28,5 +28,5 @@
     "hidden": false,
     "background": "tfc:textures/block/mud/fluvisol.png"
   },
-  "requirements": [["brown"]]
+  "requirements": [["white"]]
 }
