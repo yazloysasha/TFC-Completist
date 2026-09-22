@@ -19,7 +19,7 @@
   },
   "display": {
     "icon": {
-      "id": "tfc:plant/blueberry_bush"
+      "id": "tfc:plant/strawberry_bush"
     },
     "title": {
       "translate": "tfc_collection_advancements.advancements.world.berry_gardener.title"
@@ -33,5 +33,5 @@
     "hidden": false,
     "background": "tfc:textures/block/mud/fluvisol.png"
   },
-  "requirements": [["blueberry_bush"]]
+  "requirements": [["strawberry_bush"]]
 }
