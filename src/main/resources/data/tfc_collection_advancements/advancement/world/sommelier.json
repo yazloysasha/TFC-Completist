@@ -1,5 +1,5 @@
 {
-  "parent": "tfc:story/barrel",
+  "parent": "tfc:world/root",
   "criteria": {
     "beer": {
       "trigger": "tfc_collection_advancements:drink_fluid",
@@ -18,7 +18,7 @@
     "description": {
       "translate": "tfc_collection_advancements.advancements.world.sommelier.description"
     },
-    "frame": "challenge",
+    "frame": "goal",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false,
