@@ -19,6 +19,7 @@ import net.yazloysasha.tfccollectionadvancements.advancement.PedologistAdvanceme
 import net.yazloysasha.tfccollectionadvancements.advancement.SandsOfTheWorldAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.StonemasonAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.TrueFarmerAdvancementPatch;
+import net.yazloysasha.tfccollectionadvancements.advancement.VegetarianAdvancementPatch;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -96,6 +97,11 @@ public abstract class ServerAdvancementManagerMixin {
       this.registries
     );
     TrueFarmerAdvancementPatch.patch(
+      advancements,
+      resourceManager,
+      this.registries
+    );
+    VegetarianAdvancementPatch.patch(
       advancements,
       resourceManager,
       this.registries

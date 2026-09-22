@@ -1,0 +1,35 @@
+{
+  "parent": "tfc:world/fruit",
+  "criteria": {
+    "carrot": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": "tfc:food/carrot"
+        }
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "tfc:food/cabbage",
+      "components": {
+        "tfc:food": {
+          "creation_date": -3
+        }
+      }
+    },
+    "title": {
+      "translate": "tfc_collection_advancements.advancements.world.vegetarian.title"
+    },
+    "description": {
+      "translate": "tfc_collection_advancements.advancements.world.vegetarian.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "tfc:textures/block/mud/fluvisol.png"
+  },
+  "requirements": [["carrot"]]
+}
