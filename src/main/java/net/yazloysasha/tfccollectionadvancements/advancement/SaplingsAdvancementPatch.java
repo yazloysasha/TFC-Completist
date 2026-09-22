@@ -3,7 +3,9 @@ package net.yazloysasha.tfccollectionadvancements.advancement;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import java.util.List;
 import java.util.Map;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -15,9 +17,14 @@ public final class SaplingsAdvancementPatch {
   public static final ResourceLocation TFC_SAPLINGS_ADVANCEMENT =
     ResourceLocation.fromNamespaceAndPath("tfc", "world/saplings");
 
-  private static final String AFC_NAMESPACE = "afc";
   private static final String SAPLING_PATH_PREFIX = "wood/sapling/";
-  private static final String CRITERION_PREFIX = "afc_";
+
+  private record SaplingSource(String namespace, String criterionPrefix) {}
+
+  private static final List<SaplingSource> SAPLING_SOURCES = List.of(
+    new SaplingSource("afc", "afc_"),
+    new SaplingSource("beneath", "beneath_")
+  );
 
   private SaplingsAdvancementPatch() {}
 
@@ -37,12 +44,32 @@ public final class SaplingsAdvancementPatch {
       return;
     }
 
-    int added = 0;
     var itemRegistry = registries.lookupOrThrow(Registries.ITEM);
     var saplings = itemRegistry.listElements().toList();
+
+    for (SaplingSource source : SAPLING_SOURCES) {
+      int added = patchSource(criteria, requirements, saplings, source);
+      if (added > 0) {
+        TFCCollectionAdvancements.LOGGER.info(
+          "Extended {} with {} {} sapling criteria",
+          TFC_SAPLINGS_ADVANCEMENT,
+          added,
+          source.namespace()
+        );
+      }
+    }
+  }
+
+  private static int patchSource(
+    JsonObject criteria,
+    JsonArray requirements,
+    List<Holder.Reference<Item>> saplings,
+    SaplingSource source
+  ) {
+    int added = 0;
     for (var holder : saplings) {
       ResourceLocation itemId = holder.getKey().location();
-      if (!AFC_NAMESPACE.equals(itemId.getNamespace())) {
+      if (!source.namespace().equals(itemId.getNamespace())) {
         continue;
       }
       if (!itemId.getPath().startsWith(SAPLING_PATH_PREFIX)) {
@@ -50,40 +77,19 @@ public final class SaplingsAdvancementPatch {
       }
 
       String woodId = itemId.getPath().substring(SAPLING_PATH_PREFIX.length());
-      String criterionName = CRITERION_PREFIX + woodId;
+      String criterionName = source.criterionPrefix() + woodId;
       if (criteria.has(criterionName)) {
         continue;
       }
 
-      criteria.add(criterionName, createInventoryCriterion(itemId));
-      JsonArray requirement = new JsonArray();
-      requirement.add(criterionName);
-      requirements.add(requirement);
+      AdvancementPatchUtil.addCriterion(
+        criteria,
+        requirements,
+        criterionName,
+        AdvancementPatchUtil.createInventoryCriterion(itemId)
+      );
       added++;
     }
-
-    if (added > 0) {
-      TFCCollectionAdvancements.LOGGER.info(
-        "Extended {} with {} ArborFirmaCraft sapling criteria",
-        TFC_SAPLINGS_ADVANCEMENT,
-        added
-      );
-    }
-  }
-
-  private static JsonObject createInventoryCriterion(ResourceLocation itemId) {
-    JsonObject itemPredicate = new JsonObject();
-    itemPredicate.addProperty("items", itemId.toString());
-
-    JsonArray items = new JsonArray();
-    items.add(itemPredicate);
-
-    JsonObject conditions = new JsonObject();
-    conditions.add("items", items);
-
-    JsonObject criterion = new JsonObject();
-    criterion.addProperty("trigger", "minecraft:inventory_changed");
-    criterion.add("conditions", conditions);
-    return criterion;
+    return added;
   }
 }

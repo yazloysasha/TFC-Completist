@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.ServerAdvancementManager;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
+import net.yazloysasha.tfccollectionadvancements.advancement.AdventuringTimeAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.advancement.SaplingsAdvancementPatch;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,12 +24,13 @@ public abstract class ServerAdvancementManagerMixin {
   private HolderLookup.Provider registries;
 
   @Inject(method = "apply", at = @At("HEAD"))
-  private void tfcCollectionAdvancements$extendSaplingsAdvancement(
+  private void tfcCollectionAdvancements$extendCollectionAdvancements(
     Map<ResourceLocation, JsonElement> advancements,
     ResourceManager resourceManager,
     ProfilerFiller profiler,
     CallbackInfo ci
   ) {
     SaplingsAdvancementPatch.patch(advancements, this.registries);
+    AdventuringTimeAdvancementPatch.patch(advancements, this.registries);
   }
 }
