@@ -1,4 +1,4 @@
-A simple mod that adds items from addons to TerraFirmaCraft collection advancements.
+A simple mod that adds items from addons to TerraFirmaCraft collection advancements and fixes bugs in existing (such as sulfur duplication in "Mineralogist" or missing melon in "Healthy Diet").
 
 | Before                           | After                          |
 | -------------------------------- | ------------------------------ |
