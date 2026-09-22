@@ -10,7 +10,7 @@
   },
   "display": {
     "icon": {
-      "id": "tfc:ceramic/jug"
+      "id": "tfc:bucket/beer"
     },
     "title": {
       "translate": "tfc_collection_advancements.advancements.world.sommelier.title"
