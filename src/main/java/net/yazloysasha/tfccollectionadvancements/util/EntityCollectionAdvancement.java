@@ -74,6 +74,29 @@ public final class EntityCollectionAdvancement {
   }
 
   /**
+   * Rebuilds {@code minecraft:player_killed_entity} criteria for every
+   * discoverable member of {@code tags}.
+   */
+  public static void patchKilledEntityFromTags(
+    ResourceLocation advancementId,
+    Map<ResourceLocation, JsonElement> advancements,
+    ResourceManager resourceManager,
+    HolderLookup.Provider registries,
+    List<TagKey<EntityType<?>>> tags
+  ) {
+    patchFromTags(
+      advancementId,
+      advancements,
+      resourceManager,
+      registries,
+      tags,
+      Set.of(),
+      AdvancementCriterionBuilder::playerKilledEntity,
+      "killed-entity"
+    );
+  }
+
+  /**
    * Rebuilds {@code bred_animal} criteria for every discoverable entity in
    * {@code tags}. Progress is this mod's trigger from {@code onFertilized}.
    */

@@ -3,44 +3,41 @@ package net.yazloysasha.tfccollectionadvancements.advancement.custom;
 import com.google.gson.JsonElement;
 import java.util.List;
 import java.util.Map;
+import net.dries007.tfc.common.TFCTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.neoforged.neoforge.common.Tags;
 import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
-import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancement;
-import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
+import net.yazloysasha.tfccollectionadvancements.util.EntityCollectionAdvancement;
 
 /**
- * Rebuilds Carnivore ({@code tfc_collection_advancements:world/carnivore}).
+ * Rebuilds King of Beasts
+ * ({@code tfc_collection_advancements:world/king_of_beasts}).
  * <p>
- * Every {@code tfc} and addon item in {@code c:foods/cooked_meat}.
+ * One {@code player_killed_entity} criterion per discoverable member of
+ * {@code #tfc:land_predators}.
  */
-public final class CarnivoreAdvancement {
+public final class KingOfBeastsAdvancement {
 
   public static final ResourceLocation ADVANCEMENT =
     ResourceLocation.fromNamespaceAndPath(
       TFCCollectionAdvancements.MOD_ID,
-      "world/carnivore"
+      "world/king_of_beasts"
     );
 
-  private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.discoveredTag(Tags.Items.FOODS_COOKED_MEAT)
-  );
-
-  private CarnivoreAdvancement() {}
+  private KingOfBeastsAdvancement() {}
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,
     ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
-    InventoryCollectionAdvancement.patchConsume(
+    EntityCollectionAdvancement.patchKilledEntityFromTags(
       ADVANCEMENT,
       advancements,
       resourceManager,
       registries,
-      SOURCES
+      List.of(TFCTags.Entities.LAND_PREDATORS)
     );
   }
 }

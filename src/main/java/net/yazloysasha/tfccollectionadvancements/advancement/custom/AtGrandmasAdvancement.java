@@ -3,32 +3,32 @@ package net.yazloysasha.tfccollectionadvancements.advancement.custom;
 import com.google.gson.JsonElement;
 import java.util.List;
 import java.util.Map;
+import net.dries007.tfc.common.TFCTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.neoforged.neoforge.common.Tags;
 import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancement;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Rebuilds Carnivore ({@code tfc_collection_advancements:world/carnivore}).
+ * Rebuilds At Grandma's ({@code tfc_collection_advancements:world/at_grandmas}).
  * <p>
- * Every {@code tfc} and addon item in {@code c:foods/cooked_meat}.
+ * Every {@code tfc} and addon item in {@code #tfc:foods/jam}.
  */
-public final class CarnivoreAdvancement {
+public final class AtGrandmasAdvancement {
 
   public static final ResourceLocation ADVANCEMENT =
     ResourceLocation.fromNamespaceAndPath(
       TFCCollectionAdvancements.MOD_ID,
-      "world/carnivore"
+      "world/at_grandmas"
     );
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.discoveredTag(Tags.Items.FOODS_COOKED_MEAT)
+    InventoryCollectionSource.discoveredTag(TFCTags.Items.JAM)
   );
 
-  private CarnivoreAdvancement() {}
+  private AtGrandmasAdvancement() {}
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,

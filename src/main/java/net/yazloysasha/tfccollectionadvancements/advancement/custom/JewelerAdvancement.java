@@ -13,8 +13,7 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 /**
  * Rebuilds Jeweler ({@code tfc_collection_advancements:world/jeweler}).
  * <p>
- * Cut gems ({@code gem/{name}}), not ore pieces or powders. Parent is TFC
- * Gemologist ({@code tfc:world/gemologist}).
+ * Cut gems ({@code gem/{name}}), not ore pieces or powders.
  */
 public final class JewelerAdvancement {
 

@@ -12,23 +12,24 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvance
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Rebuilds Carnivore ({@code tfc_collection_advancements:world/carnivore}).
+ * Rebuilds Baker ({@code tfc_collection_advancements:world/baker}).
  * <p>
- * Every {@code tfc} and addon item in {@code c:foods/cooked_meat}.
+ * Every {@code tfc} and addon item in {@code c:foods/bread}. Eating counts as
+ * baked.
  */
-public final class CarnivoreAdvancement {
+public final class BakerAdvancement {
 
   public static final ResourceLocation ADVANCEMENT =
     ResourceLocation.fromNamespaceAndPath(
       TFCCollectionAdvancements.MOD_ID,
-      "world/carnivore"
+      "world/baker"
     );
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.discoveredTag(Tags.Items.FOODS_COOKED_MEAT)
+    InventoryCollectionSource.discoveredTag(Tags.Items.FOODS_BREAD)
   );
 
-  private CarnivoreAdvancement() {}
+  private BakerAdvancement() {}
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,

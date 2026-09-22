@@ -7,19 +7,25 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.ServerAdvancementManager;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
+import net.yazloysasha.tfccollectionadvancements.advancement.custom.AtGrandmasAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.BerryGardenerAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.ButcherAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.CarnivoreAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.custom.CarpenterAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.DomesticationAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.custom.FloristAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.GeologistAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.custom.HighArchitectureAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.HusbandmanAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.JewelerAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.custom.KingOfBeastsAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.OrchardistAdvancement;
-import net.yazloysasha.tfccollectionadvancements.advancement.custom.PedologistAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.SandsOfTheWorldAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.SeaCookAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.SommelierAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.StonemasonAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.custom.TastyBreadsAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.custom.VagabondAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.VegetarianAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.patch.AdventuringTimeAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.patch.ArboristAdvancement;
@@ -81,6 +87,11 @@ public abstract class ServerAdvancementManagerMixin {
     TrueFarmerAdvancement.patch(advancements, resourceManager, this.registries);
 
     // Custom
+    TastyBreadsAdvancement.patch(
+      advancements,
+      resourceManager,
+      this.registries
+    );
     BerryGardenerAdvancement.patch(
       advancements,
       resourceManager,
@@ -88,16 +99,28 @@ public abstract class ServerAdvancementManagerMixin {
     );
     ButcherAdvancement.patch(advancements, resourceManager, this.registries);
     CarnivoreAdvancement.patch(advancements, resourceManager, this.registries);
+    CarpenterAdvancement.patch(advancements, resourceManager, this.registries);
     DomesticationAdvancement.patch(
       advancements,
       resourceManager,
       this.registries
     );
+    FloristAdvancement.patch(advancements, resourceManager, this.registries);
     GeologistAdvancement.patch(advancements, resourceManager, this.registries);
     HusbandmanAdvancement.patch(advancements, resourceManager, this.registries);
     JewelerAdvancement.patch(advancements, resourceManager, this.registries);
+    KingOfBeastsAdvancement.patch(
+      advancements,
+      resourceManager,
+      this.registries
+    );
+    AtGrandmasAdvancement.patch(advancements, resourceManager, this.registries);
+    HighArchitectureAdvancement.patch(
+      advancements,
+      resourceManager,
+      this.registries
+    );
     OrchardistAdvancement.patch(advancements, resourceManager, this.registries);
-    PedologistAdvancement.patch(advancements, resourceManager, this.registries);
     SandsOfTheWorldAdvancement.patch(
       advancements,
       resourceManager,
@@ -106,6 +129,7 @@ public abstract class ServerAdvancementManagerMixin {
     SeaCookAdvancement.patch(advancements, resourceManager, this.registries);
     SommelierAdvancement.patch(advancements, resourceManager, this.registries);
     StonemasonAdvancement.patch(advancements, resourceManager, this.registries);
+    VagabondAdvancement.patch(advancements, resourceManager, this.registries);
     VegetarianAdvancement.patch(advancements, resourceManager, this.registries);
   }
 }

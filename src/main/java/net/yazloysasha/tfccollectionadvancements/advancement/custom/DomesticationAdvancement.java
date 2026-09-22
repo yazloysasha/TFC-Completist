@@ -14,8 +14,7 @@ import net.yazloysasha.tfccollectionadvancements.util.EntityCollectionAdvancemen
  * Rebuilds Domestication ({@code tfc_collection_advancements:world/domestication}).
  * <p>
  * One {@code familiarized_animal} criterion per discoverable member of
- * {@code #tfc:farm_animals} and {@code #tfc:pets}, minus frog. Parent is
- * {@code tfc:world/familiarity}.
+ * {@code #tfc:farm_animals} and {@code #tfc:pets}, minus frog.
  */
 public final class DomesticationAdvancement {
 

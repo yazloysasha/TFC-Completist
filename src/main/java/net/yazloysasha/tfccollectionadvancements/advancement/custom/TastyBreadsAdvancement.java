@@ -6,29 +6,40 @@ import java.util.Map;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.neoforged.neoforge.common.Tags;
 import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancement;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Rebuilds Carnivore ({@code tfc_collection_advancements:world/carnivore}).
+ * Rebuilds Tasty Breads ({@code tfc_collection_advancements:world/tasty_breads}).
  * <p>
- * Every {@code tfc} and addon item in {@code c:foods/cooked_meat}.
+ * Every plain bread sandwich ({@code food/*_bread_sandwich}), not jam sandwiches
+ * or whole loaves.
  */
-public final class CarnivoreAdvancement {
+public final class TastyBreadsAdvancement {
 
   public static final ResourceLocation ADVANCEMENT =
     ResourceLocation.fromNamespaceAndPath(
       TFCCollectionAdvancements.MOD_ID,
-      "world/carnivore"
+      "world/tasty_breads"
     );
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.discoveredTag(Tags.Items.FOODS_COOKED_MEAT)
+    new InventoryCollectionSource(
+      null,
+      "food/",
+      "_bread_sandwich",
+      false,
+      null,
+      false,
+      null,
+      true,
+      InventoryCollectionSource.CollectedItems.NONE,
+      false
+    )
   );
 
-  private CarnivoreAdvancement() {}
+  private TastyBreadsAdvancement() {}
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,

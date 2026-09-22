@@ -280,12 +280,23 @@ public record InventoryCollectionSource(
       if (
         remainder.isEmpty() ||
         remainder.indexOf('/') >= 0 ||
-        remainder.indexOf('_') >= 0
+        isDecorationVariant(remainder)
       ) {
         return false;
       }
     }
     return !rejectBlockItems || isHeldOrePiecePath(path);
+  }
+
+  /**
+   * Slabs, stairs, and walls of {@code name}, not names that merely contain {@code _}.
+   */
+  private static boolean isDecorationVariant(String remainder) {
+    return (
+      remainder.endsWith("_slab") ||
+      remainder.endsWith("_stairs") ||
+      remainder.endsWith("_wall")
+    );
   }
 
   private boolean isOrePieceSource() {

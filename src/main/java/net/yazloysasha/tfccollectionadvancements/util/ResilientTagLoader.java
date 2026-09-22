@@ -1,6 +1,5 @@
 package net.yazloysasha.tfccollectionadvancements.util;
 
-import com.google.common.collect.ImmutableSet;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -71,7 +70,7 @@ public final class ResilientTagLoader {
       return empty;
     }
 
-    ImmutableSet.Builder<T> builder = ImmutableSet.builder();
+    LinkedHashSet<T> builder = new LinkedHashSet<>();
     TagEntry.Lookup<T> lookup = new TagEntry.Lookup<>() {
       @Override
       @Nullable
@@ -90,11 +89,13 @@ public final class ResilientTagLoader {
     };
 
     for (TagLoader.EntryWithSource entry : entries) {
-      entry.entry().build(lookup, builder::add);
+      entry
+        .entry()
+        .build(lookup, entry.remove() ? builder::remove : builder::add);
     }
 
     visiting.remove(tagId);
-    Collection<T> built = builder.build();
+    Collection<T> built = List.copyOf(builder);
     resolved.put(tagId, built);
     return built;
   }

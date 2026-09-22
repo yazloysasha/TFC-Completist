@@ -6,6 +6,7 @@ import java.util.Map;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.yazloysasha.tfccollectionadvancements.util.AdvancementCriterionBuilder;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancement;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
@@ -42,5 +43,13 @@ public final class MinerologistAdvancement {
       registries,
       SOURCES
     );
+
+    JsonElement advancement = advancements.get(ADVANCEMENT);
+    if (advancement != null && advancement.isJsonObject()) {
+      AdvancementCriterionBuilder.setFrame(
+        advancement.getAsJsonObject(),
+        "challenge"
+      );
+    }
   }
 }

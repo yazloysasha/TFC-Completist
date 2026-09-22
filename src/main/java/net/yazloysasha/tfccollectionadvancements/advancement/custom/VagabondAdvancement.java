@@ -11,37 +11,31 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvance
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Rebuilds Pedologist ({@code tfc_collection_advancements:world/pedologist}).
+ * Rebuilds Vagabond ({@code tfc_collection_advancements:world/vagabond}).
  * <p>
- * One AND-group per soil order (entisol, aridisol, ...). Dirt, grass, duff, clay,
- * clay duff, mud, and coarse dirt of the same order are OR'd.
+ * Every {@code groundcover/...} item from TFC and addons (clam, pinecone,
+ * pumice, ...).
  */
-public final class PedologistAdvancement {
+public final class VagabondAdvancement {
 
   public static final ResourceLocation ADVANCEMENT =
     ResourceLocation.fromNamespaceAndPath(
       TFCCollectionAdvancements.MOD_ID,
-      "world/pedologist"
+      "world/vagabond"
     );
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.discovered("dirt/"),
-    InventoryCollectionSource.discovered("grass/"),
-    InventoryCollectionSource.discovered("duff/"),
-    InventoryCollectionSource.discovered("clay/"),
-    InventoryCollectionSource.discovered("clay_duff/"),
-    InventoryCollectionSource.discovered("mud/"),
-    InventoryCollectionSource.discovered("coarse_dirt/")
+    InventoryCollectionSource.discovered("groundcover/")
   );
 
-  private PedologistAdvancement() {}
+  private VagabondAdvancement() {}
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,
     ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
-    InventoryCollectionAdvancement.patchAnyOfByLastPathSegment(
+    InventoryCollectionAdvancement.patch(
       ADVANCEMENT,
       advancements,
       resourceManager,

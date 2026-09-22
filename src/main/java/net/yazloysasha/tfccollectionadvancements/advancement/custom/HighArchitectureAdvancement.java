@@ -6,36 +6,37 @@ import java.util.Map;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.neoforged.neoforge.common.Tags;
 import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancement;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Rebuilds Carnivore ({@code tfc_collection_advancements:world/carnivore}).
+ * Rebuilds High Architecture
+ * ({@code tfc_collection_advancements:world/high_architecture}).
  * <p>
- * Every {@code tfc} and addon item in {@code c:foods/cooked_meat}.
+ * One criterion per soil: place {@code mud_bricks/{soil}}. Slabs, stairs, and
+ * walls are excluded.
  */
-public final class CarnivoreAdvancement {
+public final class HighArchitectureAdvancement {
 
   public static final ResourceLocation ADVANCEMENT =
     ResourceLocation.fromNamespaceAndPath(
       TFCCollectionAdvancements.MOD_ID,
-      "world/carnivore"
+      "world/high_architecture"
     );
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.discoveredTag(Tags.Items.FOODS_COOKED_MEAT)
+    InventoryCollectionSource.discoveredPrimaryBlock("mud_bricks/")
   );
 
-  private CarnivoreAdvancement() {}
+  private HighArchitectureAdvancement() {}
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,
     ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
-    InventoryCollectionAdvancement.patchConsume(
+    InventoryCollectionAdvancement.patchPlacedBlock(
       ADVANCEMENT,
       advancements,
       resourceManager,

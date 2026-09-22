@@ -14,8 +14,7 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 /**
  * Rebuilds Butcher ({@code tfc_collection_advancements:world/butcher}).
  * <p>
- * Every {@code tfc} and addon item in {@code c:foods/raw_meat}. Parent is TFC
- * Hunter ({@code tfc:world/hunter}, kill a TFC animal).
+ * Every {@code tfc} and addon item in {@code c:foods/raw_meat}.
  */
 public final class ButcherAdvancement {
 

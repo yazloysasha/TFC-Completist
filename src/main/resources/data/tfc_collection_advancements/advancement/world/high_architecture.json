@@ -1,0 +1,37 @@
+{
+  "parent": "tfc:world/mud_bricks",
+  "criteria": {
+    "fluvisol": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": ["tfc:mud_bricks/fluvisol"]
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "tfc:mud_bricks/fluvisol"
+    },
+    "title": {
+      "translate": "tfc_collection_advancements.advancements.world.high_architecture.title"
+    },
+    "description": {
+      "translate": "tfc_collection_advancements.advancements.world.high_architecture.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "tfc:textures/block/mud/fluvisol.png"
+  },
+  "requirements": [["fluvisol"]]
+}

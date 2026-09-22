@@ -15,8 +15,7 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
  * Rebuilds Vegetarian ({@code tfc_collection_advancements:world/vegetarian}).
  * <p>
  * Every {@code tfc} and addon item in {@code c:foods/fruit} and
- * {@code c:foods/vegetable}. Parent is TFC Healthy Diet ({@code tfc:world/fruit}),
- * like Minerologist follows Gemologist.
+ * {@code c:foods/vegetable}.
  */
 public final class VegetarianAdvancement {
 

@@ -1,0 +1,30 @@
+{
+  "parent": "tfc:world/root",
+  "criteria": {
+    "strawberry_jam": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": "tfc:strawberry_jam"
+        }
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "tfc:jar/plum"
+    },
+    "title": {
+      "translate": "tfc_collection_advancements.advancements.world.at_grandmas.title"
+    },
+    "description": {
+      "translate": "tfc_collection_advancements.advancements.world.at_grandmas.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "tfc:textures/block/mud/fluvisol.png"
+  },
+  "requirements": [["plum_jam"]]
+}

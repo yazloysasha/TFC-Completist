@@ -14,8 +14,7 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 /**
  * Rebuilds Sea Cook ({@code tfc_collection_advancements:world/sea_cook}).
  * <p>
- * Every {@code tfc} and addon item in {@code c:foods/cooked_fish}. Parent is
- * TFC Gone Fishing ({@code tfc:world/all_fish}).
+ * Every {@code tfc} and addon item in {@code c:foods/cooked_fish}.
  */
 public final class SeaCookAdvancement {
 

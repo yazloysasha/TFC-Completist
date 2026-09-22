@@ -18,7 +18,7 @@ import net.yazloysasha.tfccollectionadvancements.util.FluidCollectionAdvancement
  * API, so any container or world sip that actually consumes the fluid counts
  * (jug, glass bottle, source block, addon vessels that call
  * {@code Drinkable.onDrink}). Farmer's Delight drinks stay out unless they
- * are registered as alcohol fluids. Parent is {@code tfc:world/root}.
+ * are registered as alcohol fluids.
  */
 public final class SommelierAdvancement {
 

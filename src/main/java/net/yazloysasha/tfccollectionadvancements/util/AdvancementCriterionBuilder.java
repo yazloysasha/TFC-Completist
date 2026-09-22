@@ -55,6 +55,42 @@ public final class AdvancementCriterionBuilder {
   }
 
   public static JsonObject placedBlock(ResourceLocation blockId) {
+    return locationBlockTrigger("minecraft:placed_block", blockId);
+  }
+
+  /**
+   * Fires after a successful block interaction, including potting a plant.
+   * The location check sees the block at the position after the use.
+   */
+  public static JsonObject itemUsedOnBlock(ResourceLocation blockId) {
+    return locationBlockTrigger("minecraft:item_used_on_block", blockId);
+  }
+
+  public static JsonObject playerKilledEntity(ResourceLocation entityId) {
+    JsonObject typePredicate = new JsonObject();
+    typePredicate.addProperty("type", entityId.toString());
+
+    JsonObject entityCondition = new JsonObject();
+    entityCondition.addProperty("condition", "minecraft:entity_properties");
+    entityCondition.add("predicate", typePredicate);
+    entityCondition.addProperty("entity", "this");
+
+    JsonArray entity = new JsonArray();
+    entity.add(entityCondition);
+
+    JsonObject conditions = new JsonObject();
+    conditions.add("entity", entity);
+
+    JsonObject criterion = new JsonObject();
+    criterion.addProperty("trigger", "minecraft:player_killed_entity");
+    criterion.add("conditions", conditions);
+    return criterion;
+  }
+
+  private static JsonObject locationBlockTrigger(
+    String trigger,
+    ResourceLocation blockId
+  ) {
     JsonObject blocks = new JsonObject();
     JsonArray blockIds = new JsonArray();
     blockIds.add(blockId.toString());
@@ -74,7 +110,7 @@ public final class AdvancementCriterionBuilder {
     conditions.add("location", location);
 
     JsonObject criterion = new JsonObject();
-    criterion.addProperty("trigger", "minecraft:placed_block");
+    criterion.addProperty("trigger", trigger);
     criterion.add("conditions", conditions);
     return criterion;
   }
