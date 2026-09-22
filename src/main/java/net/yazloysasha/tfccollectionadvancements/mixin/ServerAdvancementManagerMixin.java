@@ -33,6 +33,10 @@ public abstract class ServerAdvancementManagerMixin {
   ) {
     SaplingsAdvancementPatch.patch(advancements, this.registries);
     OreCollectionAdvancementPatch.patch(advancements, this.registries);
-    AdventuringTimeAdvancementPatch.patch(advancements, this.registries);
+    AdventuringTimeAdvancementPatch.patch(
+      advancements,
+      resourceManager,
+      this.registries
+    );
   }
 }

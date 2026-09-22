@@ -6,6 +6,7 @@ import java.util.Map;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.yazloysasha.tfccollectionadvancements.util.BiomeCollectionAdvancementPatch;
@@ -29,11 +30,13 @@ public final class AdventuringTimeAdvancementPatch {
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,
+    ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
     BiomeCollectionAdvancementPatch.patch(
       TFC_ADVENTURING_TIME_ADVANCEMENT,
       advancements,
+      resourceManager,
       registries,
       BIOME_SOURCES
     );

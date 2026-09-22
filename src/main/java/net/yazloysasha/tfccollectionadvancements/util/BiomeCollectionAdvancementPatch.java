@@ -6,8 +6,8 @@ import com.google.gson.JsonObject;
 import java.util.List;
 import java.util.Map;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
 
 public final class BiomeCollectionAdvancementPatch {
@@ -17,6 +17,7 @@ public final class BiomeCollectionAdvancementPatch {
   public static void patch(
     ResourceLocation advancementId,
     Map<ResourceLocation, JsonElement> advancements,
+    ResourceManager resourceManager,
     HolderLookup.Provider registries,
     List<BiomeCollectionSource> sources
   ) {
@@ -32,20 +33,20 @@ public final class BiomeCollectionAdvancementPatch {
       return;
     }
 
-    var biomeRegistry = registries.lookupOrThrow(Registries.BIOME);
-
     for (BiomeCollectionSource source : sources) {
-      if (!hasAddonItems(registries, source.namespace())) {
+      if (!AddonNamespaces.isPresent(registries, source.namespace())) {
         continue;
       }
 
+      List<ResourceLocation> biomeIds = BiomeTagResolver.resolve(
+        resourceManager,
+        registries,
+        source.tag()
+      );
+
       int added = 0;
-      for (var holder : biomeRegistry.listElements().toList()) {
-        ResourceLocation biomeId = holder.getKey().location();
+      for (ResourceLocation biomeId : biomeIds) {
         if (!source.biomeNamespace().equals(biomeId.getNamespace())) {
-          continue;
-        }
-        if (!holder.is(source.tag())) {
           continue;
         }
 
@@ -72,15 +73,5 @@ public final class BiomeCollectionAdvancementPatch {
         );
       }
     }
-  }
-
-  private static boolean hasAddonItems(
-    HolderLookup.Provider registries,
-    String namespace
-  ) {
-    return registries
-      .lookupOrThrow(Registries.ITEM)
-      .listElementIds()
-      .anyMatch(id -> namespace.equals(id.location().getNamespace()));
   }
 }
