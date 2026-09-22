@@ -8,6 +8,21 @@ import net.minecraft.resources.ResourceLocation;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
+/**
+ * Patches TFC Healthy Diet ({@code tfc:world/fruit}).
+ * <p>
+ * This advancement is <em>not</em> inventory-based: TFC uses {@code minecraft:consume_item} with
+ * a single {@code item} predicate pointing at {@code .../food/{name}}. Addon patches must use
+ * {@link InventoryCollectionAdvancementPatch#patchConsume} so triggers stay compatible; inventory
+ * criteria would never complete here.
+ * <p>
+ * Qualifying content is raw (or normally eaten) tree fruit and bush berries — the same category
+ * as TFC’s {@code tfc:food/*} fruit entries. Exclude vegetables, mushrooms, meat, drinks,
+ * inedible recipe intermediates ({@code raw_*}, dough, jam, preserves, jarred goods), and
+ * anything where eating is not the intended player action. Prefer {@code exactPath} on {@code
+ * food/...} ids: a wide {@code food/} prefix almost always pulls in non-fruit items from the same
+ * namespace.
+ */
 public final class HealthyDietAdvancementPatch {
 
   public static final ResourceLocation ADVANCEMENT =

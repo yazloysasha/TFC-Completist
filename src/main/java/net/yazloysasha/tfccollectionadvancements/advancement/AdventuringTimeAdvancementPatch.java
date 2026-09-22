@@ -12,6 +12,19 @@ import net.minecraft.world.level.biome.Biome;
 import net.yazloysasha.tfccollectionadvancements.util.BiomeCollectionAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.util.BiomeCollectionSource;
 
+/**
+ * Patches TFC Adventuring Time ({@code tfc:world/adventuring_time}).
+ * <p>
+ * Vanilla rows use {@code minecraft:location} with a biome id in the predicate — visit every
+ * listed TFC overworld biome once. Addon patches extend that checklist with extra biomes the
+ * player should discover in the same playthrough, using the same trigger shape via {@link
+ * BiomeCollectionAdvancementPatch}.
+ * <p>
+ * {@link BiomeCollectionSource} selects biomes by mod namespace, optional biome id namespace
+ * filter, and a biome tag (for example nether-tagged ids when a dimension reuses vanilla biome
+ * names). Sources are skipped when the addon is not loaded. Do not add item criteria here;
+ * biome ids must resolve from datapacks at reload time.
+ */
 public final class AdventuringTimeAdvancementPatch {
 
   public static final ResourceLocation ADVANCEMENT =
