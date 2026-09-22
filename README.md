@@ -4,7 +4,7 @@ A simple mod that adds items from addons to TerraFirmaCraft collection advanceme
 | -------------------------------- | ------------------------------ |
 | ![Before](public/img/before.png) | ![After](public/img/after.png) |
 
-## Collection advancements and compatibility:
+Collection advancements and compatibility:
 
 - True Farmer (none)
 - Arborist (ArborFirmaCraft, Beneath)
