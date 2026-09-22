@@ -7,6 +7,10 @@ public final class AddonNamespaces {
 
   private AddonNamespaces() {}
 
+  public static boolean isAddon(String namespace) {
+    return !"tfc".equals(namespace) && !"minecraft".equals(namespace);
+  }
+
   public static boolean isPresent(
     HolderLookup.Provider registries,
     String namespace

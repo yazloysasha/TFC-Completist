@@ -22,24 +22,6 @@ license = "MIT"
     side = "BOTH"
 
 [[dependencies.${modId}]]
-    modId = "afc"
-    type = "optional"
-    ordering = "AFTER"
-    side = "BOTH"
-
-[[dependencies.${modId}]]
-    modId = "beneath"
-    type = "optional"
-    ordering = "AFTER"
-    side = "BOTH"
-
-[[dependencies.${modId}]]
-    modId = "firmalife"
-    type = "optional"
-    ordering = "AFTER"
-    side = "BOTH"
-
-[[dependencies.${modId}]]
     modId = "neoforge"
     type = "required"
     versionRange = "${neoForgeVersionRange}"

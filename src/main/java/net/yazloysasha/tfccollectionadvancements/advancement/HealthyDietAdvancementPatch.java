@@ -5,23 +5,21 @@ import java.util.List;
 import java.util.Map;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.common.Tags;
+import net.yazloysasha.tfccollectionadvancements.util.AdvancementCriterionBuilder;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
+import net.yazloysasha.tfccollectionadvancements.util.SeasonalFruitItems;
 
 /**
  * Patches TFC Healthy Diet ({@code tfc:world/fruit}).
  * <p>
- * This advancement is <em>not</em> inventory-based: TFC uses {@code minecraft:consume_item} with
- * a single {@code item} predicate pointing at {@code .../food/{name}}. Addon patches must use
- * {@link InventoryCollectionAdvancementPatch#patchConsume} so triggers stay compatible; inventory
- * criteria would never complete here.
+ * Base TFC uses {@code minecraft:consume_item}. Addon rows stay on that trigger
+ * via {@link InventoryCollectionAdvancementPatch#patchConsume}.
  * <p>
- * Qualifying content is raw (or normally eaten) tree fruit and bush berries — the same category
- * as TFC’s {@code tfc:food/*} fruit entries. Exclude vegetables, mushrooms, meat, drinks,
- * inedible recipe intermediates ({@code raw_*}, dough, jam, preserves, jarred goods), and
- * anything where eating is not the intended player action. Prefer {@code exactPath} on {@code
- * food/...} ids: a wide {@code food/} prefix almost always pulls in non-fruit items from the same
- * namespace.
+ * New fruits are discovered from {@code c:foods/fruit} plus TFC-style berry
+ * bush / fruit tree products (so untagged berries such as nightshade still
+ * count). TFC’s own items are left to the original advancement.
  */
 public final class HealthyDietAdvancementPatch {
 
@@ -29,16 +27,7 @@ public final class HealthyDietAdvancementPatch {
     ResourceLocation.fromNamespaceAndPath("tfc", "world/fruit");
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    new InventoryCollectionSource("firmalife", "food/fig", null, true),
-    new InventoryCollectionSource(
-      "firmalife",
-      "food/nightshade_berry",
-      null,
-      true
-    ),
-    new InventoryCollectionSource("firmalife", "food/pineapple", null, true),
-    new InventoryCollectionSource("firmalife", "food/red_grapes", null, true),
-    new InventoryCollectionSource("firmalife", "food/white_grapes", null, true)
+    InventoryCollectionSource.addonTag(Tags.Items.FOODS_FRUIT)
   );
 
   private HealthyDietAdvancementPatch() {}
@@ -52,6 +41,12 @@ public final class HealthyDietAdvancementPatch {
       advancements,
       registries,
       SOURCES
+    );
+    InventoryCollectionAdvancementPatch.addItems(
+      ADVANCEMENT,
+      advancements,
+      SeasonalFruitItems.collectAddonProducts(registries),
+      AdvancementCriterionBuilder::consumeItem
     );
   }
 }

@@ -82,7 +82,7 @@ public final class InventoryCollectionAdvancementPatch {
           "Extended {} with {} {} item criteria",
           advancementId,
           added,
-          source.namespace()
+          source.displayNamespace()
         );
       }
     }
@@ -97,19 +97,17 @@ public final class InventoryCollectionAdvancementPatch {
   ) {
     int added = 0;
     for (var holder : items) {
-      ResourceLocation itemId = holder.getKey().location();
-      if (!source.namespace().equals(itemId.getNamespace())) {
-        continue;
-      }
-      if (!source.matchesItemPath(itemId.getPath())) {
+      if (!source.matches(holder)) {
         continue;
       }
 
+      ResourceLocation itemId = holder.getKey().location();
       String criterionSuffix = criterionSuffix(
         itemId.getPath(),
         source.pathPrefix()
       );
-      String criterionName = source.criterionPrefix() + criterionSuffix;
+      String criterionName =
+        source.criterionPrefix(itemId.getNamespace()) + criterionSuffix;
       if (criteria.has(criterionName)) {
         continue;
       }
@@ -125,7 +123,55 @@ public final class InventoryCollectionAdvancementPatch {
     return added;
   }
 
+  public static void addItems(
+    ResourceLocation advancementId,
+    Map<ResourceLocation, JsonElement> advancements,
+    Iterable<ResourceLocation> itemIds,
+    Function<ResourceLocation, JsonObject> criterionFactory
+  ) {
+    JsonElement advancementElement = advancements.get(advancementId);
+    if (advancementElement == null || !advancementElement.isJsonObject()) {
+      return;
+    }
+
+    JsonObject root = advancementElement.getAsJsonObject();
+    JsonObject criteria = root.getAsJsonObject("criteria");
+    JsonArray requirements = root.getAsJsonArray("requirements");
+    if (criteria == null || requirements == null) {
+      return;
+    }
+
+    int added = 0;
+    for (ResourceLocation itemId : itemIds) {
+      String criterionName =
+        itemId.getNamespace() +
+        "_" +
+        itemId.getPath().substring(itemId.getPath().lastIndexOf('/') + 1);
+      if (criteria.has(criterionName)) {
+        continue;
+      }
+
+      AdvancementCriterionBuilder.addAndRequire(
+        criteria,
+        requirements,
+        criterionName,
+        criterionFactory.apply(itemId)
+      );
+      added++;
+    }
+    if (added > 0) {
+      TFCCollectionAdvancements.LOGGER.info(
+        "Extended {} with {} addon plant fruit criteria",
+        advancementId,
+        added
+      );
+    }
+  }
+
   private static String criterionSuffix(String path, String pathPrefix) {
+    if (pathPrefix == null || pathPrefix.isEmpty()) {
+      return path.substring(path.lastIndexOf('/') + 1);
+    }
     String remainder;
     if (path.length() == pathPrefix.length()) {
       remainder = path.substring(path.lastIndexOf('/') + 1);

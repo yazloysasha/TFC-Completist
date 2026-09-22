@@ -5,33 +5,25 @@ import java.util.List;
 import java.util.Map;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.common.Tags;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Patches TFC True Farmer ({@code tfc:world/all_crops}), the full seed checklist after {@code
- * tfc:world/seeds}.
+ * Patches TFC True Farmer ({@code tfc:world/all_crops}).
  * <p>
- * Base criteria are {@code minecraft:inventory_changed}, one distinct {@code .../seeds/{crop}} item
- * per row in the advancement — the same id pattern TFC uses for farm crops, not “anything
- * plantable”. Obtaining the item counts; how the crop is planted in the addon (farmland, planter,
- * trellis, etc.) is irrelevant to the trigger.
- * <p>
- * Include addon crops that ship a dedicated seed item under {@code seeds/...}. Do not fold in tree
- * saplings, forage bushes, ore, or processed food. A broad {@code seeds/} prefix is appropriate
- * when every matching item in that namespace is meant to be an extra row in this checklist; use
- * {@code exactPath} when only specific ids qualify.
+ * Pulls every addon seed that follows TFC’s {@code seeds/...} id layout or is
+ * tagged {@code c:seeds}. A newly added crop from any loaded addon is picked up
+ * on advancement reload without a hardcoded item list.
  */
 public final class TrueFarmerAdvancementPatch {
 
   public static final ResourceLocation ADVANCEMENT =
     ResourceLocation.fromNamespaceAndPath("tfc", "world/all_crops");
 
-  private static final String SEEDS_PATH_PREFIX = "seeds/";
-
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    new InventoryCollectionSource("beneath", SEEDS_PATH_PREFIX),
-    new InventoryCollectionSource("firmalife", SEEDS_PATH_PREFIX)
+    InventoryCollectionSource.anyAddon("seeds/"),
+    InventoryCollectionSource.addonTag(Tags.Items.SEEDS)
   );
 
   private TrueFarmerAdvancementPatch() {}

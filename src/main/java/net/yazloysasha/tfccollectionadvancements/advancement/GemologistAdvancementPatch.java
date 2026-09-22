@@ -9,16 +9,21 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvance
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Patches TFC Gemologist ({@code tfc:world/gemologist}), parent of {@link
- * MinerologistAdvancementPatch} in the world tab. Base criteria are {@code
- * minecraft:inventory_changed} on each {@code tfc:ore/...} gem ore. Add addon gem ores here.
+ * Patches TFC Gemologist ({@code tfc:world/gemologist}).
+ * <p>
+ * Collects addon-held gem ore pieces ({@code ore/{name}}) when a matching
+ * {@code gem/{name}} item exists in that addon or in TFC. World ore blocks
+ * that drop an existing TFC gem are skipped — the TFC criterion already
+ * covers the drop.
  */
 public final class GemologistAdvancementPatch {
 
   public static final ResourceLocation ADVANCEMENT =
     ResourceLocation.fromNamespaceAndPath("tfc", "world/gemologist");
 
-  private static final List<InventoryCollectionSource> SOURCES = List.of();
+  private static final List<InventoryCollectionSource> SOURCES = List.of(
+    InventoryCollectionSource.addonOrePieces(true)
+  );
 
   private GemologistAdvancementPatch() {}
 

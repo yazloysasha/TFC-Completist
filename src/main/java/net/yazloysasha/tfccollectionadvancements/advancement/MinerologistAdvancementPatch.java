@@ -9,11 +9,12 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvance
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Patches TFC Minerologist ({@code tfc:world/minerologist}), child of {@link
- * GemologistAdvancementPatch} in the world tab. Base criteria are {@code
- * minecraft:inventory_changed} on non-metal mineral ores ({@code tfc:ore/...}). Smelted metals belong
- * under {@link MetallurgistAdvancementPatch}. Use {@code exactPath} when a prefix would also match
- * graded or block-item variants; see {@link InventoryCollectionSource#exactPath()}.
+ * Patches TFC Minerologist ({@code tfc:world/minerologist}).
+ * <p>
+ * Collects addon-held mineral pieces ({@code ore/{name}} items, not rock-ore
+ * block items or graded metal ores). Unique items such as Beneath cursecoal
+ * that do not use the {@code ore/} prefix are still matched by id. Gems go to
+ * {@link GemologistAdvancementPatch}.
  */
 public final class MinerologistAdvancementPatch {
 
@@ -21,11 +22,8 @@ public final class MinerologistAdvancementPatch {
     ResourceLocation.fromNamespaceAndPath("tfc", "world/minerologist");
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    new InventoryCollectionSource("beneath", "cursecoal"),
-    new InventoryCollectionSource("tfc", "ore/pyrite", null, true),
-    new InventoryCollectionSource("tfc", "ore/ruby", null, true),
-    new InventoryCollectionSource("tfc", "ore/sapphire", null, true),
-    new InventoryCollectionSource("tfc", "ore/topaz", null, true)
+    InventoryCollectionSource.addonOrePieces(false),
+    new InventoryCollectionSource("beneath", "cursecoal")
   );
 
   private MinerologistAdvancementPatch() {}
