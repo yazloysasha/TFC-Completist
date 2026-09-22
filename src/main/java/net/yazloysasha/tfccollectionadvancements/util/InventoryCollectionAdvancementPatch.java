@@ -27,7 +27,7 @@ import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
 public final class InventoryCollectionAdvancementPatch {
 
   private static final String METAL_INGOT_PREFIX = "metal/ingot/";
-  private static final String DOUBLE_INGOT_PREFIX = "metal/double_ingot/";
+  private static final String MOLTEN_METAL_PREFIX = "metal/";
   private static final String COMMON_INGOTS_PATH = "ingots/";
 
   private InventoryCollectionAdvancementPatch() {}
@@ -67,9 +67,9 @@ public final class InventoryCollectionAdvancementPatch {
   }
 
   /**
-   * Discovers metals from double ingots, then adds the matching ingot item.
+   * Discovers metals from molten metal fluids, then adds the matching ingot.
    */
-  public static void patchIngotsFromDoubleIngots(
+  public static void patchIngotsFromMoltenMetals(
     ResourceLocation advancementId,
     Map<ResourceLocation, JsonElement> advancements,
     ResourceManager resourceManager,
@@ -93,12 +93,10 @@ public final class InventoryCollectionAdvancementPatch {
       .lookupOrThrow(Registries.ITEM)
       .listElements()
       .toList();
-    Map<ResourceLocation, Collection<ResourceLocation>> tags =
+    Map<ResourceLocation, Collection<ResourceLocation>> itemTags =
       ItemTagResolver.loadAll(resourceManager, registries);
 
     Map<String, ResourceLocation> tfcStyleIngots = new LinkedHashMap<>();
-    Map<String, ResourceLocation> doubleIngots = new LinkedHashMap<>();
-
     for (var holder : items) {
       ResourceLocation itemId = holder.getKey().location();
       if (!AddonNamespaces.isDiscoverable(itemId.getNamespace())) {
@@ -111,40 +109,34 @@ public final class InventoryCollectionAdvancementPatch {
           path.substring(METAL_INGOT_PREFIX.length()),
           itemId
         );
-      } else if (matchesPathPrefix(path, DOUBLE_INGOT_PREFIX)) {
-        putMetalItem(
-          doubleIngots,
-          path.substring(DOUBLE_INGOT_PREFIX.length()),
-          itemId
-        );
       }
     }
 
-    Collection<ResourceLocation> taggedDoubleIngots = tags.get(
-      TFCTags.Items.DOUBLE_INGOTS.location()
-    );
-    if (taggedDoubleIngots != null) {
-      for (ResourceLocation itemId : taggedDoubleIngots) {
-        if (!AddonNamespaces.isDiscoverable(itemId.getNamespace())) {
-          continue;
-        }
-        putMetalItem(doubleIngots, metalNameFromDoubleIngot(itemId), itemId);
+    Set<String> metals = new LinkedHashSet<>();
+    for (ResourceLocation fluidId : FluidTagResolver.resolve(
+      resourceManager,
+      registries,
+      TFCTags.Fluids.MOLTEN_METALS
+    )) {
+      if (!AddonNamespaces.isDiscoverable(fluidId.getNamespace())) {
+        continue;
+      }
+      String metal = metalNameFromMoltenFluid(fluidId);
+      if (metal != null) {
+        metals.add(metal);
       }
     }
 
     int added = 0;
-    for (Map.Entry<String, ResourceLocation> entry : doubleIngots.entrySet()) {
-      String metal = entry.getKey();
-      if (metal.isEmpty()) {
-        continue;
-      }
-
+    for (String metal : metals) {
       ResourceLocation ingotId = resolveIngotForMetal(
         metal,
         tfcStyleIngots,
-        tags,
-        entry.getValue()
+        itemTags
       );
+      if (ingotId == null) {
+        continue;
+      }
       String criterionName = metalCriterionName(ingotId, metal);
       if (criteria.has(criterionName)) {
         continue;
@@ -162,7 +154,7 @@ public final class InventoryCollectionAdvancementPatch {
     if (added > 0) {
       CollectionAdvancementDeduplicator.deduplicate(root);
       TFCCollectionAdvancements.LOGGER.info(
-        "Extended {} with {} double-ingot metal criteria",
+        "Extended {} with {} molten-metal ingot criteria",
         advancementId,
         added
       );
@@ -184,8 +176,7 @@ public final class InventoryCollectionAdvancementPatch {
   private static ResourceLocation resolveIngotForMetal(
     String metal,
     Map<String, ResourceLocation> tfcStyleIngots,
-    Map<ResourceLocation, Collection<ResourceLocation>> tags,
-    ResourceLocation doubleIngotId
+    Map<ResourceLocation, Collection<ResourceLocation>> tags
   ) {
     ResourceLocation tfcStyle = tfcStyleIngots.get(metal);
     if (tfcStyle != null) {
@@ -213,15 +204,17 @@ public final class InventoryCollectionAdvancementPatch {
       }
     }
 
-    return doubleIngotId;
+    return null;
   }
 
-  private static String metalNameFromDoubleIngot(ResourceLocation itemId) {
-    String path = itemId.getPath();
-    if (matchesPathPrefix(path, DOUBLE_INGOT_PREFIX)) {
-      return path.substring(DOUBLE_INGOT_PREFIX.length());
+  /** {@code tfc:molten_metals} lists source fluids as {@code {ns}:metal/{name}}. */
+  private static String metalNameFromMoltenFluid(ResourceLocation fluidId) {
+    String path = fluidId.getPath();
+    if (!matchesPathPrefix(path, MOLTEN_METAL_PREFIX)) {
+      return null;
     }
-    return path.substring(path.lastIndexOf('/') + 1);
+    String metal = path.substring(MOLTEN_METAL_PREFIX.length());
+    return metal.isEmpty() || metal.indexOf('/') >= 0 ? null : metal;
   }
 
   private static String metalCriterionName(

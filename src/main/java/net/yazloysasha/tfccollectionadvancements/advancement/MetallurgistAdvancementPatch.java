@@ -10,8 +10,9 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvance
 /**
  * Patches TFC Metallurgist ({@code tfc:world/metallurgist}).
  * <p>
- * A TFC metal is anything that can be a double ingot. The criterion item is the
- * matching ingot from {@code metal/ingot/{metal}} or {@code c:ingots/{metal}}.
+ * A TFC metal is anything in {@code tfc:molten_metals}. The criterion is the
+ * matching ingot from
+ * {@code metal/ingot/{metal}} or {@code c:ingots/{metal}}.
  */
 public final class MetallurgistAdvancementPatch {
 
@@ -25,7 +26,7 @@ public final class MetallurgistAdvancementPatch {
     ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
-    InventoryCollectionAdvancementPatch.patchIngotsFromDoubleIngots(
+    InventoryCollectionAdvancementPatch.patchIngotsFromMoltenMetals(
       ADVANCEMENT,
       advancements,
       resourceManager,
