@@ -4,7 +4,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 
 public record BiomeCollectionSource(
-  String modId,
+  String namespace,
   String biomeNamespace,
   TagKey<Biome> tag
 ) {

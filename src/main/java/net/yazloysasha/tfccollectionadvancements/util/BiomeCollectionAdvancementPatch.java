@@ -5,12 +5,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import java.util.List;
 import java.util.Map;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.biome.Biome;
-import net.neoforged.fml.ModList;
 import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
 
 public final class BiomeCollectionAdvancementPatch {
@@ -38,19 +35,17 @@ public final class BiomeCollectionAdvancementPatch {
     var biomeRegistry = registries.lookupOrThrow(Registries.BIOME);
 
     for (BiomeCollectionSource source : sources) {
-      if (!ModList.get().isLoaded(source.modId())) {
-        continue;
-      }
-
-      var taggedBiomes = biomeRegistry.get(source.tag());
-      if (taggedBiomes.isEmpty()) {
+      if (!hasAddonItems(registries, source.namespace())) {
         continue;
       }
 
       int added = 0;
-      for (Holder<Biome> holder : taggedBiomes.get()) {
-        ResourceLocation biomeId = holder.unwrapKey().orElseThrow().location();
+      for (var holder : biomeRegistry.listElements().toList()) {
+        ResourceLocation biomeId = holder.getKey().location();
         if (!source.biomeNamespace().equals(biomeId.getNamespace())) {
+          continue;
+        }
+        if (!holder.is(source.tag())) {
           continue;
         }
 
@@ -73,9 +68,19 @@ public final class BiomeCollectionAdvancementPatch {
           "Extended {} with {} {} biome criteria",
           advancementId,
           added,
-          source.modId()
+          source.namespace()
         );
       }
     }
+  }
+
+  private static boolean hasAddonItems(
+    HolderLookup.Provider registries,
+    String namespace
+  ) {
+    return registries
+      .lookupOrThrow(Registries.ITEM)
+      .listElementIds()
+      .anyMatch(id -> namespace.equals(id.location().getNamespace()));
   }
 }
