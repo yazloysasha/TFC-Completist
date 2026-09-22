@@ -87,6 +87,8 @@ public final class InventoryCollectionAdvancementPatch {
       )
       : Set.of();
 
+    CollectionAdvancementDeduplicator.deduplicate(root);
+
     for (InventoryCollectionSource source : sources) {
       Set<ResourceLocation> tagMembers = source.tag() == null
         ? Set.of()
@@ -109,6 +111,8 @@ public final class InventoryCollectionAdvancementPatch {
         );
       }
     }
+
+    CollectionAdvancementDeduplicator.deduplicate(root);
   }
 
   private static int patchSource(

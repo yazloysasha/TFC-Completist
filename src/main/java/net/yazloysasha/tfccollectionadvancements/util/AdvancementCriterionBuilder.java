@@ -68,6 +68,14 @@ public final class AdvancementCriterionBuilder {
     JsonObject criterion
   ) {
     criteria.add(criterionName, criterion);
+    if (
+      CollectionAdvancementDeduplicator.requirementsInclude(
+        requirements,
+        criterionName
+      )
+    ) {
+      return;
+    }
     JsonArray requirement = new JsonArray();
     requirement.add(criterionName);
     requirements.add(requirement);

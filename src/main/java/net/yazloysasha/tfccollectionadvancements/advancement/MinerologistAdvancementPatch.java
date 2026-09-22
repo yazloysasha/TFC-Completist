@@ -13,10 +13,11 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
  * Patches TFC Minerologist ({@code tfc:world/minerologist}).
  * <p>
  * TFC description is every non-metal mineral. That includes gems; the JSON list
- * {@code ALL_MINERALS} omits pyrite, ruby, sapphire, and topaz. Missing TFC
- * pieces are filled from held {@code ore/{name}} items that are not metal ores,
- * not from a hardcoded gem list. Addon minerals and items such as Beneath
- * cursecoal are included the same way.
+ * {@code ALL_MINERALS} omits pyrite, ruby, sapphire, and topaz and duplicates
+ * {@code sulfur} in {@code requirements}. Missing TFC pieces are filled from
+ * held {@code ore/{name}} items that are not metal ores, not from a hardcoded
+ * gem list; duplicates are removed when the advancement is patched. Addon
+ * minerals and items such as Beneath cursecoal are included the same way.
  */
 public final class MinerologistAdvancementPatch {
 

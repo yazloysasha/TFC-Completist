@@ -73,5 +73,7 @@ public final class BiomeCollectionAdvancementPatch {
         );
       }
     }
+
+    CollectionAdvancementDeduplicator.deduplicate(root);
   }
 }
