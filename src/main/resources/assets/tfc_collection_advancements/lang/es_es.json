@@ -22,5 +22,9 @@
   "tfc_collection_advancements.advancements.world.orchardist.title": "Fruticultor",
   "tfc_collection_advancements.advancements.world.orchardist.description": "Planta cada brote de árbol frutal de TFC.",
   "tfc_collection_advancements.advancements.world.berry_gardener.title": "Cultivador de bayas",
-  "tfc_collection_advancements.advancements.world.berry_gardener.description": "Planta cada arbusto de bayas de TFC."
+  "tfc_collection_advancements.advancements.world.berry_gardener.description": "Planta cada arbusto de bayas de TFC.",
+  "tfc_collection_advancements.advancements.world.domestication.title": "Domesticación",
+  "tfc_collection_advancements.advancements.world.domestication.description": "Familiarízate con cada animal posible de TFC.",
+  "tfc_collection_advancements.advancements.world.husbandman.title": "Ganadero",
+  "tfc_collection_advancements.advancements.world.husbandman.description": "Cría cada animal posible de TFC."
 }

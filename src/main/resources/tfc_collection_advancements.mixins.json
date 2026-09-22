@@ -4,7 +4,11 @@
   "package": "net.yazloysasha.tfccollectionadvancements.mixin",
   "compatibilityLevel": "JAVA_21",
   "refmap": "tfc_collection_advancements.refmap.json",
-  "mixins": ["ServerAdvancementManagerMixin", "DrinkableMixin"],
+  "mixins": [
+    "DrinkableMixin",
+    "ServerAdvancementManagerMixin",
+    "TFCAnimalPropertiesMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

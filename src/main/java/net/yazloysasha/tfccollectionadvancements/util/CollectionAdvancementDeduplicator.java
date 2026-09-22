@@ -148,6 +148,11 @@ public final class CollectionAdvancementDeduplicator {
       return "fluid:" + conditions.get("fluid").getAsString();
     }
 
+    String entityId = entityIdFromConditions(conditions);
+    if (entityId != null) {
+      return "entity:" + entityId;
+    }
+
     return null;
   }
 
@@ -200,6 +205,23 @@ public final class CollectionAdvancementDeduplicator {
         if (blocks.isJsonArray() && !blocks.getAsJsonArray().isEmpty()) {
           return blocks.getAsJsonArray().get(0).getAsString();
         }
+      }
+    }
+    return null;
+  }
+
+  private static String entityIdFromConditions(JsonObject conditions) {
+    if (!conditions.has("entity")) {
+      return null;
+    }
+    JsonElement entity = conditions.get("entity");
+    if (entity.isJsonPrimitive()) {
+      return entity.getAsString();
+    }
+    if (entity.isJsonObject()) {
+      JsonElement type = entity.getAsJsonObject().get("type");
+      if (type != null && type.isJsonPrimitive()) {
+        return type.getAsString();
       }
     }
     return null;

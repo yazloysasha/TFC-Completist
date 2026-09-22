@@ -1,0 +1,30 @@
+{
+  "parent": "tfc:world/familiarity",
+  "criteria": {
+    "cow": {
+      "trigger": "tfc:fed_animal",
+      "conditions": {
+        "entity": {
+          "type": "tfc:cow"
+        }
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "tfc:spawn_egg/cow"
+    },
+    "title": {
+      "translate": "tfc_collection_advancements.advancements.world.domestication.title"
+    },
+    "description": {
+      "translate": "tfc_collection_advancements.advancements.world.domestication.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "tfc:textures/block/mud/fluvisol.png"
+  },
+  "requirements": [["cow"]]
+}

@@ -8,6 +8,29 @@ public final class AdvancementCriterionBuilder {
 
   private AdvancementCriterionBuilder() {}
 
+  public static JsonObject bredAnimal(ResourceLocation entityId) {
+    JsonObject conditions = new JsonObject();
+    conditions.addProperty("entity", entityId.toString());
+
+    JsonObject criterion = new JsonObject();
+    criterion.addProperty("trigger", "tfc_collection_advancements:bred_animal");
+    criterion.add("conditions", conditions);
+    return criterion;
+  }
+
+  public static JsonObject fedAnimal(ResourceLocation entityId) {
+    JsonObject entity = new JsonObject();
+    entity.addProperty("type", entityId.toString());
+
+    JsonObject conditions = new JsonObject();
+    conditions.add("entity", entity);
+
+    JsonObject criterion = new JsonObject();
+    criterion.addProperty("trigger", "tfc:fed_animal");
+    criterion.add("conditions", conditions);
+    return criterion;
+  }
+
   public static JsonObject drinkFluid(ResourceLocation fluidId) {
     JsonObject conditions = new JsonObject();
     conditions.addProperty("fluid", fluidId.toString());

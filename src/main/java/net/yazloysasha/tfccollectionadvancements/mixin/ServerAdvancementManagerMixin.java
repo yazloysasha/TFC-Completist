@@ -10,7 +10,9 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.BerryGardenerAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.ButcherAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.CarnivoreAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.custom.DomesticationAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.GeologistAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.custom.HusbandmanAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.JewelerAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.OrchardistAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.PedologistAdvancement;
@@ -86,7 +88,13 @@ public abstract class ServerAdvancementManagerMixin {
     );
     ButcherAdvancement.patch(advancements, resourceManager, this.registries);
     CarnivoreAdvancement.patch(advancements, resourceManager, this.registries);
+    DomesticationAdvancement.patch(
+      advancements,
+      resourceManager,
+      this.registries
+    );
     GeologistAdvancement.patch(advancements, resourceManager, this.registries);
+    HusbandmanAdvancement.patch(advancements, resourceManager, this.registries);
     JewelerAdvancement.patch(advancements, resourceManager, this.registries);
     OrchardistAdvancement.patch(advancements, resourceManager, this.registries);
     PedologistAdvancement.patch(advancements, resourceManager, this.registries);

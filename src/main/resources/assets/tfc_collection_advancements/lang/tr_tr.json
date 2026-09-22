@@ -22,5 +22,9 @@
   "tfc_collection_advancements.advancements.world.orchardist.title": "Bahçıvan",
   "tfc_collection_advancements.advancements.world.orchardist.description": "TFC'deki her meyve ağacı fidanını dik.",
   "tfc_collection_advancements.advancements.world.berry_gardener.title": "Böğürtlen Bahçıvanı",
-  "tfc_collection_advancements.advancements.world.berry_gardener.description": "TFC'deki her meyve çalısını dik."
+  "tfc_collection_advancements.advancements.world.berry_gardener.description": "TFC'deki her meyve çalısını dik.",
+  "tfc_collection_advancements.advancements.world.domestication.title": "Evcilleştirme",
+  "tfc_collection_advancements.advancements.world.domestication.description": "TFC'deki her mümkün hayvanı evcilleştir.",
+  "tfc_collection_advancements.advancements.world.husbandman.title": "Çiftçi",
+  "tfc_collection_advancements.advancements.world.husbandman.description": "TFC'deki her mümkün hayvanı üret."
 }
