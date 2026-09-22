@@ -15,9 +15,16 @@ license = "MIT"
 
 # Dependencies
 [[dependencies.${modId}]]
+    modId = "tfc"
+    type = "required"
+    versionRange = "${tfcVersionRange}"
+    ordering = "AFTER"
+    side = "BOTH"
+
+[[dependencies.${modId}]]
     modId = "afc"
     type = "required"
-    versionRange = "${afcVersionRange}"
+    versionRange = "[0,)"
     ordering = "AFTER"
     side = "BOTH"
 

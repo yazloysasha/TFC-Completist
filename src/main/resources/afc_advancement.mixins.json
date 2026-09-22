@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.yazloysasha.afcadvancement.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "afc_advancement.refmap.json",
+  "mixins": ["ServerAdvancementManagerMixin"],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -4,9 +4,8 @@ plugins {
 
 val minecraftVersion: String = "1.21.1"
 val neoForgeVersion: String = "21.1.234"
-val patchouliVersion: String = "1.21.1-92-NEOFORGE"
-val minAfcVersion: String = "2.0.0"
-val afcFileId: String = "8722148"
+val minTfcVersion: String = "4.2.0"
+val maxTfcVersion: String = "4.2.10"
 
 val modId: String = "afc_advancement"
 val modVersion: String = System.getenv("VERSION") ?: "0.0.0-indev"
@@ -18,7 +17,7 @@ val generateModMetadata = tasks.register<ProcessResources>("generateModMetadata"
     "modVersion" to modVersion,
     "minecraftVersionRange" to "[$minecraftVersion]",
     "neoForgeVersionRange" to "[$neoForgeVersion,)",
-    "afcVersionRange" to "[$minAfcVersion,)",
+    "tfcVersionRange" to "[$minTfcVersion,)",
   )
   inputs.properties(modReplacementProperties)
   expand(modReplacementProperties)
@@ -42,25 +41,19 @@ java {
 
 repositories {
   mavenCentral()
-  mavenLocal()
-  exclusiveContent {
-    forRepository { maven("https://maven.blamejared.com") }
-    filter { includeGroup("vazkii.patchouli") }
-  }
-  exclusiveContent {
-    forRepository { maven("https://cursemaven.com") }
-    filter { includeGroup("curse.maven") }
+  ivy {
+    url = uri("https://github.com/TerraFirmaCraft/TerraFirmaCraft/releases/download")
+    patternLayout {
+      artifact("/v[revision]/[artifact]-[revision].[ext]")
+    }
+    metadataSources {
+      artifact()
+    }
   }
 }
 
 sourceSets {
-  create("stub") {
-    java.srcDirs("src/stub/auroras/java")
-    compileClasspath += sourceSets["main"].compileClasspath
-  }
-
   main {
-    compileClasspath += sourceSets["stub"].output
     resources {
       srcDir(generateModMetadata)
     }
@@ -91,53 +84,21 @@ neoForge {
     }
   }
 
-  unitTest {
-    enable()
-    testedMod = mods[modId]
-  }
-
   ideSyncTask(generateModMetadata)
 }
 
 dependencies {
-  compileOnly("curse.maven:arborfirmacraft-877545:$afcFileId")
-
-  testImplementation("curse.maven:arborfirmacraft-877545:$afcFileId")
-  testImplementation("org.junit.jupiter:junit-jupiter:5.10.3")
-  testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.10.3")
-  testImplementation("vazkii.patchouli:Patchouli:$patchouliVersion")
+  compileOnly("net.dries007.tfc:TerraFirmaCraft-NeoForge-$minecraftVersion:$maxTfcVersion@jar")
 }
 
 tasks {
   jar {
-    exclude("auroras/**")
     manifest {
       attributes["Implementation-Version"] = project.version
     }
   }
 
-  named<JavaCompile>("compileJava") {
-    dependsOn("compileStubJava")
-  }
-
   named("neoForgeIdeSync") {
     dependsOn(generateModMetadata)
-  }
-
-  test {
-    useJUnitPlatform()
-    if (project.hasProperty("continuousBiomeCoverage")) {
-      systemProperty("continuousBiomeCoverage", "true")
-    }
-    maxHeapSize = "4g"
-    minHeapSize = "1g"
-    outputs.upToDateWhen { false }
-    testLogging {
-      events("failed", "standardError", "standardOut")
-      exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
-      showCauses = true
-      showExceptions = true
-      showStackTraces = true
-    }
   }
 }
