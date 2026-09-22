@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.neoforged.neoforge.common.Tags;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
@@ -15,8 +16,8 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
  * Base TFC uses {@code minecraft:consume_item}. Its JSON list is hand-maintained
  * and misses entries (for example {@code melon_slice} is fruit in {@code
  * c:foods/fruit} but not in the advancement). We add every {@code tfc} and addon
- * item in {@code c:foods/fruit} that is not already a criterion — one tag, no
- * special cases.
+ * item in {@code c:foods/fruit} that is not already a criterion. Item tags are
+ * read from datapacks at advancement reload (holders are not tagged yet).
  */
 public final class HealthyDietAdvancementPatch {
 
@@ -31,11 +32,13 @@ public final class HealthyDietAdvancementPatch {
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,
+    ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
     InventoryCollectionAdvancementPatch.patchConsume(
       ADVANCEMENT,
       advancements,
+      resourceManager,
       registries,
       SOURCES
     );

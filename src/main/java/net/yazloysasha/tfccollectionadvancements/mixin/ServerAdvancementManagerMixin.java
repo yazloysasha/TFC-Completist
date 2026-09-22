@@ -41,12 +41,40 @@ public abstract class ServerAdvancementManagerMixin {
       resourceManager,
       this.registries
     );
-    ArboristAdvancementPatch.patch(advancements, this.registries);
-    GemologistAdvancementPatch.patch(advancements, this.registries);
-    GoneFishingAdvancementPatch.patch(advancements, this.registries);
-    HealthyDietAdvancementPatch.patch(advancements, this.registries);
-    MetallurgistAdvancementPatch.patch(advancements, this.registries);
-    MinerologistAdvancementPatch.patch(advancements, this.registries);
-    TrueFarmerAdvancementPatch.patch(advancements, this.registries);
+    ArboristAdvancementPatch.patch(
+      advancements,
+      resourceManager,
+      this.registries
+    );
+    GemologistAdvancementPatch.patch(
+      advancements,
+      resourceManager,
+      this.registries
+    );
+    GoneFishingAdvancementPatch.patch(
+      advancements,
+      resourceManager,
+      this.registries
+    );
+    HealthyDietAdvancementPatch.patch(
+      advancements,
+      resourceManager,
+      this.registries
+    );
+    MetallurgistAdvancementPatch.patch(
+      advancements,
+      resourceManager,
+      this.registries
+    );
+    MinerologistAdvancementPatch.patch(
+      advancements,
+      resourceManager,
+      this.registries
+    );
+    TrueFarmerAdvancementPatch.patch(
+      advancements,
+      resourceManager,
+      this.registries
+    );
   }
 }

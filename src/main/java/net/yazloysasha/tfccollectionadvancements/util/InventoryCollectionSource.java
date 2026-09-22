@@ -1,5 +1,6 @@
 package net.yazloysasha.tfccollectionadvancements.util;
 
+import java.util.Set;
 import net.dries007.tfc.common.TFCTags;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -103,12 +104,16 @@ public record InventoryCollectionSource(
     return includeTfc ? "discovered" : "addon";
   }
 
-  public boolean matches(Holder<Item> holder) {
+  public boolean matches(
+    Holder<Item> holder,
+    Set<ResourceLocation> tagMembers,
+    Set<ResourceLocation> metalOres
+  ) {
     var itemId = holder.getKey().location();
     if (!matchesNamespace(itemId.getNamespace())) {
       return false;
     }
-    if (tag != null && !holder.is(tag)) {
+    if (tag != null && !isInTag(itemId, holder, tagMembers)) {
       return false;
     }
     if (!matchesItemPath(itemId.getPath())) {
@@ -117,13 +122,35 @@ public record InventoryCollectionSource(
     if (rejectBlockItems && holder.value() instanceof BlockItem) {
       return false;
     }
-    if (isOrePieceSource() && holder.is(TFCTags.Items.METAL_ORES)) {
+    if (isOrePieceSource() && isMetalOre(itemId, holder, metalOres)) {
       return false;
     }
     if (gemOre != null && hasGemCounterpart(itemId) != gemOre) {
       return false;
     }
     return true;
+  }
+
+  private boolean isInTag(
+    ResourceLocation itemId,
+    Holder<Item> holder,
+    Set<ResourceLocation> tagMembers
+  ) {
+    if (!tagMembers.isEmpty()) {
+      return tagMembers.contains(itemId);
+    }
+    return holder.is(tag);
+  }
+
+  private boolean isMetalOre(
+    ResourceLocation itemId,
+    Holder<Item> holder,
+    Set<ResourceLocation> metalOres
+  ) {
+    if (!metalOres.isEmpty()) {
+      return metalOres.contains(itemId);
+    }
+    return holder.is(TFCTags.Items.METAL_ORES);
   }
 
   public boolean matchesNamespace(String itemNamespace) {

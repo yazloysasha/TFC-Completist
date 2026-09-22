@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancementPatch;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
@@ -27,11 +28,13 @@ public final class ArboristAdvancementPatch {
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,
+    ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
     InventoryCollectionAdvancementPatch.patch(
       ADVANCEMENT,
       advancements,
+      resourceManager,
       registries,
       SOURCES
     );
