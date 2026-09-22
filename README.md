@@ -1,4 +1,4 @@
-A simple mod that adds all trees from ArborFirmaCraft to the sapling-finding advancement.
+A simple mod that adds all trees from ArborFirmaCraft / Beneath to the sapling-finding advancement.
 
 | Before                           | After                          |
 | -------------------------------- | ------------------------------ |
