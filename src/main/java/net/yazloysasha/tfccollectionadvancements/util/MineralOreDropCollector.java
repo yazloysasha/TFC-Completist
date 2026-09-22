@@ -43,27 +43,27 @@ public final class MineralOreDropCollector {
     ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
-    Set<ResourceLocation> prospectable = BlockTagResolver.resolve(
+    Set<ResourceLocation> prospectable = RegistryTagResolver.resolveSet(
       resourceManager,
       registries,
       TFCTags.Blocks.PROSPECTABLE
     );
-    Set<ResourceLocation> metalOres = ItemTagResolver.resolve(
+    Set<ResourceLocation> metalOres = RegistryTagResolver.resolveSet(
       resourceManager,
       registries,
       TFCTags.Items.METAL_ORES
     );
-    Set<ResourceLocation> smallOrePieces = ItemTagResolver.resolve(
+    Set<ResourceLocation> smallOrePieces = RegistryTagResolver.resolveSet(
       resourceManager,
       registries,
       TFCTags.Items.SMALL_ORE_PIECES
     );
-    Set<ResourceLocation> orePieces = ItemTagResolver.resolve(
+    Set<ResourceLocation> orePieces = RegistryTagResolver.resolveSet(
       resourceManager,
       registries,
       TFCTags.Items.ORE_PIECES
     );
-    Set<ResourceLocation> rawMaterials = ItemTagResolver.resolve(
+    Set<ResourceLocation> rawMaterials = RegistryTagResolver.resolveSet(
       resourceManager,
       registries,
       RAW_MATERIALS

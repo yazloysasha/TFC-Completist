@@ -94,7 +94,7 @@ public final class InventoryCollectionAdvancementPatch {
       .listElements()
       .toList();
     Map<ResourceLocation, Collection<ResourceLocation>> itemTags =
-      ItemTagResolver.loadAll(resourceManager, registries);
+      RegistryTagResolver.loadAll(resourceManager, registries, Registries.ITEM);
 
     Map<String, ResourceLocation> tfcStyleIngots = new LinkedHashMap<>();
     for (var holder : items) {
@@ -113,7 +113,7 @@ public final class InventoryCollectionAdvancementPatch {
     }
 
     Set<String> metals = new LinkedHashSet<>();
-    for (ResourceLocation fluidId : FluidTagResolver.resolve(
+    for (ResourceLocation fluidId : RegistryTagResolver.resolveSet(
       resourceManager,
       registries,
       TFCTags.Fluids.MOLTEN_METALS
@@ -284,7 +284,7 @@ public final class InventoryCollectionAdvancementPatch {
       .stream()
       .anyMatch(source -> source.rejectBlockItems() || source.gemOre() != null);
     Set<ResourceLocation> metalOres = needsMetalOres
-      ? ItemTagResolver.resolve(
+      ? RegistryTagResolver.resolveSet(
         resourceManager,
         registries,
         TFCTags.Items.METAL_ORES
@@ -326,24 +326,18 @@ public final class InventoryCollectionAdvancementPatch {
     requirements = root.getAsJsonArray("requirements");
 
     for (InventoryCollectionSource source : sources) {
-      Set<ResourceLocation> tagMembers =
-        switch (source.collectedItems()) {
-          case TFC_FARMLAND_SEEDS -> tfcFarmlandSeeds;
-          case MINERAL_ORE_DROPS -> mineralOreDrops;
-          case NONE -> source.tag() == null
-            ? Set.of()
-            : ItemTagResolver.resolve(
-              resourceManager,
-              registries,
-              source.tag()
-            );
-        };
       int added = patchSource(
         criteria,
         requirements,
         items,
         source,
-        tagMembers,
+        tagMembersForSource(
+          source,
+          resourceManager,
+          registries,
+          mineralOreDrops,
+          tfcFarmlandSeeds
+        ),
         metalOres,
         criterionFactory
       );
@@ -371,18 +365,13 @@ public final class InventoryCollectionAdvancementPatch {
   ) {
     Set<String> criterionNames = new HashSet<>();
     for (InventoryCollectionSource source : sources) {
-      Set<ResourceLocation> tagMembers =
-        switch (source.collectedItems()) {
-          case TFC_FARMLAND_SEEDS -> tfcFarmlandSeeds;
-          case MINERAL_ORE_DROPS -> mineralOreDrops;
-          case NONE -> source.tag() == null
-            ? Set.of()
-            : ItemTagResolver.resolve(
-              resourceManager,
-              registries,
-              source.tag()
-            );
-        };
+      Set<ResourceLocation> tagMembers = tagMembersForSource(
+        source,
+        resourceManager,
+        registries,
+        mineralOreDrops,
+        tfcFarmlandSeeds
+      );
       for (var holder : items) {
         if (!source.matches(holder, tagMembers, metalOres)) {
           continue;
@@ -392,6 +381,26 @@ public final class InventoryCollectionAdvancementPatch {
       }
     }
     return criterionNames.size();
+  }
+
+  private static Set<ResourceLocation> tagMembersForSource(
+    InventoryCollectionSource source,
+    ResourceManager resourceManager,
+    HolderLookup.Provider registries,
+    Set<ResourceLocation> mineralOreDrops,
+    Set<ResourceLocation> tfcFarmlandSeeds
+  ) {
+    return switch (source.collectedItems()) {
+      case TFC_FARMLAND_SEEDS -> tfcFarmlandSeeds;
+      case MINERAL_ORE_DROPS -> mineralOreDrops;
+      case NONE -> source.tag() == null
+        ? Set.of()
+        : RegistryTagResolver.resolveSet(
+          resourceManager,
+          registries,
+          source.tag()
+        );
+    };
   }
 
   private static int patchSource(

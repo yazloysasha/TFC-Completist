@@ -57,27 +57,12 @@ public final class BiomeCollectionAdvancementPatch {
     requirements = root.getAsJsonArray("requirements");
 
     for (BiomeCollectionSource source : sources) {
-      if (
-        source.namespace() != null &&
-        !AddonNamespaces.isPresent(registries, source.namespace())
-      ) {
-        continue;
-      }
-
-      List<ResourceLocation> biomeIds = source.tag() == null
-        ? registries
-          .lookupOrThrow(Registries.BIOME)
-          .listElementIds()
-          .map(ResourceKey::location)
-          .toList()
-        : BiomeTagResolver.resolve(resourceManager, registries, source.tag());
-
       int added = 0;
-      for (ResourceLocation biomeId : biomeIds) {
-        if (!matchesBiome(source, biomeId)) {
-          continue;
-        }
-
+      for (ResourceLocation biomeId : matchingBiomes(
+        resourceManager,
+        registries,
+        source
+      )) {
         String criterionName = criterionName(biomeId);
         if (criteria.has(criterionName)) {
           continue;
@@ -112,29 +97,40 @@ public final class BiomeCollectionAdvancementPatch {
   ) {
     Set<String> criterionNames = new HashSet<>();
     for (BiomeCollectionSource source : sources) {
-      if (
-        source.namespace() != null &&
-        !AddonNamespaces.isPresent(registries, source.namespace())
-      ) {
-        continue;
-      }
-
-      List<ResourceLocation> biomeIds = source.tag() == null
-        ? registries
-          .lookupOrThrow(Registries.BIOME)
-          .listElementIds()
-          .map(ResourceKey::location)
-          .toList()
-        : BiomeTagResolver.resolve(resourceManager, registries, source.tag());
-
-      for (ResourceLocation biomeId : biomeIds) {
-        if (!matchesBiome(source, biomeId)) {
-          continue;
-        }
+      for (ResourceLocation biomeId : matchingBiomes(
+        resourceManager,
+        registries,
+        source
+      )) {
         criterionNames.add(criterionName(biomeId));
       }
     }
     return criterionNames.size();
+  }
+
+  private static List<ResourceLocation> matchingBiomes(
+    ResourceManager resourceManager,
+    HolderLookup.Provider registries,
+    BiomeCollectionSource source
+  ) {
+    if (
+      source.namespace() != null &&
+      !AddonNamespaces.isPresent(registries, source.namespace())
+    ) {
+      return List.of();
+    }
+    List<ResourceLocation> biomeIds = source.tag() == null
+      ? registries
+        .lookupOrThrow(Registries.BIOME)
+        .listElementIds()
+        .map(ResourceKey::location)
+        .toList()
+      : RegistryTagResolver.resolveList(
+        resourceManager,
+        registries,
+        source.tag()
+      );
+    return biomeIds.stream().filter(id -> matchesBiome(source, id)).toList();
   }
 
   private static boolean matchesBiome(
