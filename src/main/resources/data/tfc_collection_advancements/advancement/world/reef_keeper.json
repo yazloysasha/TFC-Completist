@@ -1,12 +1,12 @@
 {
   "parent": "tfc:world/root",
   "criteria": {
-    "brain_coral": {
+    "tube_coral": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": "tfc:coral/brain_coral"
+            "items": "tfc:coral/tube_coral"
           }
         ]
       }
@@ -14,7 +14,7 @@
   },
   "display": {
     "icon": {
-      "id": "tfc:coral/brain_coral_fan"
+      "id": "tfc:coral/tube_coral"
     },
     "title": {
       "translate": "tfc_collection_advancements.advancements.world.reef_keeper.title"
@@ -28,5 +28,5 @@
     "hidden": false,
     "background": "tfc:textures/block/mud/fluvisol.png"
   },
-  "requirements": [["brain_coral"]]
+  "requirements": [["tube_coral"]]
 }
