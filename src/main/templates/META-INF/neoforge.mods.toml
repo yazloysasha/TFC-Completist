@@ -8,9 +8,9 @@ license = "MIT"
     modId = "${modId}"
     version = "${modVersion}"
     displayName = "TFC: Completist"
-    credits = "Collection advancements that grow with your TFC addons"
+    credits = "New TFC collection advancements, and the originals finished"
     authors = "yazloysasha"
-    description = '''TerraFirmaCraft collection advancements that grow with your addons. Every means every - plus the collections TFC never wrote.'''
+    description = '''Finally, a TerraFirmaCraft you can finish. New collection advancements - plus the originals, grown with your addons and stripped of their bugs.'''
     displayTest = "MATCH_VERSION"
 
 # Dependencies

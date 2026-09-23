@@ -1,55 +1,57 @@
 # TFC: Completist 🏆
 
-### When "Every" Finally Means Every
+### Finally, a TFC You Can Finish
 
-**TerraFirmaCraft** collection advancements that grow with your addons. 🌾
+TerraFirmaCraft built a whole life: animals to tame, plants to pot, orchards to plant, wines to drink, jams to seal. Then you open the advancements tab and "complete" TFC having never done any of it.
 
-You added ArborFirmaCraft, Firmalife, Beneath. New trees, wines, biomes, metals. Then you opened the tab: **Arborist** still wanted the same saplings. **Healthy Diet** never heard of melon. **Mineralogist** counted sulfur twice.
+**TFC: Completist** is the rest of the list. 🌾
 
-**TFC: Completist** makes _every_ mean every. And adds the collections TFC never wrote.
+**24 new collections:**
 
-| Before                                                                                                                       | After                                                                                                                      |
-| ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| ![Before](https://raw.githubusercontent.com/yazloysasha/TFC-Collection-Advancements/refs/heads/1.21.x/public/img/before.png) | ![After](https://raw.githubusercontent.com/yazloysasha/TFC-Collection-Advancements/refs/heads/1.21.x/public/img/after.png) |
-
-**Fixed & expanded:** Adventuring Time · Arborist · Gemologist · Gone Fishing · Healthy Diet · Metallurgist · Minerologist · True Farmer
-
-**New collections:**
-
-- **Geologist** — every rock
-- **Pedologist** — every soil
-- **Sands of the World** — every sand
-- **Prospector** — every surface nugget
-- **Vagabond** — every groundcover
-- **Reef Keeper** — every coral
-- **Vegetarian** — every fruit and vegetable
-- **Butcher** — every raw meat
-- **Carnivore** — cook and eat every meat
-- **Sea Cook** — cook and eat every seafood
-- **Breakfast, Lunch, and Dinner** — every sandwich, soup, and salad
-- **Sommelier** — drink every alcohol
-- **At Grandma's** — seal every jam
-- **Orchardist** — plant every fruit tree
-- **Berry Gardener** — plant every berry bush
-- **Florist** — pot every plant
-- **Carpenter** — planks of every wood
-- **Stonemason** — bricks of every rock
-- **High Architecture** — mud bricks of every soil
-- **Painter** — glaze every vessel
-- **Jeweler** — every cut gem
 - **Domestication** — familiarize every animal
-- **Husbandman** — breed every animal
+- **Florist** — pot every plant
+- **Sommelier** — drink every alcohol
 - **King of Beasts** — slay every land predator
+- **Orchardist** — plant every fruit tree
+- **At Grandma's** — seal every jam
+- **Husbandman** — breed every animal
+- **Berry Gardener** — plant every berry bush
+- **Carnivore** — cook and eat every meat
+- **Carpenter** — planks of every wood
+- **Breakfast, Lunch, and Dinner** — every sandwich, soup, and salad
+- **Jeweler** — every cut gem
+- **Vegetarian** — every fruit and vegetable
+- **Stonemason** — bricks of every rock
+- **Sea Cook** — cook and eat every seafood
+- **High Architecture** — mud bricks of every soil
+- **Butcher** — every raw meat
+- **Geologist** — every rock
+- **Painter** — glaze every vessel
+- **Pedologist** — every soil
+- **Reef Keeper** — every coral
+- **Prospector** — every surface nugget
+- **Sands of the World** — every sand
+- **Vagabond** — every groundcover
+
+Running addons? The lists grow with them. Firmalife does not just pad True Farmer: its trees join Orchardist, its flowers join Florist, its wines join Sommelier. ArborFirmaCraft fills Arborist and Carpenter. Beneath opens new biomes in Adventuring Time.
+
+| Before                                                                                                          | After                                                                                                         |
+| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| ![Before](https://raw.githubusercontent.com/yazloysasha/TFC-Completist/refs/heads/1.21.x/public/img/before.png) | ![After](https://raw.githubusercontent.com/yazloysasha/TFC-Completist/refs/heads/1.21.x/public/img/after.png) |
+
+The originals are finished too: Adventuring Time, Arborist, Gemologist, Gone Fishing, Healthy Diet, Metallurgist, Minerologist, True Farmer.
+
+And the bugs are gone. **Mineralogist** no longer counts sulfur twice. **Healthy Diet** finally includes melon.
 
 ---
 
 ### 📎 Links
 
-- [Explore GitHub](https://github.com/yazloysasha/TFC-Collection-Advancements)
-- [Create issue](https://github.com/yazloysasha/TFC-Collection-Advancements/issues/new)
+- [Explore GitHub](https://github.com/yazloysasha/TFC-Completist)
+- [Create issue](https://github.com/yazloysasha/TFC-Completist/issues/new)
 
 If you have suggestions or want to report a bug, please create an issue and I will definitely respond.
 
 ---
 
-**TFC asked you to collect everything. This is the mod that lets you.** 🚀
+**TFC asked you to collect everything. This is the rest of the list.** 🚀
