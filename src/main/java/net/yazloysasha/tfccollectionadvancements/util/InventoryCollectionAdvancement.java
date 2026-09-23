@@ -68,6 +68,23 @@ public final class InventoryCollectionAdvancement {
     );
   }
 
+  public static void patchSealedJar(
+    ResourceLocation advancementId,
+    Map<ResourceLocation, JsonElement> advancements,
+    ResourceManager resourceManager,
+    HolderLookup.Provider registries,
+    List<InventoryCollectionSource> sources
+  ) {
+    patch(
+      advancementId,
+      advancements,
+      resourceManager,
+      registries,
+      sources,
+      AdvancementCriterionBuilder::sealJar
+    );
+  }
+
   public static void patchPlacedBlock(
     ResourceLocation advancementId,
     Map<ResourceLocation, JsonElement> advancements,

@@ -21,6 +21,7 @@ import net.yazloysasha.tfccollectionadvancements.util.DrinkFluidTrigger;
 import net.yazloysasha.tfccollectionadvancements.util.EntityCollectionAdvancement;
 import net.yazloysasha.tfccollectionadvancements.util.FamiliarizedAnimalTrigger;
 import net.yazloysasha.tfccollectionadvancements.util.LastFedAnimalTracker;
+import net.yazloysasha.tfccollectionadvancements.util.SealJarTrigger;
 
 public final class TFCCollectionAdvancementTriggers {
 
@@ -48,10 +49,22 @@ public final class TFCCollectionAdvancementTriggers {
     FamiliarizedAnimalTrigger::new
   );
 
+  public static final DeferredHolder<
+    CriterionTrigger<?>,
+    SealJarTrigger
+  > SEAL_JAR = TRIGGERS.register("seal_jar", SealJarTrigger::new);
+
   private TFCCollectionAdvancementTriggers() {}
 
   public static void register(IEventBus modEventBus) {
     TRIGGERS.register(modEventBus);
+  }
+
+  public static void onSealedJar(ServerPlayer player, ResourceLocation itemId) {
+    if (!AddonNamespaces.isDiscoverable(itemId.getNamespace())) {
+      return;
+    }
+    SEAL_JAR.get().trigger(player, itemId);
   }
 
   public static void onDrinkFluid(Player player, Fluid fluid) {

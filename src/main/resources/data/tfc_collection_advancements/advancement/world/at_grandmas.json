@@ -1,12 +1,10 @@
 {
   "parent": "tfc:world/root",
   "criteria": {
-    "strawberry_jam": {
-      "trigger": "minecraft:consume_item",
+    "plum": {
+      "trigger": "tfc_collection_advancements:seal_jar",
       "conditions": {
-        "item": {
-          "items": "tfc:strawberry_jam"
-        }
+        "item": "tfc:jar/plum"
       }
     }
   },
@@ -26,5 +24,5 @@
     "hidden": false,
     "background": "tfc:textures/block/mud/fluvisol.png"
   },
-  "requirements": [["plum_jam"]]
+  "requirements": [["plum"]]
 }

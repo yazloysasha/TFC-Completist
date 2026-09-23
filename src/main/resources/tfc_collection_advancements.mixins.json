@@ -7,6 +7,7 @@
   "mixins": [
     "CommonAnimalBehaviorMixin",
     "DrinkableMixin",
+    "JamPotRecipeJamOutputMixin",
     "PlayerInteractMixin",
     "ServerAdvancementManagerMixin",
     "TFCAnimalPropertiesMixin"

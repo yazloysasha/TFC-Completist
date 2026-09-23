@@ -14,7 +14,8 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 /**
  * Rebuilds At Grandma's ({@code tfc_collection_advancements:world/at_grandmas}).
  * <p>
- * Every {@code tfc} and addon item in {@code #tfc:foods/jam}.
+ * Every discoverable sealed preserve in {@code #tfc:foods/sealed_preserves}.
+ * Criteria fire when the player seals a jar at a pot ({@code JamPotRecipe}).
  */
 public final class AtGrandmasAdvancement {
 
@@ -25,7 +26,7 @@ public final class AtGrandmasAdvancement {
     );
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.discoveredTag(TFCTags.Items.JAM)
+    InventoryCollectionSource.discoveredTag(TFCTags.Items.SEALED_PRESERVES)
   );
 
   private AtGrandmasAdvancement() {}
@@ -35,7 +36,7 @@ public final class AtGrandmasAdvancement {
     ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
-    InventoryCollectionAdvancement.patchConsume(
+    InventoryCollectionAdvancement.patchSealedJar(
       ADVANCEMENT,
       advancements,
       resourceManager,

@@ -31,6 +31,16 @@ public final class AdvancementCriterionBuilder {
     return criterion;
   }
 
+  public static JsonObject sealJar(ResourceLocation itemId) {
+    JsonObject conditions = new JsonObject();
+    conditions.addProperty("item", itemId.toString());
+
+    JsonObject criterion = new JsonObject();
+    criterion.addProperty("trigger", "tfc_collection_advancements:seal_jar");
+    criterion.add("conditions", conditions);
+    return criterion;
+  }
+
   public static JsonObject drinkFluid(ResourceLocation fluidId) {
     JsonObject conditions = new JsonObject();
     conditions.addProperty("fluid", fluidId.toString());
