@@ -285,7 +285,7 @@ public record InventorySource(
       }
     } else if (
       pathPrefix != null &&
-      !InventoryCollections.matchesPathPrefix(path, pathPrefix)
+      !InventoryRebuild.matchesPathPrefix(path, pathPrefix)
     ) {
       return false;
     }
@@ -301,7 +301,7 @@ public record InventorySource(
       return false;
     }
     if (singleSegmentAfterPrefix && pathPrefix != null) {
-      if (!InventoryCollections.matchesPathPrefix(path, pathPrefix)) {
+      if (!InventoryRebuild.matchesPathPrefix(path, pathPrefix)) {
         return false;
       }
       String remainder = path.substring(pathPrefix.length());

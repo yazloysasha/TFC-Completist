@@ -5,9 +5,9 @@ import java.util.Map;
 import java.util.Set;
 import net.minecraft.resources.ResourceLocation;
 
-public final class BlockCollections {
+public final class BlockRebuild {
 
-  private BlockCollections() {}
+  private BlockRebuild() {}
 
   public static void patchItemUsedOnBlocks(
     ResourceLocation advancementId,
@@ -15,15 +15,15 @@ public final class BlockCollections {
     Set<ResourceLocation> blockIds,
     String pathPrefix
   ) {
-    CollectionJson.rebuildIdCriteria(
+    RebuildJson.rebuildIdCriteria(
       advancementId,
       advancements,
       blockIds,
       "potted-plant",
       "potted-plant",
       false,
-      blockId -> InventoryCollections.criterionName(blockId, pathPrefix),
-      CriterionBuilder::itemUsedOnBlock
+      blockId -> InventoryRebuild.criterionName(blockId, pathPrefix),
+      CriterionJson::itemUsedOnBlock
     );
   }
 }

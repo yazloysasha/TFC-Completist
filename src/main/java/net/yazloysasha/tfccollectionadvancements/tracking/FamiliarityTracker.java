@@ -7,21 +7,21 @@ import net.dries007.tfc.common.entities.livestock.TFCAnimalProperties;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.yazloysasha.tfccollectionadvancements.criterion.CollectionCriteria;
+import net.yazloysasha.tfccollectionadvancements.criterion.CollectionTriggers;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Tracks the player in {@code interactOn} and fires familiarized-animal when
  * TFC familiarity crosses the adult cap (or 100% as a child).
  */
-public final class Familiarity {
+public final class FamiliarityTracker {
 
   private static final float EPSILON = 1e-4f;
   private static final ThreadLocal<Player> INTERACTING = new ThreadLocal<>();
   private static final ThreadLocal<Map<Object, Float>> PREVIOUS =
     ThreadLocal.withInitial(IdentityHashMap::new);
 
-  private Familiarity() {}
+  private FamiliarityTracker() {}
 
   public static void set(@Nullable Player player) {
     if (player == null) {
@@ -59,7 +59,7 @@ public final class Familiarity {
     if (!(player() instanceof ServerPlayer serverPlayer)) {
       return;
     }
-    CollectionCriteria.onFamiliarized(serverPlayer, entity);
+    CollectionTriggers.onFamiliarized(serverPlayer, entity);
   }
 
   private static float familiarityCap(TFCAnimalProperties properties) {

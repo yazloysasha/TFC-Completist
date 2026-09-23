@@ -14,12 +14,12 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
-import net.yazloysasha.tfccollectionadvancements.collection.EntityCollections;
+import net.yazloysasha.tfccollectionadvancements.collection.EntityRebuild;
 import net.yazloysasha.tfccollectionadvancements.discover.Namespaces;
 import net.yazloysasha.tfccollectionadvancements.tracking.DrinkFluidTracker;
 import net.yazloysasha.tfccollectionadvancements.tracking.LastFedAnimalTracker;
 
-public final class CollectionCriteria {
+public final class CollectionTriggers {
 
   public static final DeferredRegister<CriterionTrigger<?>> TRIGGERS =
     DeferredRegister.create(
@@ -50,7 +50,7 @@ public final class CollectionCriteria {
     SealJarTrigger
   > SEAL_JAR = TRIGGERS.register("seal_jar", SealJarTrigger::new);
 
-  private CollectionCriteria() {}
+  private CollectionTriggers() {}
 
   public static void register(IEventBus modEventBus) {
     TRIGGERS.register(modEventBus);
@@ -80,7 +80,7 @@ public final class CollectionCriteria {
     if (
       entityId == null ||
       !Namespaces.isDiscoverable(entityId.getNamespace()) ||
-      EntityCollections.isExcludedFromFamiliarization(entityId)
+      EntityRebuild.isExcludedFromFamiliarization(entityId)
     ) {
       return;
     }
@@ -94,7 +94,7 @@ public final class CollectionCriteria {
     if (
       entityId == null ||
       !Namespaces.isDiscoverable(entityId.getNamespace()) ||
-      EntityCollections.isExcludedFromBreeding(entityId)
+      EntityRebuild.isExcludedFromBreeding(entityId)
     ) {
       return;
     }

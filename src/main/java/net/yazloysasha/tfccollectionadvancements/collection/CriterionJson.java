@@ -4,9 +4,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.resources.ResourceLocation;
 
-public final class CriterionBuilder {
+public final class CriterionJson {
 
-  private CriterionBuilder() {}
+  private CriterionJson() {}
 
   public static JsonObject bredAnimal(ResourceLocation entityId) {
     return simpleTrigger(
@@ -169,9 +169,7 @@ public final class CriterionBuilder {
     JsonObject criterion
   ) {
     criteria.add(criterionName, criterion);
-    if (
-      CollectionDeduplicator.requirementsInclude(requirements, criterionName)
-    ) {
+    if (RebuildDeduplicator.requirementsInclude(requirements, criterionName)) {
       return;
     }
     JsonArray requirement = new JsonArray();

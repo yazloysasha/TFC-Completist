@@ -13,9 +13,9 @@ import net.yazloysasha.tfccollectionadvancements.discover.Namespaces;
 /**
  * Shared JSON open/reset/write helpers for rebuilt collection advancements.
  */
-public final class CollectionJson {
+public final class RebuildJson {
 
-  private CollectionJson() {}
+  private RebuildJson() {}
 
   public static JsonObject advancementRootOrNull(
     ResourceLocation advancementId,
@@ -51,7 +51,7 @@ public final class CollectionJson {
     if (RebuildGuard.shouldSkipRebuild(advancementId, resolvedCriteria, kind)) {
       return null;
     }
-    CriterionBuilder.resetCollection(root);
+    CriterionJson.resetCollection(root);
     return root;
   }
 
@@ -94,7 +94,7 @@ public final class CollectionJson {
       if (criterion == null) {
         continue;
       }
-      CriterionBuilder.addAndRequire(criteria, requirements, name, criterion);
+      CriterionJson.addAndRequire(criteria, requirements, name, criterion);
       added++;
     }
     return added;
@@ -106,7 +106,7 @@ public final class CollectionJson {
     int added,
     String kind
   ) {
-    CollectionDeduplicator.deduplicate(root);
+    RebuildDeduplicator.deduplicate(root);
     if (added > 0) {
       TFCCollectionAdvancements.LOGGER.info(
         "Rebuilt {} with {} {} criteria",

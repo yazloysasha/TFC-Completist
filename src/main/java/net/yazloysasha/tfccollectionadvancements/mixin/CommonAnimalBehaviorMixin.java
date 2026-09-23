@@ -2,7 +2,7 @@ package net.yazloysasha.tfccollectionadvancements.mixin;
 
 import net.dries007.tfc.common.entities.livestock.CommonAnimalBehavior;
 import net.minecraft.world.entity.LivingEntity;
-import net.yazloysasha.tfccollectionadvancements.tracking.Familiarity;
+import net.yazloysasha.tfccollectionadvancements.tracking.FamiliarityTracker;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -16,7 +16,10 @@ public interface CommonAnimalBehaviorMixin {
     CallbackInfo ci
   ) {
     CommonAnimalBehavior behavior = (CommonAnimalBehavior) this;
-    Familiarity.beforeFamiliarityChange(behavior, behavior.getFamiliarity());
+    FamiliarityTracker.beforeFamiliarityChange(
+      behavior,
+      behavior.getFamiliarity()
+    );
   }
 
   @Inject(method = "setFamiliarity", at = @At("TAIL"), remap = false)
@@ -25,7 +28,7 @@ public interface CommonAnimalBehaviorMixin {
     CallbackInfo ci
   ) {
     CommonAnimalBehavior behavior = (CommonAnimalBehavior) this;
-    Familiarity.afterFamiliarityChange(
+    FamiliarityTracker.afterFamiliarityChange(
       this,
       (LivingEntity) this,
       behavior.getFamiliarity()

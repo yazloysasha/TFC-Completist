@@ -219,7 +219,7 @@ public final class CollectionPatches {
     InventorySource... sources
   ) {
     return (advancements, resourceManager, registries) -> {
-      InventoryCollections.patch(
+      InventoryRebuild.patch(
         id,
         advancements,
         resourceManager,
@@ -243,7 +243,7 @@ public final class CollectionPatches {
     InventorySource... sources
   ) {
     return (advancements, resourceManager, registries) -> {
-      InventoryCollections.patchConsume(
+      InventoryRebuild.patchConsume(
         id,
         advancements,
         resourceManager,
@@ -256,7 +256,7 @@ public final class CollectionPatches {
 
   private static Patch placed(ResourceLocation id, InventorySource... sources) {
     return (advancements, resourceManager, registries) ->
-      InventoryCollections.patchPlacedBlock(
+      InventoryRebuild.patchPlacedBlock(
         id,
         advancements,
         resourceManager,
@@ -270,7 +270,7 @@ public final class CollectionPatches {
     InventorySource... sources
   ) {
     return (advancements, resourceManager, registries) ->
-      InventoryCollections.patchSealedJar(
+      InventoryRebuild.patchSealedJar(
         id,
         advancements,
         resourceManager,
@@ -284,7 +284,7 @@ public final class CollectionPatches {
     InventorySource... sources
   ) {
     return (advancements, resourceManager, registries) ->
-      InventoryCollections.patchAnyOfByLastPathSegment(
+      InventoryRebuild.patchAnyOfByLastPathSegment(
         id,
         advancements,
         resourceManager,
@@ -295,7 +295,7 @@ public final class CollectionPatches {
 
   private static Patch moltenIngots(ResourceLocation id, String frame) {
     return (advancements, resourceManager, registries) -> {
-      InventoryCollections.patchIngotsFromMoltenMetals(
+      InventoryRebuild.patchIngotsFromMoltenMetals(
         id,
         advancements,
         resourceManager,
@@ -307,7 +307,7 @@ public final class CollectionPatches {
 
   private static Patch biomes(ResourceLocation id, BiomeSource... sources) {
     return (advancements, resourceManager, registries) ->
-      BiomeCollections.patch(
+      BiomeRebuild.patch(
         id,
         advancements,
         resourceManager,
@@ -319,7 +319,7 @@ public final class CollectionPatches {
   @SafeVarargs
   private static Patch drink(ResourceLocation id, TagKey<Fluid>... tags) {
     return (advancements, resourceManager, registries) ->
-      FluidCollections.patchDrinkFromTags(
+      FluidRebuild.patchDrinkFromTags(
         id,
         advancements,
         resourceManager,
@@ -334,7 +334,7 @@ public final class CollectionPatches {
     TagKey<EntityType<?>>... tags
   ) {
     return (advancements, resourceManager, registries) ->
-      EntityCollections.patchFamiliarizedAnimalFromTags(
+      EntityRebuild.patchFamiliarizedAnimalFromTags(
         id,
         advancements,
         resourceManager,
@@ -349,7 +349,7 @@ public final class CollectionPatches {
     TagKey<EntityType<?>>... tags
   ) {
     return (advancements, resourceManager, registries) ->
-      EntityCollections.patchBredAnimalFromTags(
+      EntityRebuild.patchBredAnimalFromTags(
         id,
         advancements,
         resourceManager,
@@ -364,7 +364,7 @@ public final class CollectionPatches {
     TagKey<EntityType<?>>... tags
   ) {
     return (advancements, resourceManager, registries) ->
-      EntityCollections.patchKilledEntityFromTags(
+      EntityRebuild.patchKilledEntityFromTags(
         id,
         advancements,
         resourceManager,
@@ -383,7 +383,7 @@ public final class CollectionPatches {
     }
     JsonElement advancement = advancements.get(id);
     if (advancement != null && advancement.isJsonObject()) {
-      CriterionBuilder.setFrame(advancement.getAsJsonObject(), frame);
+      CriterionJson.setFrame(advancement.getAsJsonObject(), frame);
     }
   }
 
@@ -397,7 +397,7 @@ public final class CollectionPatches {
     ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
-    BlockCollections.patchItemUsedOnBlocks(
+    BlockRebuild.patchItemUsedOnBlocks(
       world("florist"),
       advancements,
       collectPottedPlants(registries),

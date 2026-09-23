@@ -16,9 +16,9 @@ import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
 import net.yazloysasha.tfccollectionadvancements.discover.Namespaces;
 import net.yazloysasha.tfccollectionadvancements.discover.RegistryTags;
 
-public final class BiomeCollections {
+public final class BiomeRebuild {
 
-  private BiomeCollections() {}
+  private BiomeRebuild() {}
 
   public static void patch(
     ResourceLocation advancementId,
@@ -27,7 +27,7 @@ public final class BiomeCollections {
     HolderLookup.Provider registries,
     List<BiomeSource> sources
   ) {
-    JsonObject root = CollectionJson.collectionRootOrNull(
+    JsonObject root = RebuildJson.collectionRootOrNull(
       advancementId,
       advancements
     );
@@ -41,7 +41,7 @@ public final class BiomeCollections {
       sources
     );
     if (
-      CollectionJson.resetIfResolved(
+      RebuildJson.resetIfResolved(
         advancementId,
         root,
         resolvedCriteria,
@@ -62,16 +62,16 @@ public final class BiomeCollections {
         registries,
         source
       )) {
-        String criterionName = CollectionJson.pathCriterion(biomeId);
+        String criterionName = RebuildJson.pathCriterion(biomeId);
         if (criteria.has(criterionName)) {
           continue;
         }
 
-        CriterionBuilder.addAndRequire(
+        CriterionJson.addAndRequire(
           criteria,
           requirements,
           criterionName,
-          CriterionBuilder.biomeLocation(biomeId)
+          CriterionJson.biomeLocation(biomeId)
         );
         added++;
       }
@@ -86,7 +86,7 @@ public final class BiomeCollections {
       }
     }
 
-    CollectionDeduplicator.deduplicate(root);
+    RebuildDeduplicator.deduplicate(root);
   }
 
   private static int countResolvedBiomeCriteria(
@@ -101,7 +101,7 @@ public final class BiomeCollections {
         registries,
         source
       )) {
-        criterionNames.add(CollectionJson.pathCriterion(biomeId));
+        criterionNames.add(RebuildJson.pathCriterion(biomeId));
       }
     }
     return criterionNames.size();

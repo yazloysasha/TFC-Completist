@@ -15,9 +15,9 @@ import java.util.Set;
  * Removes redundant criteria and requirement groups from rebuilt collection
  * advancements (for example two sources that resolve to the same item).
  */
-public final class CollectionDeduplicator {
+public final class RebuildDeduplicator {
 
-  private CollectionDeduplicator() {}
+  private RebuildDeduplicator() {}
 
   public static void deduplicate(JsonObject root) {
     JsonObject criteria = root.getAsJsonObject("criteria");

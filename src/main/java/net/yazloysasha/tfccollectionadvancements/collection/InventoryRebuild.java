@@ -30,13 +30,13 @@ import net.yazloysasha.tfccollectionadvancements.discover.MineralOreDrops;
 import net.yazloysasha.tfccollectionadvancements.discover.Namespaces;
 import net.yazloysasha.tfccollectionadvancements.discover.RegistryTags;
 
-public final class InventoryCollections {
+public final class InventoryRebuild {
 
   private static final String METAL_INGOT_PREFIX = "metal/ingot/";
   private static final String MOLTEN_METAL_PREFIX = "metal/";
   private static final String COMMON_INGOTS_PATH = "ingots/";
 
-  private InventoryCollections() {}
+  private InventoryRebuild() {}
 
   public static void patch(
     ResourceLocation advancementId,
@@ -51,7 +51,7 @@ public final class InventoryCollections {
       resourceManager,
       registries,
       sources,
-      CriterionBuilder::inventoryChanged
+      CriterionJson::inventoryChanged
     );
   }
 
@@ -68,7 +68,7 @@ public final class InventoryCollections {
       resourceManager,
       registries,
       sources,
-      CriterionBuilder::consumeItem
+      CriterionJson::consumeItem
     );
   }
 
@@ -85,7 +85,7 @@ public final class InventoryCollections {
       resourceManager,
       registries,
       sources,
-      CriterionBuilder::sealJar
+      CriterionJson::sealJar
     );
   }
 
@@ -102,7 +102,7 @@ public final class InventoryCollections {
       resourceManager,
       registries,
       sources,
-      InventoryCollections::placedBlockCriterion
+      InventoryRebuild::placedBlockCriterion
     );
   }
 
@@ -114,7 +114,7 @@ public final class InventoryCollections {
     ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(
       blockItem.getBlock()
     );
-    return CriterionBuilder.placedBlock(blockId);
+    return CriterionJson.placedBlock(blockId);
   }
 
   /**
@@ -129,7 +129,7 @@ public final class InventoryCollections {
     HolderLookup.Provider registries,
     List<InventorySource> sources
   ) {
-    JsonObject root = CollectionJson.collectionRootOrNull(
+    JsonObject root = RebuildJson.collectionRootOrNull(
       advancementId,
       advancements
     );
@@ -146,12 +146,7 @@ public final class InventoryCollections {
       sources
     );
     if (
-      CollectionJson.resetIfResolved(
-        advancementId,
-        root,
-        groups.size(),
-        "item"
-      ) ==
+      RebuildJson.resetIfResolved(advancementId, root, groups.size(), "item") ==
       null
     ) {
       return;
@@ -167,14 +162,14 @@ public final class InventoryCollections {
         }
         criteria.add(
           entry.getKey(),
-          CriterionBuilder.inventoryChanged(entry.getValue())
+          CriterionJson.inventoryChanged(entry.getValue())
         );
         alternatives++;
       }
-      CriterionBuilder.addRequirementAny(requirements, group.keySet());
+      CriterionJson.addRequirementAny(requirements, group.keySet());
     }
 
-    CollectionDeduplicator.deduplicate(root);
+    RebuildDeduplicator.deduplicate(root);
     if (alternatives > 0) {
       TFCCollectionAdvancements.LOGGER.info(
         "Rebuilt {} with {} item groups ({} alternatives)",
@@ -203,9 +198,9 @@ public final class InventoryCollections {
           continue;
         }
         ResourceLocation itemId = holder.getKey().location();
-        String groupKey = CollectionJson.qualifiedCriterion(
+        String groupKey = RebuildJson.qualifiedCriterion(
           itemId,
-          CollectionJson.lastPathSegment(itemId.getPath())
+          RebuildJson.lastPathSegment(itemId.getPath())
         );
         Map<String, ResourceLocation> group = groups.computeIfAbsent(
           groupKey,
@@ -231,14 +226,14 @@ public final class InventoryCollections {
     if (usedNames.add(name)) {
       return name;
     }
-    String folder = CollectionJson.lastPathSegment(
+    String folder = RebuildJson.lastPathSegment(
       pathPrefix != null && pathPrefix.endsWith("/")
         ? pathPrefix.substring(0, pathPrefix.length() - 1)
         : pathPrefix
     );
-    String fallback = CollectionJson.qualifiedCriterion(
+    String fallback = RebuildJson.qualifiedCriterion(
       itemId,
-      folder + "_" + CollectionJson.lastPathSegment(itemId.getPath())
+      folder + "_" + RebuildJson.lastPathSegment(itemId.getPath())
     );
     usedNames.add(fallback);
     return fallback;
@@ -254,7 +249,7 @@ public final class InventoryCollections {
     ResourceManager resourceManager,
     HolderLookup.Provider registries
   ) {
-    JsonObject root = CollectionJson.collectionRootOrNull(
+    JsonObject root = RebuildJson.collectionRootOrNull(
       advancementId,
       advancements
     );
@@ -307,7 +302,7 @@ public final class InventoryCollections {
       }
     }
     if (
-      CollectionJson.resetIfResolved(advancementId, root, resolved, "ingot") ==
+      RebuildJson.resetIfResolved(advancementId, root, resolved, "ingot") ==
       null
     ) {
       return;
@@ -331,16 +326,16 @@ public final class InventoryCollections {
         continue;
       }
 
-      CriterionBuilder.addAndRequire(
+      CriterionJson.addAndRequire(
         criteria,
         requirements,
         criterionName,
-        CriterionBuilder.inventoryChanged(ingotId)
+        CriterionJson.inventoryChanged(ingotId)
       );
       added++;
     }
 
-    CollectionDeduplicator.deduplicate(root);
+    RebuildDeduplicator.deduplicate(root);
     if (added > 0) {
       TFCCollectionAdvancements.LOGGER.info(
         "Rebuilt {} with {} molten-metal ingot criteria",
@@ -410,7 +405,7 @@ public final class InventoryCollections {
     ResourceLocation ingotId,
     String metal
   ) {
-    return CollectionJson.qualifiedCriterion(ingotId, metal);
+    return RebuildJson.qualifiedCriterion(ingotId, metal);
   }
 
   private static void patch(
@@ -421,7 +416,7 @@ public final class InventoryCollections {
     List<InventorySource> sources,
     Function<ResourceLocation, JsonObject> criterionFactory
   ) {
-    JsonObject root = CollectionJson.collectionRootOrNull(
+    JsonObject root = RebuildJson.collectionRootOrNull(
       advancementId,
       advancements
     );
@@ -487,7 +482,7 @@ public final class InventoryCollections {
       metalOres
     );
     if (
-      CollectionJson.resetIfResolved(
+      RebuildJson.resetIfResolved(
         advancementId,
         root,
         resolvedCriteria,
@@ -528,7 +523,7 @@ public final class InventoryCollections {
       }
     }
 
-    CollectionDeduplicator.deduplicate(root);
+    RebuildDeduplicator.deduplicate(root);
   }
 
   private static int countResolvedItemCriteria(
@@ -617,7 +612,7 @@ public final class InventoryCollections {
       if (criterion == null) {
         continue;
       }
-      CriterionBuilder.addAndRequire(
+      CriterionJson.addAndRequire(
         criteria,
         requirements,
         criterionName,
@@ -681,7 +676,7 @@ public final class InventoryCollections {
   }
 
   static String criterionName(ResourceLocation itemId, String pathPrefix) {
-    return CollectionJson.qualifiedCriterion(
+    return RebuildJson.qualifiedCriterion(
       itemId,
       criterionSuffix(itemId.getPath(), pathPrefix)
     );

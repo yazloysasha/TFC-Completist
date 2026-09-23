@@ -7,7 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
-import net.yazloysasha.tfccollectionadvancements.criterion.CollectionCriteria;
+import net.yazloysasha.tfccollectionadvancements.criterion.CollectionTriggers;
 import net.yazloysasha.tfccollectionadvancements.tracking.DrinkFluidTracker;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -53,6 +53,6 @@ public abstract class DrinkableMixin {
     int amount,
     CallbackInfo ci
   ) {
-    CollectionCriteria.onDrinkFluid(player, DrinkFluidTracker.take());
+    CollectionTriggers.onDrinkFluid(player, DrinkFluidTracker.take());
   }
 }

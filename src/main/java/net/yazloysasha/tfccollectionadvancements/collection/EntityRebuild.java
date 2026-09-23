@@ -15,7 +15,7 @@ import net.minecraft.world.entity.EntityType;
 import net.yazloysasha.tfccollectionadvancements.discover.Namespaces;
 import net.yazloysasha.tfccollectionadvancements.discover.RegistryTags;
 
-public final class EntityCollections {
+public final class EntityRebuild {
 
   private static final ResourceLocation TFC_FROG =
     ResourceLocation.fromNamespaceAndPath("tfc", "frog");
@@ -48,7 +48,7 @@ public final class EntityCollections {
     return BRED_ANIMAL_EXCLUDED.contains(entityId);
   }
 
-  private EntityCollections() {}
+  private EntityRebuild() {}
 
   /**
    * Rebuilds {@code familiarized_animal} criteria for tag members that reach
@@ -68,7 +68,7 @@ public final class EntityCollections {
       registries,
       tags,
       FAMILIARIZED_EXCLUDED,
-      CriterionBuilder::familiarizedAnimal,
+      CriterionJson::familiarizedAnimal,
       "familiarized-animal"
     );
   }
@@ -91,7 +91,7 @@ public final class EntityCollections {
       registries,
       tags,
       Set.of(),
-      CriterionBuilder::playerKilledEntity,
+      CriterionJson::playerKilledEntity,
       "killed-entity"
     );
   }
@@ -114,7 +114,7 @@ public final class EntityCollections {
       registries,
       tags,
       BRED_ANIMAL_EXCLUDED,
-      CriterionBuilder::bredAnimal,
+      CriterionJson::bredAnimal,
       "bred-animal"
     );
   }
@@ -145,14 +145,14 @@ public final class EntityCollections {
       }
     }
 
-    CollectionJson.rebuildIdCriteria(
+    RebuildJson.rebuildIdCriteria(
       advancementId,
       advancements,
       entities,
       "entity",
       kind,
       true,
-      CollectionJson::lastSegmentCriterion,
+      RebuildJson::lastSegmentCriterion,
       criterionFactory
     );
   }

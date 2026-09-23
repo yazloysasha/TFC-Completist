@@ -13,9 +13,9 @@ import net.minecraft.world.level.material.Fluid;
 import net.yazloysasha.tfccollectionadvancements.discover.Namespaces;
 import net.yazloysasha.tfccollectionadvancements.discover.RegistryTags;
 
-public final class FluidCollections {
+public final class FluidRebuild {
 
-  private FluidCollections() {}
+  private FluidRebuild() {}
 
   /**
    * Rebuilds drink-fluid criteria for every fluid in {@code tag}, including addon
@@ -46,15 +46,15 @@ public final class FluidCollections {
       }
     }
 
-    CollectionJson.rebuildIdCriteria(
+    RebuildJson.rebuildIdCriteria(
       advancementId,
       advancements,
       fluids,
       "fluid",
       "drink-fluid",
       true,
-      CollectionJson::pathCriterion,
-      CriterionBuilder::drinkFluid
+      RebuildJson::pathCriterion,
+      CriterionJson::drinkFluid
     );
   }
 
