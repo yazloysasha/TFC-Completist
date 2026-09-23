@@ -14,7 +14,7 @@
   },
   "display": {
     "icon": {
-      "id": "tfc:ore/small_native_gold"
+      "id": "tfc:ore/small_native_silver"
     },
     "title": {
       "translate": "tfc_collection_advancements.advancements.world.prospector.title"
@@ -28,5 +28,5 @@
     "hidden": false,
     "background": "tfc:textures/block/mud/fluvisol.png"
   },
-  "requirements": [["small_native_gold"]]
+  "requirements": [["small_native_silver"]]
 }
