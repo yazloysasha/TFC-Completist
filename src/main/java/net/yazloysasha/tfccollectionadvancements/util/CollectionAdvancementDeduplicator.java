@@ -167,9 +167,15 @@ public final class CollectionAdvancementDeduplicator {
       }
     }
     if (conditions.has("item")) {
-      JsonElement id = conditions.getAsJsonObject("item").get("items");
-      if (id != null && id.isJsonPrimitive()) {
-        return id.getAsString();
+      JsonElement item = conditions.get("item");
+      if (item.isJsonPrimitive()) {
+        return item.getAsString();
+      }
+      if (item.isJsonObject()) {
+        JsonElement id = item.getAsJsonObject().get("items");
+        if (id != null && id.isJsonPrimitive()) {
+          return id.getAsString();
+        }
       }
     }
     return null;
