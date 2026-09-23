@@ -12,7 +12,7 @@
 
 New collection goals for the parts of TFC the tab never asked for. The original collections grow with your addons, and a couple of vanilla bugs are gone.
 
-#### 🌟 New Collections
+#### 🌟 New Collections:
 
 - **Domestication** — familiarize every animal 🐾
 - **Florist** — pot every plant 🌸
