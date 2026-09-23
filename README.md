@@ -2,15 +2,21 @@
 
 ### Finally, a TFC You Can Finish
 
-**TerraFirmaCraft** built a whole life: animals to tame, plants to pot, orchards to plant, wines to drink, jams to seal. Then you open the advancements tab and "complete" TFC having never done any of it. 🐄🌸
+**TerraFirmaCraft** built a whole life: animals to tame, plants to pot, orchards to plant, wines to drink, jams to seal. Then you open the advancements tab and "complete" TFC having never done any of it.
 
 **TFC: Completist** is the rest of the list. ✨
 
-**New collections:**
+---
+
+### What This Mod Does
+
+New collection goals for the parts of TFC the tab never asked for. The original collections grow with your addons, and a couple of vanilla bugs are gone.
+
+#### 🌟 New Collections
 
 - **Domestication** — familiarize every animal 🐾
 - **Florist** — pot every plant 🌸
-- **Sommelier** — drink every alcohol 🍷
+- **Sommelier** — drink every alcohol 🍇
 - **King of Beasts** — slay every land predator 🦁
 - **Orchardist** — plant every fruit tree 🍎
 - **At Grandma's** — seal every jam 🫙
@@ -33,15 +39,15 @@
 - **Sands of the World** — every sand 🏖️
 - **Vagabond** — every groundcover 🍂
 
+#### 🏅 The Originals
+
 The original collection advancements also pick up items from your addons, as with ArborFirmaCraft:
 
 | Before                           | After                          |
 | -------------------------------- | ------------------------------ |
 | ![Before](public/img/before.png) | ![After](public/img/after.png) |
 
-The originals are finished too: Adventuring Time, Arborist, Gemologist, Gone Fishing, Healthy Diet, Metallurgist, Minerologist, True Farmer. 🏅
-
-And the bugs are gone. **Mineralogist** no longer counts sulfur twice. **Healthy Diet** finally includes melon. 🔧
+That covers Adventuring Time, Arborist, Gemologist, Gone Fishing, Healthy Diet, Metallurgist, Minerologist and True Farmer. **Mineralogist** no longer counts sulfur twice, and **Healthy Diet** finally includes melon. 🔧
 
 ---
 
