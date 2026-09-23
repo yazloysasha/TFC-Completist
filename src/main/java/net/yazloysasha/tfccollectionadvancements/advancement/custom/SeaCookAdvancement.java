@@ -10,11 +10,13 @@ import net.neoforged.neoforge.common.Tags;
 import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancement;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
+import net.yazloysasha.tfccollectionadvancements.util.MeatCollectionItems;
 
 /**
  * Rebuilds Sea Cook ({@code tfc_collection_advancements:world/sea_cook}).
  * <p>
- * Every {@code tfc} and addon item in {@code c:foods/cooked_fish}.
+ * Every {@code tfc} and addon item in {@code c:foods/cooked_fish}, except
+ * {@code cooked_turtle} (counts toward Carnivore / Butcher).
  */
 public final class SeaCookAdvancement {
 
@@ -25,7 +27,10 @@ public final class SeaCookAdvancement {
     );
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.discoveredTag(Tags.Items.FOODS_COOKED_FISH)
+    InventoryCollectionSource.discoveredTagExcludingItems(
+      Tags.Items.FOODS_COOKED_FISH,
+      MeatCollectionItems.SEAFOOD_TAG_EXCLUSIONS
+    )
   );
 
   private SeaCookAdvancement() {}

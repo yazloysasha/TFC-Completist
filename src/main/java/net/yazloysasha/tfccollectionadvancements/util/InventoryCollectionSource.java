@@ -21,7 +21,8 @@ public record InventoryCollectionSource(
   boolean includeTfc,
   CollectedItems collectedItems,
   boolean singleSegmentAfterPrefix,
-  List<TagKey<Item>> excludeTags
+  List<TagKey<Item>> excludeTags,
+  List<ResourceLocation> excludeItems
 ) {
   public enum CollectedItems {
     NONE,
@@ -42,6 +43,7 @@ public record InventoryCollectionSource(
       true,
       CollectedItems.NONE,
       false,
+      List.of(),
       List.of()
     );
   }
@@ -63,6 +65,7 @@ public record InventoryCollectionSource(
       true,
       CollectedItems.NONE,
       false,
+      List.of(),
       List.of()
     );
   }
@@ -86,6 +89,7 @@ public record InventoryCollectionSource(
       true,
       CollectedItems.NONE,
       false,
+      List.of(),
       List.of()
     );
   }
@@ -105,6 +109,26 @@ public record InventoryCollectionSource(
       true,
       CollectedItems.NONE,
       true,
+      List.of(),
+      List.of()
+    );
+  }
+
+  public static InventoryCollectionSource discoveredExactItem(
+    ResourceLocation itemId
+  ) {
+    return new InventoryCollectionSource(
+      null,
+      itemId.getPath(),
+      null,
+      true,
+      null,
+      false,
+      null,
+      true,
+      CollectedItems.NONE,
+      false,
+      List.of(),
       List.of()
     );
   }
@@ -128,7 +152,29 @@ public record InventoryCollectionSource(
       true,
       CollectedItems.NONE,
       false,
-      List.of(excludeTags)
+      List.of(excludeTags),
+      List.of()
+    );
+  }
+
+  public static InventoryCollectionSource discoveredTagExcludingItems(
+    TagKey<Item> tag,
+    List<ResourceLocation> excludeItems,
+    TagKey<Item>... excludeTags
+  ) {
+    return new InventoryCollectionSource(
+      null,
+      null,
+      null,
+      false,
+      tag,
+      false,
+      null,
+      true,
+      CollectedItems.NONE,
+      false,
+      List.of(excludeTags),
+      excludeItems
     );
   }
 
@@ -144,6 +190,7 @@ public record InventoryCollectionSource(
       false,
       CollectedItems.NONE,
       false,
+      List.of(),
       List.of()
     );
   }
@@ -160,6 +207,7 @@ public record InventoryCollectionSource(
       true,
       CollectedItems.NONE,
       false,
+      List.of(),
       List.of()
     );
   }
@@ -176,6 +224,7 @@ public record InventoryCollectionSource(
       true,
       CollectedItems.TFC_FARMLAND_SEEDS,
       false,
+      List.of(),
       List.of()
     );
   }
@@ -192,6 +241,7 @@ public record InventoryCollectionSource(
       true,
       CollectedItems.MINERAL_ORE_DROPS,
       false,
+      List.of(),
       List.of()
     );
   }
@@ -208,6 +258,7 @@ public record InventoryCollectionSource(
       true,
       CollectedItems.SALT_WATER_CORAL_ITEMS,
       false,
+      List.of(),
       List.of()
     );
   }

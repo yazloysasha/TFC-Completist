@@ -627,6 +627,7 @@ public final class InventoryCollectionAdvancement {
             )
           );
         }
+        members.removeAll(source.excludeItems());
         yield members;
       }
     };

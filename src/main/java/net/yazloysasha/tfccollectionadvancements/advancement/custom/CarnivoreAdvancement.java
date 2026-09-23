@@ -10,12 +10,14 @@ import net.neoforged.neoforge.common.Tags;
 import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancement;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
+import net.yazloysasha.tfccollectionadvancements.util.MeatCollectionItems;
 
 /**
  * Rebuilds Carnivore ({@code tfc_collection_advancements:world/carnivore}).
  * <p>
  * Every {@code tfc} and addon item in {@code c:foods/cooked_meat}, excluding
- * {@code c:foods/cooked_fish} (seafood stays in Sea Cook).
+ * {@code c:foods/cooked_fish} (seafood stays in Sea Cook). {@code cooked_turtle}
+ * is included here despite TFC listing it under cooked fish.
  */
 public final class CarnivoreAdvancement {
 
@@ -29,6 +31,9 @@ public final class CarnivoreAdvancement {
     InventoryCollectionSource.discoveredTagExcluding(
       Tags.Items.FOODS_COOKED_MEAT,
       Tags.Items.FOODS_COOKED_FISH
+    ),
+    InventoryCollectionSource.discoveredExactItem(
+      MeatCollectionItems.COOKED_TURTLE
     )
   );
 
