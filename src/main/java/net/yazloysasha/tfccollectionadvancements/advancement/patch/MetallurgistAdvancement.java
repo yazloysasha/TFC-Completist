@@ -5,6 +5,7 @@ import java.util.Map;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.yazloysasha.tfccollectionadvancements.util.AdvancementCriterionBuilder;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancement;
 
 /**
@@ -32,5 +33,13 @@ public final class MetallurgistAdvancement {
       resourceManager,
       registries
     );
+
+    JsonElement advancement = advancements.get(ADVANCEMENT);
+    if (advancement != null && advancement.isJsonObject()) {
+      AdvancementCriterionBuilder.setFrame(
+        advancement.getAsJsonObject(),
+        "challenge"
+      );
+    }
   }
 }
