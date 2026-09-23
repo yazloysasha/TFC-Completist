@@ -1,0 +1,32 @@
+{
+  "parent": "tfc:world/root",
+  "criteria": {
+    "brain_coral": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "tfc:coral/brain_coral"
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "tfc:coral/brain_coral_fan"
+    },
+    "title": {
+      "translate": "tfc_collection_advancements.advancements.world.reef_keeper.title"
+    },
+    "description": {
+      "translate": "tfc_collection_advancements.advancements.world.reef_keeper.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "tfc:textures/block/mud/fluvisol.png"
+  },
+  "requirements": [["brain_coral"]]
+}

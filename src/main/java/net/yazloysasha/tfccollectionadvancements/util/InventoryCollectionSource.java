@@ -27,6 +27,7 @@ public record InventoryCollectionSource(
     NONE,
     TFC_FARMLAND_SEEDS,
     MINERAL_ORE_DROPS,
+    SALT_WATER_CORAL_ITEMS,
   }
 
   public InventoryCollectionSource(String namespace, String pathPrefix) {
@@ -195,6 +196,22 @@ public record InventoryCollectionSource(
     );
   }
 
+  public static InventoryCollectionSource saltWaterCorals() {
+    return new InventoryCollectionSource(
+      null,
+      null,
+      null,
+      false,
+      null,
+      false,
+      null,
+      true,
+      CollectedItems.SALT_WATER_CORAL_ITEMS,
+      false,
+      List.of()
+    );
+  }
+
   public String displayNamespace() {
     if (namespace != null) {
       return namespace;
@@ -202,6 +219,7 @@ public record InventoryCollectionSource(
     return switch (collectedItems) {
       case TFC_FARMLAND_SEEDS -> "tfc farmland";
       case MINERAL_ORE_DROPS -> "mineral ore drops";
+      case SALT_WATER_CORAL_ITEMS -> "salt water coral";
       case NONE -> includeTfc ? "discovered" : "addon";
     };
   }

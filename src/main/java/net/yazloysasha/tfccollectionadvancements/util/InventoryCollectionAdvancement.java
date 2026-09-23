@@ -18,6 +18,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.BlockItem;
@@ -498,6 +499,17 @@ public final class InventoryCollectionAdvancement {
       ? collectTfcCropSeeds()
       : Set.of();
 
+    boolean needsSaltWaterCoralItems = sources
+      .stream()
+      .anyMatch(
+        source ->
+          source.collectedItems() ==
+          InventoryCollectionSource.CollectedItems.SALT_WATER_CORAL_ITEMS
+      );
+    Set<ResourceLocation> saltWaterCoralItems = needsSaltWaterCoralItems
+      ? collectSaltWaterCoralItems(resourceManager, registries)
+      : Set.of();
+
     int resolvedCriteria = countResolvedItemCriteria(
       items,
       sources,
@@ -505,6 +517,7 @@ public final class InventoryCollectionAdvancement {
       registries,
       mineralOreDrops,
       tfcFarmlandSeeds,
+      saltWaterCoralItems,
       metalOres
     );
     if (
@@ -532,7 +545,8 @@ public final class InventoryCollectionAdvancement {
           resourceManager,
           registries,
           mineralOreDrops,
-          tfcFarmlandSeeds
+          tfcFarmlandSeeds,
+          saltWaterCoralItems
         ),
         metalOres,
         criterionFactory
@@ -557,6 +571,7 @@ public final class InventoryCollectionAdvancement {
     HolderLookup.Provider registries,
     Set<ResourceLocation> mineralOreDrops,
     Set<ResourceLocation> tfcFarmlandSeeds,
+    Set<ResourceLocation> saltWaterCoralItems,
     Set<ResourceLocation> metalOres
   ) {
     Set<String> criterionNames = new HashSet<>();
@@ -566,7 +581,8 @@ public final class InventoryCollectionAdvancement {
         resourceManager,
         registries,
         mineralOreDrops,
-        tfcFarmlandSeeds
+        tfcFarmlandSeeds,
+        saltWaterCoralItems
       );
       for (var holder : items) {
         if (!source.matches(holder, tagMembers, metalOres)) {
@@ -584,11 +600,13 @@ public final class InventoryCollectionAdvancement {
     ResourceManager resourceManager,
     HolderLookup.Provider registries,
     Set<ResourceLocation> mineralOreDrops,
-    Set<ResourceLocation> tfcFarmlandSeeds
+    Set<ResourceLocation> tfcFarmlandSeeds,
+    Set<ResourceLocation> saltWaterCoralItems
   ) {
     return switch (source.collectedItems()) {
       case TFC_FARMLAND_SEEDS -> tfcFarmlandSeeds;
       case MINERAL_ORE_DROPS -> mineralOreDrops;
+      case SALT_WATER_CORAL_ITEMS -> saltWaterCoralItems;
       case NONE -> {
         if (source.tag() == null) {
           yield Set.of();
@@ -648,6 +666,40 @@ public final class InventoryCollectionAdvancement {
       added++;
     }
     return added;
+  }
+
+  private static Set<ResourceLocation> collectSaltWaterCoralItems(
+    ResourceManager resourceManager,
+    HolderLookup.Provider registries
+  ) {
+    Set<ResourceLocation> blockIds = RegistryTagResolver.resolveSet(
+      resourceManager,
+      registries,
+      TFCTags.Blocks.SALT_WATER_CORALS
+    );
+    var blockRegistry = registries.lookupOrThrow(Registries.BLOCK);
+    Set<ResourceLocation> items = new LinkedHashSet<>();
+    for (ResourceLocation blockId : blockIds) {
+      if (!AddonNamespaces.isDiscoverable(blockId.getNamespace())) {
+        continue;
+      }
+      var blockKey = ResourceKey.create(Registries.BLOCK, blockId);
+      var blockHolder = blockRegistry.get(blockKey);
+      if (blockHolder.isEmpty()) {
+        continue;
+      }
+      Item item = blockHolder.get().value().asItem();
+      if (item == Items.AIR) {
+        continue;
+      }
+      ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(item);
+      if (
+        itemId != null && AddonNamespaces.isDiscoverable(itemId.getNamespace())
+      ) {
+        items.add(itemId);
+      }
+    }
+    return items;
   }
 
   private static Set<ResourceLocation> collectTfcCropSeeds() {
