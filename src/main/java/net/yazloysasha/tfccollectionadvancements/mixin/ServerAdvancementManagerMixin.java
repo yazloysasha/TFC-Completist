@@ -20,6 +20,7 @@ import net.yazloysasha.tfccollectionadvancements.advancement.custom.HusbandmanAd
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.JewelerAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.KingOfBeastsAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.OrchardistAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.custom.PedologistAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.SandsOfTheWorldAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.SeaCookAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.SommelierAdvancement;
@@ -121,6 +122,7 @@ public abstract class ServerAdvancementManagerMixin {
       this.registries
     );
     OrchardistAdvancement.patch(advancements, resourceManager, this.registries);
+    PedologistAdvancement.patch(advancements, resourceManager, this.registries);
     SandsOfTheWorldAdvancement.patch(
       advancements,
       resourceManager,
