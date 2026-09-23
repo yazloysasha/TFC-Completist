@@ -3,7 +3,7 @@ package net.yazloysasha.tfccollectionadvancements;
 import com.mojang.logging.LogUtils;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
-import net.yazloysasha.tfccollectionadvancements.advancement.TFCCollectionAdvancementTriggers;
+import net.yazloysasha.tfccollectionadvancements.criterion.CollectionCriteria;
 import org.slf4j.Logger;
 
 @Mod(TFCCollectionAdvancements.MOD_ID)
@@ -13,6 +13,6 @@ public final class TFCCollectionAdvancements {
   public static final Logger LOGGER = LogUtils.getLogger();
 
   public TFCCollectionAdvancements(IEventBus modEventBus) {
-    TFCCollectionAdvancementTriggers.register(modEventBus);
+    CollectionCriteria.register(modEventBus);
   }
 }

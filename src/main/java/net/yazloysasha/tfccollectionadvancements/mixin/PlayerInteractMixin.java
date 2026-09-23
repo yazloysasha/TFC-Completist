@@ -4,7 +4,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.yazloysasha.tfccollectionadvancements.util.FamiliarityInteractionContext;
+import net.yazloysasha.tfccollectionadvancements.tracking.Familiarity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -19,7 +19,7 @@ public abstract class PlayerInteractMixin {
     InteractionHand hand,
     CallbackInfoReturnable<InteractionResult> cir
   ) {
-    FamiliarityInteractionContext.set((Player) (Object) this);
+    Familiarity.set((Player) (Object) this);
   }
 
   @Inject(method = "interactOn", at = @At("RETURN"))
@@ -28,6 +28,6 @@ public abstract class PlayerInteractMixin {
     InteractionHand hand,
     CallbackInfoReturnable<InteractionResult> cir
   ) {
-    FamiliarityInteractionContext.set(null);
+    Familiarity.set(null);
   }
 }

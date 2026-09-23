@@ -5,8 +5,8 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.yazloysasha.tfccollectionadvancements.advancement.TFCCollectionAdvancementTriggers;
-import net.yazloysasha.tfccollectionadvancements.util.LastFedAnimalTracker;
+import net.yazloysasha.tfccollectionadvancements.criterion.CollectionCriteria;
+import net.yazloysasha.tfccollectionadvancements.tracking.LastFedAnimalTracker;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -38,7 +38,7 @@ public interface TFCAnimalPropertiesMixin {
     TFCAnimalProperties male,
     CallbackInfo ci
   ) {
-    TFCCollectionAdvancementTriggers.onBredAnimal(
+    CollectionCriteria.onBredAnimal(
       ((TFCAnimalProperties) this).getEntity(),
       male.getEntity()
     );

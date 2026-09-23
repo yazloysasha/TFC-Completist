@@ -8,7 +8,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.yazloysasha.tfccollectionadvancements.advancement.TFCCollectionAdvancementTriggers;
+import net.yazloysasha.tfccollectionadvancements.criterion.CollectionCriteria;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -41,7 +41,7 @@ public abstract class JamPotRecipeJamOutputMixin {
         sealedStack.getItem()
       );
       if (itemId != null) {
-        TFCCollectionAdvancementTriggers.onSealedJar(serverPlayer, itemId);
+        CollectionCriteria.onSealedJar(serverPlayer, itemId);
       }
     }
   }
