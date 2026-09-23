@@ -12,7 +12,7 @@
   },
   "display": {
     "icon": {
-      "id": "tfc:food/protein_soup",
+      "id": "tfc:food/grain_salad",
       "components": {
         "tfc:food": {
           "creation_date": -3
@@ -31,5 +31,5 @@
     "hidden": false,
     "background": "tfc:textures/block/mud/fluvisol.png"
   },
-  "requirements": [["wheat_bread_sandwich"]]
+  "requirements": [["grain_salad"]]
 }
