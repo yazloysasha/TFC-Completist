@@ -1,0 +1,28 @@
+{
+  "parent": "tfc:world/root",
+  "criteria": {
+    "beer": {
+      "trigger": "tfc_completist:drink_fluid",
+      "conditions": {
+        "fluid": "tfc:beer"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "tfc:bucket/beer"
+    },
+    "title": {
+      "translate": "tfc_completist.advancements.world.sommelier.title"
+    },
+    "description": {
+      "translate": "tfc_completist.advancements.world.sommelier.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "tfc:textures/block/mud/fluvisol.png"
+  },
+  "requirements": [["beer"]]
+}

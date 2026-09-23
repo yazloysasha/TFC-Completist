@@ -1,4 +1,4 @@
-# TFC Collection Advancements 🏆
+# TFC: Completist 🏆
 
 ### When "Every" Finally Means Every
 
@@ -6,7 +6,7 @@
 
 You added ArborFirmaCraft, Firmalife, Beneath. New trees, wines, biomes, metals. Then you opened the tab: **Arborist** still wanted the same saplings. **Healthy Diet** never heard of melon. **Mineralogist** counted sulfur twice.
 
-This mod makes _every_ mean every. And adds the collections TFC never wrote.
+**TFC: Completist** makes _every_ mean every. And adds the collections TFC never wrote.
 
 | Before                           | After                          |
 | -------------------------------- | ------------------------------ |

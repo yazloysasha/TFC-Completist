@@ -3,14 +3,14 @@ modLoader = "javafml"
 loaderVersion = "[4,)"
 license = "MIT"
 
-# TFC Collection Advancements
+# TFC: Completist
 [[mods]]
     modId = "${modId}"
     version = "${modVersion}"
-    displayName = "TFC Collection Advancements"
-    credits = "Adds addon items to collection advancements"
+    displayName = "TFC: Completist"
+    credits = "Collection advancements that grow with your TFC addons"
     authors = "yazloysasha"
-    description = '''A simple mod that adds items from addons to TerraFirmaCraft collection advancements.'''
+    description = '''TerraFirmaCraft collection advancements that grow with your addons. Every means every - plus the collections TFC never wrote.'''
     displayTest = "MATCH_VERSION"
 
 # Dependencies

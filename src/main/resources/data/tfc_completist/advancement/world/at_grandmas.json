@@ -1,0 +1,28 @@
+{
+  "parent": "tfc:world/root",
+  "criteria": {
+    "plum": {
+      "trigger": "tfc_completist:seal_jar",
+      "conditions": {
+        "item": "tfc:jar/plum"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "tfc:jar/plum"
+    },
+    "title": {
+      "translate": "tfc_completist.advancements.world.at_grandmas.title"
+    },
+    "description": {
+      "translate": "tfc_completist.advancements.world.at_grandmas.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "tfc:textures/block/mud/fluvisol.png"
+  },
+  "requirements": [["plum"]]
+}

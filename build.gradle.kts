@@ -7,7 +7,7 @@ val neoForgeVersion: String = "21.1.234"
 val minTfcVersion: String = "4.1.0"
 val maxTfcVersion: String = "4.2.10"
 
-val modId: String = "tfc_collection_advancements"
+val modId: String = "tfc_completist"
 val modVersion: String = System.getenv("VERSION") ?: "0.0.0-indev"
 val modJavaVersion: String = "21"
 
@@ -30,8 +30,8 @@ neoForge {
 }
 
 base {
-  archivesName.set("TFC-Collection-Advancements-NeoForge-$minecraftVersion")
-  group = "net.yazloysasha.tfccollectionadvancements"
+  archivesName.set("TFC-Completist-NeoForge-$minecraftVersion")
+  group = "net.yazloysasha.tfccompletist"
   version = modVersion
 }
 

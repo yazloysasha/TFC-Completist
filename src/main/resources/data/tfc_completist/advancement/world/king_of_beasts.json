@@ -1,0 +1,36 @@
+{
+  "parent": "tfc:world/hunter",
+  "criteria": {
+    "bear": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "tfc:grizzly_bear"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "tfc:metal/sword/red_steel"
+    },
+    "title": {
+      "translate": "tfc_completist.advancements.world.king_of_beasts.title"
+    },
+    "description": {
+      "translate": "tfc_completist.advancements.world.king_of_beasts.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "tfc:textures/block/mud/fluvisol.png"
+  },
+  "requirements": [["bear"]]
+}

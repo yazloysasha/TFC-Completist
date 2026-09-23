@@ -1,0 +1,32 @@
+{
+  "parent": "tfc:world/root",
+  "criteria": {
+    "pinecone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "tfc:groundcover/pinecone"
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "tfc:groundcover/mussel"
+    },
+    "title": {
+      "translate": "tfc_completist.advancements.world.vagabond.title"
+    },
+    "description": {
+      "translate": "tfc_completist.advancements.world.vagabond.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "tfc:textures/block/mud/fluvisol.png"
+  },
+  "requirements": [["mussel"]]
+}

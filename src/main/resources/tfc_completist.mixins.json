@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.yazloysasha.tfccompletist.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "tfc_completist.refmap.json",
+  "mixins": [
+    "CommonAnimalBehaviorMixin",
+    "DrinkableMixin",
+    "JamPotRecipeJamOutputMixin",
+    "PlayerMixin",
+    "ServerAdvancementManagerMixin",
+    "TFCAnimalPropertiesMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "tfc:world/iron",
+  "criteria": {
+    "small_native_gold": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "tfc:ore/small_native_gold"
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "tfc:ore/small_native_silver"
+    },
+    "title": {
+      "translate": "tfc_completist.advancements.world.prospector.title"
+    },
+    "description": {
+      "translate": "tfc_completist.advancements.world.prospector.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "tfc:textures/block/mud/fluvisol.png"
+  },
+  "requirements": [["small_native_silver"]]
+}

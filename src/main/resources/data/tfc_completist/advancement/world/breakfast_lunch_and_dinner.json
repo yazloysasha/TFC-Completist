@@ -1,0 +1,35 @@
+{
+  "parent": "tfc:world/bread",
+  "criteria": {
+    "wheat_bread_sandwich": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": "tfc:food/wheat_bread_sandwich"
+        }
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "tfc:food/grain_salad",
+      "components": {
+        "tfc:food": {
+          "creation_date": -3
+        }
+      }
+    },
+    "title": {
+      "translate": "tfc_completist.advancements.world.breakfast_lunch_and_dinner.title"
+    },
+    "description": {
+      "translate": "tfc_completist.advancements.world.breakfast_lunch_and_dinner.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "tfc:textures/block/mud/fluvisol.png"
+  },
+  "requirements": [["grain_salad"]]
+}

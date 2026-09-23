@@ -1,0 +1,37 @@
+{
+  "parent": "tfc:world/root",
+  "criteria": {
+    "blueberry_bush": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": ["tfc:plant/blueberry_bush"]
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "tfc:plant/strawberry_bush"
+    },
+    "title": {
+      "translate": "tfc_completist.advancements.world.berry_gardener.title"
+    },
+    "description": {
+      "translate": "tfc_completist.advancements.world.berry_gardener.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "tfc:textures/block/mud/fluvisol.png"
+  },
+  "requirements": [["strawberry_bush"]]
+}

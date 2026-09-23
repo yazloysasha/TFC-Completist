@@ -1,0 +1,28 @@
+{
+  "parent": "tfc_completist:world/domestication",
+  "criteria": {
+    "cow": {
+      "trigger": "tfc_completist:bred_animal",
+      "conditions": {
+        "entity": "tfc:cow"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "minecraft:egg"
+    },
+    "title": {
+      "translate": "tfc_completist.advancements.world.husbandman.title"
+    },
+    "description": {
+      "translate": "tfc_completist.advancements.world.husbandman.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "tfc:textures/block/mud/fluvisol.png"
+  },
+  "requirements": [["cow"]]
+}
