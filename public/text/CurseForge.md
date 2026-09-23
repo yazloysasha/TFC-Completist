@@ -14,30 +14,30 @@ New collection goals for the parts of TFC the tab never asked for. The original 
 
 #### 🌟 New Collections:
 
-1. **Domestication** — familiarize every animal 🐾
-2. **Florist** — pot every plant 🌸
-3. **Sommelier** — drink every alcohol 🍇
-4. **King of Beasts** — slay every land predator 🦁
-5. **Orchardist** — plant every fruit tree 🍎
-6. **At Grandma's** — seal every jam 🫙
-7. **Husbandman** — breed every animal 🐣
-8. **Berry Gardener** — plant every berry bush 🫐
-9. **Carnivore** — cook and eat every meat 🥩
-10. **Carpenter** — planks of every wood 🪵
-11. **Breakfast, Lunch, and Dinner** — every sandwich, soup, and salad 🥪
-12. **Jeweler** — every cut gem 💎
-13. **Vegetarian** — every fruit and vegetable 🥗
-14. **Stonemason** — bricks of every rock 🧱
-15. **Sea Cook** — cook and eat every seafood 🐟
-16. **High Architecture** — mud bricks of every soil 🏠
-17. **Butcher** — every raw meat 🔪
-18. **Geologist** — every rock 🪨
-19. **Painter** — glaze every vessel 🎨
-20. **Pedologist** — every soil 🌱
-21. **Reef Keeper** — every coral 🪸
-22. **Prospector** — every surface nugget ⛏️
-23. **Sands of the World** — every sand 🏖️
-24. **Vagabond** — every groundcover 🍂
+**1. Domestication** — familiarize every animal 🐾  
+**2. Florist** — pot every plant 🌸  
+**3. Sommelier** — drink every alcohol 🍇  
+**4. King of Beasts** — slay every land predator 🦁  
+**5. Orchardist** — plant every fruit tree 🍎  
+**6. At Grandma's** — seal every jam 🫙  
+**7. Husbandman** — breed every animal 🐣  
+**8. Berry Gardener** — plant every berry bush 🫐  
+**9. Carnivore** — cook and eat every meat 🥩  
+**10. Carpenter** — planks of every wood 🪵  
+**11. Breakfast, Lunch, and Dinner** — every sandwich, soup, and salad 🥪  
+**12. Jeweler** — every cut gem 💎  
+**13. Vegetarian** — every fruit and vegetable 🥗  
+**14. Stonemason** — bricks of every rock 🧱  
+**15. Sea Cook** — cook and eat every seafood 🐟  
+**16. High Architecture** — mud bricks of every soil 🏠  
+**17. Butcher** — every raw meat 🔪  
+**18. Geologist** — every rock 🪨  
+**19. Painter** — glaze every vessel 🎨  
+**20. Pedologist** — every soil 🌱  
+**21. Reef Keeper** — every coral 🪸  
+**22. Prospector** — every surface nugget ⛏️  
+**23. Sands of the World** — every sand 🏖️  
+**24. Vagabond** — every groundcover 🍂
 
 #### 🏅 The Originals
 
