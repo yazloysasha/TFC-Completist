@@ -2,46 +2,46 @@
 
 ### Finally, a TFC You Can Finish
 
-TerraFirmaCraft built a whole life: animals to tame, plants to pot, orchards to plant, wines to drink, jams to seal. Then you open the advancements tab and "complete" TFC having never done any of it.
+**TerraFirmaCraft** built a whole life: animals to tame, plants to pot, orchards to plant, wines to drink, jams to seal. Then you open the advancements tab and "complete" TFC having never done any of it. 🐄🌸
 
-**TFC: Completist** is the rest of the list. 🌾
+**TFC: Completist** is the rest of the list. ✨
 
-**24 new collections:**
+**New collections:**
 
-- **Domestication** — familiarize every animal
-- **Florist** — pot every plant
-- **Sommelier** — drink every alcohol
-- **King of Beasts** — slay every land predator
-- **Orchardist** — plant every fruit tree
-- **At Grandma's** — seal every jam
-- **Husbandman** — breed every animal
-- **Berry Gardener** — plant every berry bush
-- **Carnivore** — cook and eat every meat
-- **Carpenter** — planks of every wood
-- **Breakfast, Lunch, and Dinner** — every sandwich, soup, and salad
-- **Jeweler** — every cut gem
-- **Vegetarian** — every fruit and vegetable
-- **Stonemason** — bricks of every rock
-- **Sea Cook** — cook and eat every seafood
-- **High Architecture** — mud bricks of every soil
-- **Butcher** — every raw meat
-- **Geologist** — every rock
-- **Painter** — glaze every vessel
-- **Pedologist** — every soil
-- **Reef Keeper** — every coral
-- **Prospector** — every surface nugget
-- **Sands of the World** — every sand
-- **Vagabond** — every groundcover
+- **Domestication** — familiarize every animal 🐾
+- **Florist** — pot every plant 🌸
+- **Sommelier** — drink every alcohol 🍷
+- **King of Beasts** — slay every land predator 🦁
+- **Orchardist** — plant every fruit tree 🍎
+- **At Grandma's** — seal every jam 🫙
+- **Husbandman** — breed every animal 🐣
+- **Berry Gardener** — plant every berry bush 🫐
+- **Carnivore** — cook and eat every meat 🥩
+- **Carpenter** — planks of every wood 🪵
+- **Breakfast, Lunch, and Dinner** — every sandwich, soup, and salad 🥪
+- **Jeweler** — every cut gem 💎
+- **Vegetarian** — every fruit and vegetable 🥗
+- **Stonemason** — bricks of every rock 🧱
+- **Sea Cook** — cook and eat every seafood 🐟
+- **High Architecture** — mud bricks of every soil 🏠
+- **Butcher** — every raw meat 🔪
+- **Geologist** — every rock 🪨
+- **Painter** — glaze every vessel 🎨
+- **Pedologist** — every soil 🌱
+- **Reef Keeper** — every coral 🪸
+- **Prospector** — every surface nugget ⛏️
+- **Sands of the World** — every sand 🏖️
+- **Vagabond** — every groundcover 🍂
 
-Running addons? The lists grow with them. Firmalife does not just pad True Farmer: its trees join Orchardist, its flowers join Florist, its wines join Sommelier. ArborFirmaCraft fills Arborist and Carpenter. Beneath opens new biomes in Adventuring Time.
+The original collection advancements also pick up items from your addons, as with ArborFirmaCraft:
 
 | Before                                                                                                          | After                                                                                                         |
 | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | ![Before](https://raw.githubusercontent.com/yazloysasha/TFC-Completist/refs/heads/1.21.x/public/img/before.png) | ![After](https://raw.githubusercontent.com/yazloysasha/TFC-Completist/refs/heads/1.21.x/public/img/after.png) |
 
-The originals are finished too: Adventuring Time, Arborist, Gemologist, Gone Fishing, Healthy Diet, Metallurgist, Minerologist, True Farmer.
+The originals are finished too: Adventuring Time, Arborist, Gemologist, Gone Fishing, Healthy Diet, Metallurgist, Minerologist, True Farmer. 🏅
 
-And the bugs are gone. **Mineralogist** no longer counts sulfur twice. **Healthy Diet** finally includes melon.
+And the bugs are gone. **Mineralogist** no longer counts sulfur twice. **Healthy Diet** finally includes melon. 🔧
 
 ---
 
