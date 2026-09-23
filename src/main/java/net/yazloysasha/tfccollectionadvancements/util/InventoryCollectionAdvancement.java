@@ -589,13 +589,28 @@ public final class InventoryCollectionAdvancement {
     return switch (source.collectedItems()) {
       case TFC_FARMLAND_SEEDS -> tfcFarmlandSeeds;
       case MINERAL_ORE_DROPS -> mineralOreDrops;
-      case NONE -> source.tag() == null
-        ? Set.of()
-        : RegistryTagResolver.resolveSet(
-          resourceManager,
-          registries,
-          source.tag()
+      case NONE -> {
+        if (source.tag() == null) {
+          yield Set.of();
+        }
+        Set<ResourceLocation> members = new LinkedHashSet<>(
+          RegistryTagResolver.resolveSet(
+            resourceManager,
+            registries,
+            source.tag()
+          )
         );
+        for (var excludeTag : source.excludeTags()) {
+          members.removeAll(
+            RegistryTagResolver.resolveSet(
+              resourceManager,
+              registries,
+              excludeTag
+            )
+          );
+        }
+        yield members;
+      }
     };
   }
 

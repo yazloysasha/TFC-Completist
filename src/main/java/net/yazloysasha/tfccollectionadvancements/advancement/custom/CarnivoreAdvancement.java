@@ -14,7 +14,8 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 /**
  * Rebuilds Carnivore ({@code tfc_collection_advancements:world/carnivore}).
  * <p>
- * Every {@code tfc} and addon item in {@code c:foods/cooked_meat}.
+ * Every {@code tfc} and addon item in {@code c:foods/cooked_meat}, excluding
+ * {@code c:foods/cooked_fish} (seafood stays in Sea Cook).
  */
 public final class CarnivoreAdvancement {
 
@@ -25,7 +26,10 @@ public final class CarnivoreAdvancement {
     );
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.discoveredTag(Tags.Items.FOODS_COOKED_MEAT)
+    InventoryCollectionSource.discoveredTagExcluding(
+      Tags.Items.FOODS_COOKED_MEAT,
+      Tags.Items.FOODS_COOKED_FISH
+    )
   );
 
   private CarnivoreAdvancement() {}

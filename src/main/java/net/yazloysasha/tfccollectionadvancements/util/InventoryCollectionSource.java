@@ -1,5 +1,6 @@
 package net.yazloysasha.tfccollectionadvancements.util;
 
+import java.util.List;
 import java.util.Set;
 import net.dries007.tfc.common.TFCTags;
 import net.minecraft.core.Holder;
@@ -19,7 +20,8 @@ public record InventoryCollectionSource(
   Boolean gemOre,
   boolean includeTfc,
   CollectedItems collectedItems,
-  boolean singleSegmentAfterPrefix
+  boolean singleSegmentAfterPrefix,
+  List<TagKey<Item>> excludeTags
 ) {
   public enum CollectedItems {
     NONE,
@@ -38,7 +40,8 @@ public record InventoryCollectionSource(
       null,
       true,
       CollectedItems.NONE,
-      false
+      false,
+      List.of()
     );
   }
 
@@ -58,7 +61,8 @@ public record InventoryCollectionSource(
       null,
       true,
       CollectedItems.NONE,
-      false
+      false,
+      List.of()
     );
   }
 
@@ -80,7 +84,8 @@ public record InventoryCollectionSource(
       null,
       true,
       CollectedItems.NONE,
-      false
+      false,
+      List.of()
     );
   }
 
@@ -98,11 +103,19 @@ public record InventoryCollectionSource(
       null,
       true,
       CollectedItems.NONE,
-      true
+      true,
+      List.of()
     );
   }
 
   public static InventoryCollectionSource discoveredTag(TagKey<Item> tag) {
+    return discoveredTagExcluding(tag);
+  }
+
+  public static InventoryCollectionSource discoveredTagExcluding(
+    TagKey<Item> tag,
+    TagKey<Item>... excludeTags
+  ) {
     return new InventoryCollectionSource(
       null,
       null,
@@ -113,7 +126,8 @@ public record InventoryCollectionSource(
       null,
       true,
       CollectedItems.NONE,
-      false
+      false,
+      List.of(excludeTags)
     );
   }
 
@@ -128,7 +142,8 @@ public record InventoryCollectionSource(
       null,
       false,
       CollectedItems.NONE,
-      false
+      false,
+      List.of()
     );
   }
 
@@ -143,7 +158,8 @@ public record InventoryCollectionSource(
       true,
       true,
       CollectedItems.NONE,
-      false
+      false,
+      List.of()
     );
   }
 
@@ -158,7 +174,8 @@ public record InventoryCollectionSource(
       null,
       true,
       CollectedItems.TFC_FARMLAND_SEEDS,
-      false
+      false,
+      List.of()
     );
   }
 
@@ -173,7 +190,8 @@ public record InventoryCollectionSource(
       null,
       true,
       CollectedItems.MINERAL_ORE_DROPS,
-      false
+      false,
+      List.of()
     );
   }
 

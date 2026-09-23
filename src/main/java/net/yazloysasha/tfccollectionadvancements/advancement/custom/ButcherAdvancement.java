@@ -14,7 +14,8 @@ import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 /**
  * Rebuilds Butcher ({@code tfc_collection_advancements:world/butcher}).
  * <p>
- * Every {@code tfc} and addon item in {@code c:foods/raw_meat}.
+ * Every {@code tfc} and addon item in {@code c:foods/raw_meat}, excluding
+ * {@code c:foods/raw_fish} (seafood stays in Gone Fishing).
  */
 public final class ButcherAdvancement {
 
@@ -25,7 +26,10 @@ public final class ButcherAdvancement {
     );
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    InventoryCollectionSource.discoveredTag(Tags.Items.FOODS_RAW_MEAT)
+    InventoryCollectionSource.discoveredTagExcluding(
+      Tags.Items.FOODS_RAW_MEAT,
+      Tags.Items.FOODS_RAW_FISH
+    )
   );
 
   private ButcherAdvancement() {}

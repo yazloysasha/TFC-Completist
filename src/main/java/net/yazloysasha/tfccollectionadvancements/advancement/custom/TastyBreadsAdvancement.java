@@ -35,7 +35,8 @@ public final class TastyBreadsAdvancement {
       null,
       true,
       InventoryCollectionSource.CollectedItems.NONE,
-      false
+      false,
+      List.of()
     )
   );
 
