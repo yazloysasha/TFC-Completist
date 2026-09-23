@@ -9,6 +9,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.AtGrandmasAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.BerryGardenerAdvancement;
+import net.yazloysasha.tfccollectionadvancements.advancement.custom.BreakfastLunchAndDinnerAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.ButcherAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.CarnivoreAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.CarpenterAdvancement;
@@ -26,7 +27,6 @@ import net.yazloysasha.tfccollectionadvancements.advancement.custom.SandsOfTheWo
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.SeaCookAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.SommelierAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.StonemasonAdvancement;
-import net.yazloysasha.tfccollectionadvancements.advancement.custom.TastyBreadsAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.VagabondAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.custom.VegetarianAdvancement;
 import net.yazloysasha.tfccollectionadvancements.advancement.patch.AdventuringTimeAdvancement;
@@ -89,12 +89,13 @@ public abstract class ServerAdvancementManagerMixin {
     TrueFarmerAdvancement.patch(advancements, resourceManager, this.registries);
 
     // Custom
-    TastyBreadsAdvancement.patch(
+    AtGrandmasAdvancement.patch(advancements, resourceManager, this.registries);
+    BerryGardenerAdvancement.patch(
       advancements,
       resourceManager,
       this.registries
     );
-    BerryGardenerAdvancement.patch(
+    BreakfastLunchAndDinnerAdvancement.patch(
       advancements,
       resourceManager,
       this.registries
@@ -109,6 +110,11 @@ public abstract class ServerAdvancementManagerMixin {
     );
     FloristAdvancement.patch(advancements, resourceManager, this.registries);
     GeologistAdvancement.patch(advancements, resourceManager, this.registries);
+    HighArchitectureAdvancement.patch(
+      advancements,
+      resourceManager,
+      this.registries
+    );
     HusbandmanAdvancement.patch(advancements, resourceManager, this.registries);
     JewelerAdvancement.patch(advancements, resourceManager, this.registries);
     KingOfBeastsAdvancement.patch(
@@ -116,15 +122,9 @@ public abstract class ServerAdvancementManagerMixin {
       resourceManager,
       this.registries
     );
-    AtGrandmasAdvancement.patch(advancements, resourceManager, this.registries);
-    HighArchitectureAdvancement.patch(
-      advancements,
-      resourceManager,
-      this.registries
-    );
     OrchardistAdvancement.patch(advancements, resourceManager, this.registries);
-    ReefKeeperAdvancement.patch(advancements, resourceManager, this.registries);
     PedologistAdvancement.patch(advancements, resourceManager, this.registries);
+    ReefKeeperAdvancement.patch(advancements, resourceManager, this.registries);
     SandsOfTheWorldAdvancement.patch(
       advancements,
       resourceManager,

@@ -7,41 +7,34 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.yazloysasha.tfccollectionadvancements.TFCCollectionAdvancements;
+import net.yazloysasha.tfccollectionadvancements.util.CommonFoodTags;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionAdvancement;
 import net.yazloysasha.tfccollectionadvancements.util.InventoryCollectionSource;
 
 /**
- * Rebuilds Tasty Breads ({@code tfc_collection_advancements:world/tasty_breads}).
+ * Rebuilds Breakfast, Lunch, and Dinner ({@code
+ * tfc_collection_advancements:world/breakfast_lunch_and_dinner}).
  * <p>
- * Every plain bread sandwich ({@code food/*_bread_sandwich}), not jam sandwiches
- * or whole loaves.
+ * Every discoverable {@code food/*_sandwich} (plain and jam; 12 in base TFC).
+ * {@code c:foods/sandwiches} is not used: it omits {@code wheat_bread_jam_sandwich}
+ * and lists {@code wheat_bread} instead. Also {@code c:foods/soup} and
+ * {@code c:foods/salad}.
  */
-public final class TastyBreadsAdvancement {
+public final class BreakfastLunchAndDinnerAdvancement {
 
   public static final ResourceLocation ADVANCEMENT =
     ResourceLocation.fromNamespaceAndPath(
       TFCCollectionAdvancements.MOD_ID,
-      "world/tasty_breads"
+      "world/breakfast_lunch_and_dinner"
     );
 
   private static final List<InventoryCollectionSource> SOURCES = List.of(
-    new InventoryCollectionSource(
-      null,
-      "food/",
-      "_bread_sandwich",
-      false,
-      null,
-      false,
-      null,
-      true,
-      InventoryCollectionSource.CollectedItems.NONE,
-      false,
-      List.of(),
-      List.of()
-    )
+    InventoryCollectionSource.discovered("food/", "_sandwich"),
+    InventoryCollectionSource.discoveredTag(CommonFoodTags.SOUP),
+    InventoryCollectionSource.discoveredTag(CommonFoodTags.SALAD)
   );
 
-  private TastyBreadsAdvancement() {}
+  private BreakfastLunchAndDinnerAdvancement() {}
 
   public static void patch(
     Map<ResourceLocation, JsonElement> advancements,

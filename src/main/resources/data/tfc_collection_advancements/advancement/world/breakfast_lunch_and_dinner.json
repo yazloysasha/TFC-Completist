@@ -12,7 +12,7 @@
   },
   "display": {
     "icon": {
-      "id": "tfc:food/wheat_bread_sandwich",
+      "id": "tfc:food/protein_soup",
       "components": {
         "tfc:food": {
           "creation_date": -3
@@ -20,10 +20,10 @@
       }
     },
     "title": {
-      "translate": "tfc_collection_advancements.advancements.world.tasty_breads.title"
+      "translate": "tfc_collection_advancements.advancements.world.breakfast_lunch_and_dinner.title"
     },
     "description": {
-      "translate": "tfc_collection_advancements.advancements.world.tasty_breads.description"
+      "translate": "tfc_collection_advancements.advancements.world.breakfast_lunch_and_dinner.description"
     },
     "frame": "goal",
     "show_toast": true,
